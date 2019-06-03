@@ -1,0 +1,18 @@
+.modal-content{
+  background-color: whitesmoke!important;
+  border-radius: .18rem!important;
+}
+
+.modal-header .close{
+  padding: 0.5rem!important;
+  background-color: rgba(247, 242, 125, 0.5);
+}
+
+.submodal{
+  background-color: rgba(127, 141, 142, 0.08)!important;
+  color: #7f8c8d;
+}
+
+/* .modal-footer{
+
+} */

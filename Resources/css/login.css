@@ -1,0 +1,60 @@
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px whitesmoke inset;
+  -webkit-text-fill-color: black!important;
+}
+
+html {
+  height: 100%;
+}
+.table td, .table th{
+  border-top: none!important
+}
+
+body {
+  background-color: whitesmoke;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvecia, Arial, sans-serif;
+}
+input[type="text"], input[type="email"], input[type="password"] {
+  font-family: 'Courier New', 'Courier', monospace;
+  background-color: whitesmoke;
+  border: 3px solid #ddd;
+  border-radius: 20pt;
+  padding-left: 15pt;
+  padding-right: 15pt;
+  height: 30pt;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  margin-bottom: 10pt;
+  margin-top: 10pt;
+  color: #333;
+}
+input[type="text"]::-webkit-input-placeholder, input[type="email"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder {
+  color: #ddd;
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+  border: 3px solid #333;
+}
+
+input[type="submit"] {
+  font-family: Helvecia, Arial, sans-serif;
+  letter-spacing: 1.5pt;
+  text-transform: uppercase;
+  background-color: #333;
+  border: 0;
+  color: #fff;
+  height: 35pt;
+  border-radius: 20pt;
+  margin-top: 10pt;
+  margin-left: 50%;
+  transform: translate(-50%, 0%);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  opacity: 0.8;
+  transform: translate(-50%, -10%);
+}

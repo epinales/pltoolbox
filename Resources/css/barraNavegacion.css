@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v12/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7g.ttf) format('truetype');
+}
+
+
+li.btn {
+  color: #7f8c8d;
+  position: relative;
+  z-index: 1;
+  font-family: 'Source Sans Pro', sans-serif;
+  height: 50px;
+}
+
+li.btn a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  outline: none;
+  transition: 300ms ease-out 0ms;
+  height: 50px;
+}
+
+.title {
+  display: inline-block;
+  letter-spacing: 2px;
+  width: 100%;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.img svg {
+  fill: #7f8c8d;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+
+.bblack a:hover {
+  background-color: #414141;
+  color: whitesmoke
+}
+
+.arrow {
+  transition: 300ms ease-out 0ms;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  opacity: 0;
+  bottom: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 8px solid whitesmoke;
+}
+
+a:hover .arrow {
+  opacity: 1;
+  border-top-color: #414141;
+  bottom: -8px;
+}
+
+.active,
+a:active,
+a:focus {
+  background-color: #414141;
+}
+
+.active .arrow,
+a:active .arrow,
+a:focus .arrow {
+  opacity: 1;
+  border-top-color: #414141;
+  bottom: -8px;
+}
+
+
+
+a:hover span.img svg {
+  fill: whitesmoke;
+}
+
+
+.active span.img svg,
+ a:active span.img svg,
+ a:focus span.img svg {
+  fill: whitesmoke;
+}
+
+.f5 {
+  flex:5
+}
+
+.f19 {
+  flex: 19;
+}
+
+.bienvenido{
+  font-size:2.6em;
+  text-align:center;
+  margin-top:280px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gainsboro;
+  letter-spacing: 14px
+}
+.wel{
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-right:10px;
+  padding-left:10px;
+  /* border: solid 1.2px rgba(127, 141, 142, 0.3); */
+  border: solid 1.2px rgba(247, 242, 125, 0.4);
+  color:#414141
+}
+.footer{
+  position: fixed;
+  bottom: 0px;
+  background-color: #fff;
+  list-style: none;
+  width: 100%;
+  float: right;
+  margin-top: 50px;
+  margin-bottom: 1px;
+}
+.footer li a{
+font-size: 18px;
+list-style: none;
+}
+.footer li a:hover{
+  transition: .4s;
+  letter-spacing: 4px;
+  background-color: transparent;
+  font-weight: normal;
+  list-style: none;
+
+}
