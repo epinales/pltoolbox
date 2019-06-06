@@ -8,20 +8,23 @@
         </button>
       </div>
       <div class="mt-3 text-center submodal">
-        CONFIGURACIÓN : <select id="o_nombre" class="custom-select border-0" name="">
-          <option value="">Nuevo Laredo</option>
-          <option value="">Manzanillo</option>
-          <option value="">Veracruz</option>
-          <option value="">Aeropuerto</option>
+        <input type="hidden" id="pk_oficina">
+        CONFIGURACIÓN :
+         <select id="o_nombre" class="custom-select border-0">
+          <option value="Nuevo Laredo">Nuevo Laredo</option>
+          <option value="Manzanillo">Manzanillo</option>
+          <option value="Veracruz">Veracruz</option>
+          <option value="Aeropuerto">Aeropuerto</option>
+          <option value="Laredo Texas">Laredo Texas</option>
         </select>
       </div>
       <div class="modal-body">
-        <table class="table">
+        <table class="table text-center">
           <tr class="row">
             <td class="col-md-12 align-items-center">
-              Mostrar marcador <img class="w-25px" src="/BitacoraProlog/Resources/iconos/circular-amarillo.svg">
+              Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/circular-amarillo.svg">
               a partir de
-              <select id="o_amarilla" class="custom-select" name="">
+              <select id="o_amarillo" class="custom-select">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -39,9 +42,9 @@
 
           <tr class="row">
             <td class="col-md-12 align-items-center">
-              Mostrar marcador <img class="w-25px" src="/BitacoraProlog/Resources/iconos/circular-rojo.svg">
+              Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/circular-rojo.svg">
               a partir de
-              <select id="o_rojo" class="custom-select" name="">
+              <select id="o_rojo" class="custom-select">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -59,9 +62,9 @@
 
           <tr class="row">
             <td class="col-md-12 align-items-center">
-              Mostrar marcador <img class="w-25px" src="/BitacoraProlog/Resources/iconos/warning.svg">
+              Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/warning.svg">
               a partir de
-              <select id="o_alerta" class="custom-select" name="">
+              <select id="o_alerta" class="custom-select">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -81,7 +84,7 @@
       <div class="border-0 mb-4">
         <div class="row justify-content-center">
           <div class="col-md-3">
-            <input id="u_agregar" class="u_agregar back-aceptar" type="submit" name="" value="Agregar">
+            <input id="o_modificar" class="o_modificar back-aceptar" type="submit" value="Modificar">
           </div>
         </div>
       </div>

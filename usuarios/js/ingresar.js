@@ -8,12 +8,12 @@ $(document).ready(function(){
 
     $.ajax({
       type: "POST",
-      url: "/BitacoraProlog/Ubicaciones/usuarios/actions/ingresar.php",
+      url: "/pltoolbox/usuarios/actions/ingresar.php",
       data: data,
       success: 	function(r){
         r = JSON.parse(r);
         if (r.code == 1) {
-          window.location.replace("/BitacoraProlog/Ubicaciones/bienvenido.php");
+          window.location.replace("/pltoolbox/BitacoraProlog/index.php");
           console.log(r);
         } else {
           swal("USUARIO O CONTRASEÑA INCORRECTOS","Favor de Verificar","error");

@@ -1,6 +1,6 @@
 <?php
-// $root = $_SERVER['DOCUMENT_ROOT'];
-// require $root . '/BitacoraProlog/Resources/PHP/Utilities/initialScript.php';
+$root = $_SERVER['DOCUMENT_ROOT'];
+require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
 
 $global = $_SESSION['user']['u_tipo'] == 'global';
@@ -21,21 +21,21 @@ date_default_timezone_set('America/Mexico_City');
   <title>Bitacora Prolog</title>
 
   <!--***************ESTILOS*****************-->
-<link rel="stylesheet" href="/BitacoraProlog/Resources/css/estilos.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/css/barraNavegacion.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/css/modales.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/sweetAlert/css/sweetalert.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/alertify/css/alertify.min.css">
-<link rel="stylesheet" href="/BitacoraProlog/Resources/alertify/css/themes/default.min.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/css/estilos.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/css/barraNavegacion.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/css/modales.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/sweetAlert/css/sweetalert.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/alertify.min.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/themes/default.min.css">
 
 <!--***************SCRIPTS*****************-->
-<script src="/BitacoraProlog/Resources/js/jquery.js"></script>
-<script src="/BitacoraProlog/Resources/alertify/js/alertify.min.js"></script>
-<script src="/BitacoraProlog/Resources/sweetAlert/js/sweetalert.min.js"></script>
-<script src="/BitacoraProlog/Resources/js/popper.js"></script>
-<script src="/BitacoraProlog/Resources/js/tether.min.js"></script>
-<script src="/BitacoraProlog/Resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/pltoolbox/Resources/js/jquery.js"></script>
+<script src="/pltoolbox/Resources/alertify/js/alertify.min.js"></script>
+<script src="/pltoolbox/Resources/sweetAlert/js/sweetalert.min.js"></script>
+<script src="/pltoolbox/Resources/js/popper.js"></script>
+<script src="/pltoolbox/Resources/js/tether.min.js"></script>
+<script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -84,7 +84,7 @@ date_default_timezone_set('America/Mexico_City');
       </li>
       <?php else: ?>
         <li id="home" class="p-0 btn img f5 bblack">
-          <a class="nav-link" href="/BitacoraProlog/Ubicaciones/bienvenido.php" role="button">
+          <a class="nav-link" href="/pltoolbox/Ubicaciones/bienvenido.php" role="button">
             <span class="img">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" >
                 <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M509.014,262.276L263.213,16.475c-3.985-3.983-10.441-3.983-14.425,0L2.987,262.276 c-2.916,2.916-3.789,7.304-2.211,11.114c1.579,3.81,5.297,6.296,9.423,6.296h40.532v208.627c0,5.633,4.567,10.199,10.199,10.199
@@ -116,8 +116,8 @@ date_default_timezone_set('America/Mexico_City');
         </a>
 
         <div class="dropdown-menu mt-3">
-          <a class="dropdown-item" href="/BitacoraProlog/Ubicaciones/usuarios/usuarios.php">Usuarios</a>
-          <a class="dropdown-item" href="#opcOficina" data-toggle="modal">Opciones de Oficina</a>
+          <a class="dropdown-item" href="/pltoolbox/Ubicaciones/usuarios/usuarios.php">Usuarios</a>
+          <a class="opcOficina dropdown-item" href="#opcOficina" data-toggle="modal" db-id="<?php echo $_SESSION['user']['u_oficina'] ?>" >Opciones de Oficina</a>
           <a class="dropdown-item" href="#">Cuentas Bancarias</a>
           <a class="dropdown-item" href="#">Reportes</a>
         </div>
@@ -125,7 +125,7 @@ date_default_timezone_set('America/Mexico_City');
 
 
       <li class="p-0 btn text bblack f19">
-        <a href="#">
+        <a href="/pltoolbox/pltoolbox/trafico/index.php">
           <span class="title">TRAFICO</span>
         </a>
       </li>
@@ -142,7 +142,7 @@ date_default_timezone_set('America/Mexico_City');
 
     <?php else: ?>
       <li class="p-0 btn text bblack f19">
-        <a href="#">
+        <a href="/pltoolbox/pltoolbox/trafico/index.php">
           <span class="title">TRAFICO</span>
         </a>
       </li>

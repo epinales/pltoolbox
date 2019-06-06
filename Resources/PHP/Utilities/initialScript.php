@@ -8,12 +8,12 @@ $root = $_SERVER['DOCUMENT_ROOT'];
 
 session_start();
 if (!isset($_SESSION['user'])) {
- header("Location: /BitacoraProlog/index.php");
+ header("Location: /pltoolbox/index.php");
 }
 
 
 
-include($root . '/BitacoraProlog/Resources/PHP/DataBases/Conexion.php');
+include($root . '/pltoolbox/Resources/PHP/DataBases/Conexion.php');
 date_default_timezone_set('America/Monterrey');
 function exit_script($input_array){
  $json_string = json_encode($input_array);

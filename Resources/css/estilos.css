@@ -88,7 +88,6 @@ width: 32px;
   width: 25px;
 }
 
-
 .bread{
   background-color: rgba(127, 141, 142, 0.08)!important;
   border-radius: 0px;
@@ -168,4 +167,12 @@ input[type="submit"]:hover {
 
 .bloqueo{
   cursor: not-allowed!important;
+}
+
+a {
+  text-decoration: none!important
+}
+
+.b2px{
+  border: 2px solid;
 }

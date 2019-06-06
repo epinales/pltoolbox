@@ -5,15 +5,15 @@
     header("Location: /fitcoControl/index.php");
   }
   $root = $_SERVER['DOCUMENT_ROOT'];
-  require $root . '/BitacoraProlog/Ubicaciones/barraNavegacion.php';
+  require $root . '/pltoolbox/BitacoraProlog/barraNavegacion.php';
 ?>
 
 
 
 <!-- <form class="page p-0" id="tablaVentas"> -->
-<form class="p-0" id="tablaVentas">
+<form class="p-0">
   <ol class="breadcrumb bread py-2 mb-1">
-    <li class="breadcrumb-item"><a href="/BitacoraProlog/Ubicaciones/usuarios/usuarios.php" class="abread">Home</a></li>
+    <li class="breadcrumb-item"><a href="/pltoolbox/BitacoraProlog/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Usuarios</b></li>
     <li class="b ml-auto text-center mr-4">
       <a href="#agregarUsuario" data-toggle="modal"  class="bt noborder w-100 mr-2">
@@ -43,10 +43,10 @@
     <tbody id="lista_usuarios" style="font-family: 'Source Sans Pro';"></tbody>
   </table>
 </form>
-  <script src="/BitacoraProlog/Ubicaciones/usuarios/js/usuarios.js"></script>
+  <script src="/pltoolbox/BitacoraProlog/usuarios/js/usuarios.js"></script>
 
 <?php
-  require $root . '/BitacoraProlog/Ubicaciones/footer.php';
-  require $root . '/BitacoraProlog/Ubicaciones/Usuarios/modales/modal.php';
+  require $root . '/pltoolbox/BitacoraProlog/footer.php';
+  require $root . '/pltoolbox/BitacoraProlog/Usuarios/modales/modal.php';
 
 ?>

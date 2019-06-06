@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/BitacoraProlog/Resources/PHP/Utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
 
 $pk_usuario = trim($_POST['pk_usuario']);
 $u_nombre = trim($_POST['u_nombre']);

@@ -31,7 +31,14 @@
                 </td>
                 <td class="col-md-6">
                   <label for="" class="m-0 ml-3">Oficina</label>
-                  <input id="u_oficina" class="efecto-1 ls-2" type="text">
+                  <select id="u_oficina" class="efecto-1 ls-2 custom-select py-0" style="height: calc(1.8rem)!important;">
+                    <option value="Nuevo Laredo">Nuevo Laredo</option>
+                    <option value="Manzanillo">Manzanillo</option>
+                    <option value="Veracruz">Veracruz</option>
+                    <option value="Aeropuerto">Aeropuerto</option>
+                    <option value="Laredo Texas">Laredo Texas</option>
+                  </select>
+                  <!-- <input id="u_oficina" class="efecto-1 ls-2" type="text"> -->
                 </td>
               </tr>
 
@@ -53,7 +60,10 @@
                 </td>
                 <td class="col-md-6">
                   <label for="" class="m-0 ml-3">Tipo</label>
-                  <input id="u_tipo" class="efecto-1 ls-2" type="text">
+                  <select id="u_tipo" class="efecto-1 ls-2 custom-select py-0" style="height: calc(1.8rem)!important;">
+                    <option value="administrador">administrador</option>
+                    <option value="usuario">usuario</option>
+                  </select>
                 </td>
               </tr>
 

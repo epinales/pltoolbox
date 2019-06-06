@@ -1,11 +1,13 @@
 <?php
-  require $root . '/BitacoraProlog/Ubicaciones/modales/opcionesOficina.php';
+  require $root . '/pltoolbox/BitacoraProlog/modales/opcionesOficina.php';
 ?>
+
 <footer class="footer">
   <li class="nav-item">
     <div class="row justify-content-center m-3">
       <div class="col-md-1 text-center">
-        <a  class="noborder w-100 m-4" href="/BitacoraProlog/Resources/PHP/Utilities/cerrarSesion.php">
+        <input type="hidden" id="oficinaUsuario" value="<?php echo $_SESSION['user']['u_oficina'] ?>" db-id="<?php echo $_SESSION['user']['u_oficina'] ?>">
+        <a  class="noborder w-100 m-4" href="/pltoolbox/Resources/PHP/Utilities/cerrarSesion.php">
           <span class="img2"><svg class='w-32' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 502">
         	<path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M428.483,73.517C381.076,26.108,318.045,0,251,0S120.924,26.108,73.517,73.517C26.108,120.924,0,183.955,0,251
         		s26.108,130.076,73.517,177.483C120.924,475.892,183.955,502,251,502s130.076-26.108,177.483-73.517
@@ -35,9 +37,10 @@
     </div>
   </li>
 
+  <script src="/pltoolbox/BitacoraProlog/js/opcionesOficina.js"></script>
 
-  <script src="/BitacoraProlog/Resources/js/table-fetch-plugin.js"></script>
-  <script src="/BitacoraProlog/Resources/js/popup-list-plugin.js"></script>
-  <script src="/BitacoraProlog/Resources/js/table-fetch-plugin.js"></script>
+  <script src="/pltoolbox/Resources/js/table-fetch-plugin.js"></script>
+  <script src="/pltoolbox/Resources/js/popup-list-plugin.js"></script>
+  <script src="/pltoolbox/Resources/js/table-fetch-plugin.js"></script>
 
 </footer>

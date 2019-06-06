@@ -1,11 +1,11 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/BitacoraProlog/Resources/PHP/Utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
 
 $system_callback = [];
 $data = $_POST;
 
-$query = "SELECT * FROM usuarios WHERE pk_usuario = ?";
+$query = "SELECT * FROM oficinas WHERE pk_oficina = ?";
 
 $stmt = $db->prepare($query);
 if (!($stmt)) {

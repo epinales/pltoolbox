@@ -2,12 +2,13 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Bitacora Prolog</title>
-  <link rel="stylesheet" href="/BitacoraProlog/Resources/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/BitacoraProlog/Resources/css/login.css">
-  <link rel="stylesheet" href="/BitacoraProlog/Resources/sweetAlert/css/sweetalert.css">
-  <link rel="stylesheet" href="/BitacoraProlog/Resources/alertify/css/alertify.min.css">
-  <link rel="stylesheet" href="/BitacoraProlog/Resources/alertify/css/themes/default.min.css">
+  <title>Tool Box</title>
+  <link rel="stylesheet" href="/pltoolbox/Resources/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/pltoolbox/Resources/css/estilos.css">
+  <link rel="stylesheet" href="/pltoolbox/Resources/css/login.css">
+  <link rel="stylesheet" href="/pltoolbox/Resources/sweetAlert/css/sweetalert.css">
+  <link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/alertify.min.css">
+  <link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/themes/default.min.css">
 </head>
 
 <body>
@@ -35,12 +36,13 @@
 </body>
 
 
-<script src="/BitacoraProlog/Resources/js/jquery.js"></script>
-<script src="/BitacoraProlog/Resources/alertify/js/alertify.min.js"></script>
-<script src="/BitacoraProlog/Resources/sweetAlert/js/sweetalert.min.js"></script>
-<script src="/BitacoraProlog/Resources/js/popper.js"></script>
-<script src="/BitacoraProlog/Resources/js/tether.min.js"></script>
-<script src="/BitacoraProlog/Resources/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="/BitacoraProlog/Ubicaciones/usuarios/js/ingresar.js"></script>
+
+<script src="/pltoolbox/Resources/js/jquery.js"></script>
+<script src="/pltoolbox/Resources/alertify/js/alertify.min.js"></script>
+<script src="/pltoolbox/Resources/sweetAlert/js/sweetalert.min.js"></script>
+<script src="/pltoolbox/Resources/js/popper.js"></script>
+<script src="/pltoolbox/Resources/js/tether.min.js"></script>
+<script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/pltoolbox/usuarios/js/ingresar.js"></script>
 </html>

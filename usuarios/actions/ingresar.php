@@ -1,7 +1,7 @@
 <?php
 
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/BitacoraProlog/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
 
 
 $system_callback = [];
