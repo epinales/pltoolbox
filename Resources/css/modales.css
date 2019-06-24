@@ -16,3 +16,12 @@
 /* .modal-footer{
 
 } */
+
+
+.bordermodal{
+  border-top: 1px solid rgba(247, 242, 125, 0.5);
+}
+
+.bordenegro{
+  border: 2px solid!important;
+}
