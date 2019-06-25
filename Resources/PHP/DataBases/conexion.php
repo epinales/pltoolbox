@@ -1,6 +1,6 @@
 <?php
 
-$datab = 'bitacoraProlog';
+$datab = 'pltoolbox';
 $host = 'localhost';
 $port = 8886;
 $usr = 'root';

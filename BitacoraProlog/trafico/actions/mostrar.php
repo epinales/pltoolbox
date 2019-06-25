@@ -8,7 +8,7 @@ $data = $_POST;
 $oficina = $data['oficina'];
 $andWhere = 'WHERE oficina = ?';
 
-$query = "SELECT * FROM bitacora $andWhere";
+$query = "SELECT * FROM bitacora INNER JOIN oficinas ON oficina = o_nombre $andWhere";
 
 $stmt = $db->prepare($query);
 if (!($stmt)) {
@@ -50,12 +50,39 @@ while ($row = $rslt->fetch_assoc()) {
   $UsuarioModif = $row['UsuarioModif'];
   $UsuarioAlta = $row['UsuarioAlta'];
 
-  $system_callback['data'] .="<tr class='row m-0 align-items-center bbyellow'>
-    <td class='col-md-9'><span class='ls-3'>$nombreCliente</span> <br> $tipo -- $referencia ($UsuarioAlta) <br />
-    <span style='color:rgba(127, 141, 142, 0.71);'>Ultima Modificación: $fechaModif / $UsuarioModif</span></td>
-    <td class='col-md-3'>$estatusActual <br />
-    Tiempo total : <br />
-    Disponible : </td>
+
+  $fechaAlta = $row['fechaAlta'];
+  $amarillo = $row['o_amarillo'];
+  $rojo = $row['o_rojo'];
+  $alerta = $row['o_alerta'];
+
+
+  $fecha1 = new DateTime($fechaAlta);//fecha inicial
+  $fecha2 = new DateTime('2016-11-30 11:55:06');//fecha de cierre
+
+  $intervalo = $fecha1->diff($fecha2);
+
+  $diferencia = $intervalo->format('%Y años %m meses %d days %H horas %i minutos
+  %s segundos');//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
+
+
+
+  $system_callback['data'] .="
+  <tr class='row m-0 align-items-center bbyellow'>
+    <td class='col-md-8'>
+      <span class='ls-3'>$nombreCliente</span> <br> $tipo -- $referencia ($UsuarioAlta) <br />
+      <span style='color:rgba(127, 141, 142, 0.71);'>Ultima Modificación: $fechaModif / $UsuarioModif</span>
+    </td>
+    <td class='col-md-3'>
+      $estatusActual <br />
+      Tiempo total : $diferencia <br />
+      Disponible :
+    </td>
+
+    <td class='col-md-1'>
+      <img src='/pltoolbox/Resources/iconos/$icono'>
+    </td>
+
   </tr>";
 
 }

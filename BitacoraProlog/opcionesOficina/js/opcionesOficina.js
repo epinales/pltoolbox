@@ -15,7 +15,7 @@ $(document).ready(function(){
     var fetch_opc = $.ajax({
       method: 'POST',
       data: {dbid: dbid},
-      url: '/pltoolbox/BitacoraProlog/actions/fetchOpcionesOficina.php'
+      url: '/pltoolbox/BitacoraProlog/opcionesOficina/actions/fetch.php'
     });
 
     fetch_opc.done(function(r){
@@ -59,7 +59,7 @@ $(document).ready(function(){
     var fetch_opc = $.ajax({
       method: 'POST',
       data: {dbid: dbid},
-      url: '/pltoolbox/BitacoraProlog/actions/fetchOpcionesOficina.php'
+      url: '/pltoolbox/BitacoraProlog/opcionesOficina/actions/fetch.php'
     });
 
     fetch_opc.done(function(r){
@@ -98,7 +98,7 @@ $(document).ready(function(){
     var ajaxCall = $.ajax({
         method: 'POST',
         data: data,
-        url: '/pltoolbox/BitacoraProlog/actions/editarOficinas.php'
+        url: '/pltoolbox/BitacoraProlog/opcionesOficina/actions/editar.php'
     });
 
     ajaxCall.done(function(r) {

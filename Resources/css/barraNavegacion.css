@@ -143,3 +143,11 @@ list-style: none;
   list-style: none;
 
 }
+
+.border-dark:hover{
+  border: solid 2px;
+}
+
+.text-dark:hover{
+  letter-spacing: 8px!important;
+}

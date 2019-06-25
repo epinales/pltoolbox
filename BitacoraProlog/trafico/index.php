@@ -11,7 +11,7 @@
 
 <form class="p-0">
   <ol class="breadcrumb bread py-2 mb-1">
-    <li class="breadcrumb-item"><a href="/pltoolbox/BitacoraProlog/bienvenido.php" class="abread">Home</a></li>
+    <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Trafico</b></li>
     <li class="b ml-auto text-center mr-4">
       <a href="#agregarTrafico" data-toggle="modal"  class="bt noborder w-100 mr-2">
