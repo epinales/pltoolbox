@@ -69,11 +69,11 @@ a:hover .arrow {
   bottom: -8px;
 }
 
-/* .active,
+.active,
 a:active,
 a:focus {
   background-color: #414141;
-} */
+}
 
 .active .arrow,
 a:active .arrow,
