@@ -2,18 +2,26 @@
   session_start();
 
   if (!isset($_SESSION['user'])) {
-    header("Location: /fitcoControl/index.php");
+    header("Location: /pltoolbox/index.php");
   }
   $root = $_SERVER['DOCUMENT_ROOT'];
-  require $root . '/pltoolbox/BitacoraProlog/barraNavegacion.php';
+  require $root . '/pltoolbox/links.php';
+
 ?>
 
+<ul class="navbar p-0">
+  <li class="p-0 btn text bblack f19">
+    <a href="#">
+      <span class="title">USUARIOS</span>
+      <div class="arrow"></div>
+    </a>
+  </li>
+</ul>
 
 
-<!-- <form class="page p-0" id="tablaVentas"> -->
 <form class="p-0">
   <ol class="breadcrumb bread py-2 mb-1">
-    <li class="breadcrumb-item"><a href="/pltoolbox/BitacoraProlog/bienvenido.php" class="abread">Home</a></li>
+    <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Usuarios</b></li>
     <li class="b ml-auto text-center mr-4">
       <a href="#agregarUsuario" data-toggle="modal"  class="bt noborder w-100 mr-2">
@@ -43,10 +51,10 @@
     <tbody id="lista_usuarios" style="font-family: 'Source Sans Pro';"></tbody>
   </table>
 </form>
-  <script src="/pltoolbox/BitacoraProlog/usuarios/js/usuarios.js"></script>
+<script src="/pltoolbox/usuarios/js/usuarios.js"></script>
 
 <?php
-  require $root . '/pltoolbox/BitacoraProlog/footer.php';
-  require $root . '/pltoolbox/BitacoraProlog/Usuarios/modales/modal.php';
+  require $root . '/pltoolbox/footer.php';
+  require $root . '/pltoolbox/usuarios/modales/modal.php';
 
 ?>

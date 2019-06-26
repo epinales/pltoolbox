@@ -1,6 +1,4 @@
-<?php
-  require $root . '/pltoolbox/BitacoraProlog/opcionesOficina/modales/opcionesOficina.php';
-?>
+
 
 <footer class="footer">
   <li class="nav-item">
@@ -37,7 +35,6 @@
     </div>
   </li>
 
-  <script src="/pltoolbox/BitacoraProlog/opcionesOficina/js/opcionesOficina.js"></script>
 
   <script src="/pltoolbox/Resources/js/table-fetch-plugin.js"></script>
   <script src="/pltoolbox/Resources/js/popup-list-plugin.js"></script>
