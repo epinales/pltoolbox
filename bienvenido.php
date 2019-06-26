@@ -40,6 +40,15 @@
         </div>
       </div>
     </div>
+
+    <div class="col">
+      <div class="card border-dark m-5 b2px">
+        <div class="card-body text-center">
+          <h5 class="card-title text-dark ls-3"><a href="/pltoolbox/mayoral/"><b class="b">Mayoral</b></a></h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
