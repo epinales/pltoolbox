@@ -49,21 +49,33 @@ while ($row = $rslt->fetch_assoc()) {
   $fechaModif = $row['fechaModif'];
   $UsuarioModif = $row['UsuarioModif'];
   $UsuarioAlta = $row['UsuarioAlta'];
+  $icono = '';
 
-
+  $fechaActual = date("Y-m-d h:i:s");
   $fechaAlta = $row['fechaAlta'];
+  $verde = $row['o_verde'];
   $amarillo = $row['o_amarillo'];
   $rojo = $row['o_rojo'];
   $alerta = $row['o_alerta'];
 
 
+
   $fecha1 = new DateTime($fechaAlta);//fecha inicial
-  $fecha2 = new DateTime('2016-11-30 11:55:06');//fecha de cierre
-
+  $fecha2 = new DateTime($fechaActual);//fecha de cierre
   $intervalo = $fecha1->diff($fecha2);
+  $diferencia = $intervalo->format('%d dias %H:%i horas');
 
-  $diferencia = $intervalo->format('%Y años %m meses %d days %H horas %i minutos
-  %s segundos');//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
+  $dias = $intervalo->format('%d');
+
+  if ($dias < $amarillo) {
+    $icono = 'circular-verde.svg';
+  }elseif ($dias >=  $amarillo AND $dias < $rojo) {
+    $icono = 'circular-amarillo.svg';
+  }elseif ($dias >=  $rojo AND $dias < $alerta) {
+    $icono = 'circular-rojo.svg';
+  }elseif ($dias >=  $alerta) {
+    $icono = 'warning.svg';
+  }
 
 
 
@@ -76,11 +88,11 @@ while ($row = $rslt->fetch_assoc()) {
     <td class='col-md-3'>
       $estatusActual <br />
       Tiempo total : $diferencia <br />
-      Disponible :
+      Disponible : (verde $dias < $amarillo)/(amarillo: $dias >=  $amarillo AND $dias < $rojo)/(rojo : $dias >=  $rojo AND $dias < $alerta)/(alerta : $dias >=  $alerta)
     </td>
 
-    <td class='col-md-1'>
-      <img src='/pltoolbox/Resources/iconos/$icono'>
+    <td class='col-md-1 text-center'>
+      <img class='w-32'  src='/pltoolbox/Resources/iconos/$icono'>
     </td>
 
   </tr>";

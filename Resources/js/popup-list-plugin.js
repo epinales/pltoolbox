@@ -6,7 +6,7 @@ $(document).ready(function(){
     var display = $($(this).attr('id-display'));
     var text = $(this).val();
     var action = $(this).attr('action');
-    var url = '/BitacoraProlog/Resources/PHP/actions/popup-actions/' + action + '.php';
+    var url = '/pltoolbox/Resources/PHP/actions/popup-actions/' + action + '.php';
 
     $(this).attr('db-id', '');
 

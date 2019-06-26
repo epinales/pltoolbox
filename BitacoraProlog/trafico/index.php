@@ -9,7 +9,7 @@
 ?>
 
 
-<form class="p-0">
+<form class="p-0 mb-5">
   <ol class="breadcrumb bread py-2 mb-1">
     <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Trafico</b></li>
@@ -37,7 +37,7 @@
       </a>
     </li>
   </ol>
-  <table class="table table-hover fixed-table mb-0">
+  <table class="table table-hover fixed-table mb-5">
     <tbody id="lista_trafico" style="font-family: 'Source Sans Pro';"></tbody>
   </table>
 </form>
