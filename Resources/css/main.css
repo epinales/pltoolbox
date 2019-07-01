@@ -27,3 +27,15 @@
 .options-list{
   max-width: 75%;
 }
+
+[role='button']{
+  cursor: pointer;
+}
+
+.overflow-scroll{
+  overflow: scroll;
+}
+
+/* #agregarIdentificadores-forma * .custom-input{
+  text-transform: uppercase;
+} */
