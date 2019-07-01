@@ -53,7 +53,6 @@ while ($row = $rslt->fetch_assoc()) {
 
   $fechaActual = date("Y-m-d h:i:s");
   $fechaAlta = $row['fechaAlta'];
-  $verde = $row['o_verde'];
   $amarillo = $row['o_amarillo'];
   $rojo = $row['o_rojo'];
   $alerta = $row['o_alerta'];
@@ -88,7 +87,7 @@ while ($row = $rslt->fetch_assoc()) {
     <td class='col-md-3'>
       $estatusActual <br />
       Tiempo total : $diferencia <br />
-      Disponible : (verde $dias < $amarillo)/(amarillo: $dias >=  $amarillo AND $dias < $rojo)/(rojo : $dias >=  $rojo AND $dias < $alerta)/(alerta : $dias >=  $alerta)
+      Disponible :
     </td>
 
     <td class='col-md-1 text-center'>

@@ -14,7 +14,7 @@
     <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Trafico</b></li>
     <li class="b ml-auto text-center mr-4">
-      <a href="#agregarTrafico" data-toggle="modal"  class="bt noborder w-100 mr-2">
+      <a href="#agregarTrafico" data-toggle="modal"  class="modalTrafico bt noborder w-100 mr-2">
         <span class="img3">
           <svg class="w-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 502">
           	<path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans"

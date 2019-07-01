@@ -11,6 +11,8 @@ $usuario = $_SESSION['user']['u_tipo']== "usuario";
 
 date_default_timezone_set('America/Mexico_City');
 
+$fechaAlta = date('Y-m-d h:i:s');
+$usuarioAlta = $_SESSION['user']['u_usuario'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,11 +77,11 @@ date_default_timezone_set('America/Mexico_City');
         </a>
 
         <div class="dropdown-menu mt-3">
-          <a class="dropdown-item" href="#">Aeropuerto</a>
-          <a class="dropdown-item" href="#">Laredo Texas</a>
-          <a class="dropdown-item" href="#">Manzanillo</a>
-          <a class="dropdown-item" href="#">Nuevo Laredo</a>
-          <a class="dropdown-item" href="#">Veracruz</a>
+          <a class="dropdown-item filtroOficina" db-id='Aeropuerto' href="#">Aeropuerto</a>
+          <a class="dropdown-item filtroOficina" db-id='Laredo Texas' href="#">Laredo Texas</a>
+          <a class="dropdown-item filtroOficina" db-id='Manzanillo' href="#">Manzanillo</a>
+          <a class="dropdown-item filtroOficina" db-id='Nuevo Laredo' href="#">Nuevo Laredo</a>
+          <a class="dropdown-item filtroOficina" db-id='Veracruz' href="#">Veracruz</a>
         </div>
       </li>
       <?php else: ?>

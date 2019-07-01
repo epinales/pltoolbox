@@ -256,3 +256,9 @@ a {
   width: 100%;
   display: block;
 }
+
+.activo{
+  font-size: 18px;
+font-weight: 800;
+text-shadow: 0.09px 0.25px rgba(247, 242, 125, 0.88);
+}

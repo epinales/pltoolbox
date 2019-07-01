@@ -43,7 +43,7 @@ li.btn a {
 }
 
 
-.bblack a:hover {
+.bblack a:hover,.bblack a:focus  {
   background-color: #414141;
   color: whitesmoke
 }
