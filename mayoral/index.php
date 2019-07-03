@@ -3,16 +3,54 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
-$file_factura_mayoral = fopen($root . '/pltoolbox/mayoral/resources/helper_files/factura_aeropuerto.csv','r');
+$file_factura_mayoral = fopen($root . '/pltoolbox/mayoral/resources/helper_files/factura_aeropuerto_II.csv','r');
 // $factura = array();
 
 $facturas = array();
 $identificadores = array();
 
-$hoy = date('d/m/Y', strtotime('today'));
+$precios_estimados = "SELECT * FROM mayoral_precio_estimado";
+$precios = array();
+$valor_factura = array();
+$precios_estimados = $db->prepare($precios_estimados);
+if (!($precios_estimados)) {
+  $system_callback['code'] = "500";
+  $system_callback['message'] = "Error during PRECIOS ESTIMADOS query prepare [$db->errno]: $db->error";
+  exit_script($system_callback);
+}
 
+if (!($precios_estimados->execute())) {
+  $system_callback['code'] = "500";
+  $system_callback['message'] = "Error during PRECIOS ESTIMADOS execution [$precios_estimados->errno]: $precios_estimados->error";
+  exit_script($system_callback);
+}
+
+$precios_estimados = $precios_estimados->get_result();
+
+if ($precios_estimados->num_rows == 0) {
+  $system_callback['results'][$factura]['response'] = 400;
+  $system_callback['results'][$factura]['message'] = "No se pudo sacar la información de precios estimados.";
+  exit_script($system_callback);
+} else {
+  while ($row = $precios_estimados->fetch_assoc()) {
+    $precios[$row['fraccion']] = array('umt'=>$row['umt'], 'precio_estimado'=>$row['precio_estimado']);
+  }
+}
+
+$hoy = date('d/m/Y', strtotime('today'));
+$comparacion_precios = array();
+
+fgetcsv($file_factura_mayoral);
 while ($row = fgetcsv($file_factura_mayoral,1000)) {
   $item = array();
+  $comparacion_precios[$row[10]]['Excel'] = $row[21] / $row[18];
+  $comparacion_precios[$row[10]]['Tarifa'] = $precios[$row[13]]['precio_estimado'];
+
+  if ($row[1] == ".") {
+    continue;
+  }
+
+  $valor_factura[$row[1]] += $row[21];
 
   $facturas[$row[1]]['header'] = array(
     $row[1],  //NumeroFactura
@@ -34,7 +72,7 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
     "",          //DescripcionIngles
     $row[18],    //CantUMC
     $row[17],    //UMC
-    $row[21],    //PrecioUnitario
+    $row[21]/$row[18],    //PrecioUnitario
     2,0,         //UnidadPesoUnitario - PesoUnitario
     $row[13],   //Fraccion
     $row[20],   //CantUMT
@@ -43,35 +81,57 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
     0           //ValorAgregado
   );
 
-  $identificadores[$row[10]] = array();
+  // $identificadores[$row[10]] = array();
 
-
-  $generic = array();
-
-  if ($row[30] != "") {
-    $identif1 = explode(",",$row[30]);
+  if ($row[29] != "") {
+    $identif1 = explode(",",$row[29]);
     array_unshift($identif1, $row[10]);
     $identificadores[$row[10]][] = $identif1;
   }
-  if ($row[31] != "") {
-    $identif2 = explode(",",$row[31]);
+  if ($row[30] != "") {
+    $identif2 = explode(",",$row[30]);
     array_unshift($identif2, $row[10]);
     $identificadores[$row[10]][] = $identif2;
   }
-  if ($row[32] != "") {
-    $identif3 = explode(",",$row[32]);
+  if ($row[31] != "") {
+    $identif3 = explode(",",$row[31]);
     array_unshift($identif3, $row[10]);
     $identificadores[$row[10]][] = $identif3;
   }
-  if ($row[33] != "") {
-    $identif4 = explode(",",$row[33]);
+  if ($row[32] != "") {
+    $identif4 = explode(",",$row[32]);
     array_unshift($identif4, $row[10]);
     $identificadores[$row[10]][] = $identif4;
   }
 
+  if ($precios[$row[13]]['precio_estimado'] != "") {
+    $compare = $precios[$row[13]]['precio_estimado'] < [$row[21] / $row[18]];
+    $capitulo = substr($row[13], 0, 2);
+
+    if ($capitulo <= 63 && $capitulo >= 50) {
+      $comple_ex = 31;
+    } elseif ($capitulo = 64) {
+      $comple_ex = 29;
+    }
+
+    if ($compare) {
+      $identificadores[$row[10]][] = array($row[10], 'EX', $comple_ex);
+    }
+  }
+
+  if ($row[23] == "TL") {
+    $identificadores[$row[10]][] = array($row[10], 'TL', $row['24']);
+  }
+
+}
+
+foreach ($facturas as $id => $factura) {
+  $facturas[$id]['header'][7] = $valor_factura[$id];
+  $facturas[$id]['header'][8] = $valor_factura[$id];
 }
 
 $txt_file = "";
+
 
 foreach ($facturas as $factura) {
   foreach ($factura['header'] as $valor_header) {
@@ -97,7 +157,10 @@ foreach ($identificadores as $identificadores_parte) {
   }
 }
 
-$txt_file .= "@";
+$txt_file .= "@||||||";
+
+$txt_file = str_replace("ñ","n",$txt_file);
+$txt_file = str_replace("Ñ","N",$txt_file);
 
 
 $json_print = json_encode(array($facturas, $identificadores));
@@ -214,123 +277,36 @@ $json_print = json_encode(array($facturas, $identificadores));
             </table>
           </div>
           <div class="tab-pane fade mt-5 px-5" id="facturasMayoral-pane" role="tabpanel" aria-labelledby="facturasMayoral-tab">
-            <h4>Facturas Mayoral</h4>
+            <div class="">
+              <button type="button" class="btn btn-small btn-outline-primary float-right" id="marcasModelos_btn" name="button">Archivo Marcas y Modelos</button>
+              <div class="float-right">
+                <button type="button" class="btn btn-small btn-outline-primary" data-toggle="modal" data-target="#subirFactura-modal" name="button">Agregar Factura</button>
+                <button type="button" class="btn btn-small btn-outline-info" id="procesarFacturas_btn" name="button">Procesar Facturas</button>
+              </div>
+              <h4>Facturas Mayoral</h4>
+            </div>
             <hr>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Factura</th>
+                  <th>Año</th>
+                  <th>Fecha Carga</th>
+                  <th>Items</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="facturasMayoral_tbl">
+
+              </tbody>
+            </table>
+
+
             <?php echo $txt_file ?>
-            <!-- <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <!-- <tr>
-                    <th>AÑO</th>
-                    <th>FACTURA</th>
-                    <th>ARTICULO</th>
-                    <th>PIEZA</th>
-                    <th>RANGO</th>
-                    <th>DESCRIPCION </th>
-                    <th>DESCRIPCION MX</th>
-                    <th>COMPOSICION</th>
-                    <th>COMP. FORRO</th>
-                    <th>TARIC</th>
-                    <th>MX HS CODE</th>
-                    <th>SUBDIVI</th>
-                    <th>CANTIDAD</th>
-                    <th>PRECIO UNITARIO</th>
-                    <th>IMPORTE TOTAL</th>
-                    <th>MONEDA</th>
-                    <th>ORIGEN</th>
-                    <th>PESO NETO</th>
-                    <th>PESO BRUTO</th>
-                    <th>FACERR</th>
-                    <th>SECCION </th>
-                    <th>MARCA</th>
-                    <th>T1</th>
-                    <th>T2</th>
-                    <th>T3</th>
-                    <th>T4</th>
-                    <th>T5</th>
-                    <th>T6</th>
-                    <th>T7</th>
-                    <th>T8</th>
-                    <th>T9</th>
-                    <th>T10</th>
-                    <th>TK1</th>
-                    <th>TK2</th>
-                    <th>TK3</th>
-                    <th>TK4</th>
-                    <th>TK5</th>
-                    <th>TK6</th>
-                    <th>TK7</th>
-                    <th>TK8</th>
-                    <th>TK9</th>
-                    <th>TK10</th>
-                    <th>C1</th>
-                    <th>C2</th>
-                    <th>C3</th>
-                    <th>C4</th>
-                    <th>C5</th>
-                    <th>C6</th>
-                    <th>C7</th>
-                    <th>C8</th>
-                    <th>C9</th>
-                    <th>C10</th>
-                    <th>PUNTO / PLANA</th>
-                    <th>SEXO</th>
-                    <th>UMC</th>
-                    <th>UMT</th>
-                  </tr>
-                  <tr>
-                    <th>ClaveProveedor</th>
-                    <th>NumFac</th>
-                    <th>FechaFactura</th>
-                    <th>ValorComercial</th>3
-                    <th>Moneda</th>4
-                    <th>Incoterm</th>5
-                    <th>SubdV</th>
-                    <th>CertOrigin</th>
-                    <th>NúmeroItem</th>
-                    <th>PartidaPed</th>
-                    <th>NúmeroParte</th>10
-                    <th>ModeloCOVE</th>
-                    <th>SubModeloCOVE</th>
-                    <th>Fracción</th>13
-                    <th>Descripción</th>14
-                    <th>Vendedor</th>
-                    <th>Origen</th>16
-                    <th>ClaveUMC</th>17
-                    <th>CantUMC</th>18
-                    <th>ClaveUMT</th>19
-                    <th>CantUMT</th>20
-                    <th>ValorMercancía</th>21
-                    <th>Moneda(2)</th>
-                    <th>PreferenciaTL</th>
-                    <th>IdentPref</th>
-                    <th>MétVal</th>
-                    <th>TipoMerc</th>
-                    <th>UsoMerc</th>
-                    <th>Vinc</th>
-                    <th>Ident1</th>
-                    <th>Ident2</th>
-                    <th>Ident3</th>
-                    <th>Ident4</th>
-                    <th>Permisos1</th>
-                    <th>Permisos2</th>
-                    <th>ObservPart</th>
-                    <th>MarcaCOVE</th>
-                    <th>SerieCOVE</th>
-                    <th>SubDiv</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($factura as $item): ?>
-                    <tr>
-                      <?php foreach ($item as $field): ?>
-                        <td><?php echo $field ?></td>
-                      <?php endforeach; ?>
-                    </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div> -->
+            <div class="" id="insert-here-off">
+
+            </div>
           </div>
         </div>
       </div>
@@ -340,6 +316,7 @@ $json_print = json_encode(array($facturas, $identificadores));
 
   require 'modales/agregarIdentificador.php';
   require 'modales/editarIdentificador.php';
+  require 'modales/nuevaFactura.php';
   require $root . '/pltoolbox/scripts.php';
    ?>
    <script src="js/mayoral.js" charset="utf-8"></script>

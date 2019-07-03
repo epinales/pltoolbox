@@ -18,7 +18,6 @@ $(document).ready(function(){
       r = JSON.parse(r);
       if (r.code == 1) {
         tabla.html(r.data);
-        alertify.success('Identificadores cargados con éxito');
       } else {
         tabla.html('<tr class="bg-transparent"><td>No se encontraron identificadores en el sistema.</td></tr>')
       }
@@ -364,4 +363,104 @@ $(document).ready(function(){
   $('#preciosEstimados-tab').on('show.bs.tab', function(){
     $('#precios-estimados-tbl').trigger('fetch');
   });
+
+  //Eventos factura Mayoral
+  $('#facturasMayoral-tab').on('show.bs.tab', function(){
+    $('#facturasMayoral_tbl').trigger('fetch');
+  });
+  $('#marcasModelos_btn').click(function(){
+    var createExcel = $.ajax({
+      method: 'POST',
+      url: 'actions/facturasMayoral/marcasyModelos.php',
+    });
+
+    createExcel.done(function(r){
+      // r = JSON.parse(r);
+      // console.log(r);
+      alertify.message('File Created');
+    }).fail(function(x,y,z){
+      alertify.message(y + ":" + z);
+    })
+  })
+  $('#facturasMayoral_tbl').on('fetch', function(){
+    var table = $(this);
+    var fetchFacturas = $.ajax({
+      method: 'POST',
+      url: 'actions/facturasMayoral/fetch.php'
+    });
+
+    fetchFacturas.done(function(r){
+      r = JSON.parse(r);
+      table.html(r.data);
+    }).fail(function(x,y,z){
+      alertify.error(y + ": " + z);
+    });
+  });
+  $('#procesarFacturas_btn').click(function(){
+    var rows = $('#facturasMayoral_tbl').find('tr');
+    var facturas = [];
+
+    rows.each(function(){
+      var check = $(this).find('input[type=checkbox]').prop('checked');
+      if (check) {
+        facturas.push($(this).data('id'));
+      }
+    });
+
+    if (facturas.length == 0) {
+      alertify.warning('Necesita seleccionar por lo menos una factura para procesarla.');
+      return false;
+    }
+
+    data = {
+      facturas: facturas
+    }
+
+    var procesarFacturas = $.ajax({
+        method: 'POST',
+        data: data,
+        url: 'actions/facturasMayoral/procesarFacturas.php'
+    });
+
+    procesarFacturas.done(function(r){
+      r = JSON.parse(r);
+      console.log(r);
+      $('#insert-here').html(r.data);
+    }).fail(function(x,y,z){
+      alertify.error(y + ": " + z);
+    });
+
+  });
+
+  //EventosModalSubirFactura
+  $('.custom-file-input').change(function(e){
+    fileName = e.target.files[0].name;
+    $(this).siblings('label').html(fileName);
+  });
+  $('#subirFactura_btn').click(function(){
+    var data = new FormData;
+    var authorized_files = [
+      'csv',
+    ];
+    var fileInput = $(this).parents('.modal').find('.custom-file-input');
+    console.log(fileInput.prop('files'));
+    data.append('file', fileInput.prop('files')[0]);
+
+    var uploadFactura = $.ajax({
+      method: 'POST',
+      url: 'actions/facturasMayoral/upload.php',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: data
+    });
+
+    uploadFactura.done(function(r){
+      r = JSON.parse(r);
+      console.log(r);
+    }).fail(function(x,y,z){
+      alertify.error(y + ": " + z);
+    });
+  });
+
 });
