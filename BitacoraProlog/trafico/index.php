@@ -42,6 +42,7 @@
   </table>
 </form>
 <script src="/pltoolbox/BitacoraProlog/trafico/js/trafico.js"></script>
+<!-- <script src="/pltoolbox/BitacoraProlog/js/funciones.js"></script> -->
 
 
 <?php

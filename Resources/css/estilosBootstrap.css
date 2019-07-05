@@ -1,0 +1,27 @@
+.custom-select {
+  background: transparent url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center!important;
+  background-size: 8px 10px!important;
+  border-radius: 1.5rem!important;
+}
+
+
+.custom-select:focus {
+  border-color: black!important;
+  outline: 0;
+  box-shadow: none!important
+}
+
+.alink{
+  color: rgb(106, 142, 171)!important;
+}
+
+/* a {
+  color: rgb(106, 142, 171);
+  text-decoration: none;
+  background-color: transparent;
+} */
+
+
+input[type=datetime]{
+  -webkit-appearance: listbox!important;
+}

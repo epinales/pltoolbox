@@ -125,7 +125,7 @@ li.breadcrumb-item:hover, a.abread:hover{
 .efecto-1{
   font-family: 'Source Sans Pro', 'Courier', monospace;
   background-color: whitesmoke;
-  border: 2px solid #ddd;
+  border: 2px solid #ddd!important;
   border-radius: 20pt;
   padding-left: 10pt;
   padding-right: 10pt;
@@ -135,12 +135,25 @@ li.breadcrumb-item:hover, a.abread:hover{
   width: 100%!important;
 }
 
+/* .efecto-1:{
+  font-family: 'Source Sans Pro', 'Courier', monospace;
+  background-color: whitesmoke;
+  border: 2px solid #ddd!important;
+  border-radius: 20pt;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  color: #333;
+  width: 100%!important;
+} */
+
 .form{
   font-family: 'Source Sans Pro';
 }
 
 input[type="text"]:focus, input[type="email"]:focus,input[type="date"]:focus, input[type="password"]:focus {
-  border: 2px solid #333;
+  border: 2px solid #333!important;
 }
 
 

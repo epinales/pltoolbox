@@ -40,6 +40,7 @@ if ($rslt->num_rows == 0) {
 }
 
 while ($row = $rslt->fetch_assoc()) {
+  $pk_bitacora = $row['pk_bitacora'];
   $nombreCliente = $row['nombreCliente'];
   $tipo = $row['tipo'];
   $referencia = $row['referencia'];
@@ -81,8 +82,13 @@ while ($row = $rslt->fetch_assoc()) {
   $system_callback['data'] .="
   <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-8'>
-      <span class='ls-3'>$nombreCliente</span> <br> $tipo -- $referencia ($UsuarioAlta) <br />
-      <span style='color:rgba(127, 141, 142, 0.71);'>Ultima Modificación: $fechaModif / $UsuarioModif</span>
+      <span class='ls-3'>
+        <a href='#adminEstatus' data-toggle='modal' class='adminEstatus alink' db-id='$pk_bitacora'>$nombreCliente</a>
+      </span>
+      <br> $tipo -- $referencia ($UsuarioAlta) <br />
+      <span style='color:rgba(127, 141, 142, 0.71);'>
+        Ultima Modificación: $fechaModif / $UsuarioModif
+      </span>
     </td>
     <td class='col-md-3'>
       $estatusActual <br />

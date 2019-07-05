@@ -1,19 +1,10 @@
 <?php
-$root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
+  $root = $_SERVER['DOCUMENT_ROOT'];
+  require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
+  date_default_timezone_set('America/Mexico_City');
 
-$global = $_SESSION['user']['u_tipo'] == 'global';
-$admin = $_SESSION['user']['u_tipo']== "administrador";
-$usuario = $_SESSION['user']['u_tipo']== "usuario";
-
-
-
-date_default_timezone_set('America/Mexico_City');
-
-$fechaAlta = date('Y-m-d h:i:s');
-$usuarioAlta = $_SESSION['user']['u_usuario'];
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +17,9 @@ $usuarioAlta = $_SESSION['user']['u_usuario'];
 <link rel="stylesheet" href="/pltoolbox/Resources/css/estilos.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/barraNavegacion.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/modales.css">
-<link rel="stylesheet" href="/pltoolbox/Resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/pltoolbox/Resources/css/estilosBootstrap.css">
+<!-- <link rel="stylesheet" href="/pltoolbox/Resources/bootstrap/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/pltoolbox/Resources/Bootstrap_4_3/css/bootstrap.min.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/sweetAlert/css/sweetalert.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/alertify.min.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/themes/default.min.css">
@@ -37,7 +30,8 @@ $usuarioAlta = $_SESSION['user']['u_usuario'];
 <script src="/pltoolbox/Resources/sweetAlert/js/sweetalert.min.js"></script>
 <script src="/pltoolbox/Resources/js/popper.js"></script>
 <script src="/pltoolbox/Resources/js/tether.min.js"></script>
-<script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- <script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script> -->
+<script src="/pltoolbox/Resources/Bootstrap_4_3/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 

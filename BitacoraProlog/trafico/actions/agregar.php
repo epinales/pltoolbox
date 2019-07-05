@@ -12,8 +12,8 @@ $a_estatusActual = trim($_POST['a_estatusActual']);
 $a_estatusSiguiente = trim($_POST['a_estatusSiguiente']);
 $a_oficina = trim($_POST['a_oficina']);
 $a_referencia = trim($_POST['a_referencia']);
-$a_usuarioAlta = trim($_POST['a_usuarioAlta']);
-$a_fechaAlta = trim($_POST['a_fechaAlta']);
+// $a_usuarioAlta = trim($_POST['a_usuarioAlta']);
+// $a_fechaAlta = trim($_POST['a_fechaAlta']);
 $a_estatusTipo = trim($_POST['a_estatusTipo']);
 $a_tipo = trim($_POST['a_tipo']);
 
@@ -66,7 +66,7 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 			exit_script($system_callback);
 		}
 
-		$stmt->bind_param('sssssssss',$a_cliente,$a_estatusActual,$a_estatusSiguiente,$a_oficina,$a_referencia,$a_usuarioAlta,$a_fechaAlta,$a_estatusTipo,$a_tipo);
+		$stmt->bind_param('sssssssss',$a_cliente,$a_estatusActual,$a_estatusSiguiente,$a_oficina,$a_referencia,$usuarioAlta,$fechaAlta,$a_estatusTipo,$a_tipo);
 		if (!($stmt)) {
 			$system_callback['code'] = "500";
 			$system_callback['message'] = "Error during variables binding [$stmt->errno]: $stmt->error";
@@ -93,9 +93,10 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 
 		if ($a_referencia  == "SN") {
       $query = "INSERT INTO bitacora_detalle (fk_bitacora,
-    																					prealerta_fechahora,
+                                              prealerta_fecha,
+    																					prealerta_hora,
     																					usuarioRegistro)
-    																				 VALUES (?,?,?)";
+    																				 VALUES (?,?,?,?)";
       $stmt = $db->prepare($query);
      	if (!($stmt)) {
      		$system_callback['code'] = "500";
@@ -103,16 +104,20 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
      		exit_script($system_callback);
      	}
 
-     	 $stmt->bind_param('sss',$fk_bitacora,
-     														$a_fechaAlta,
+     	 $stmt->bind_param('ssss',$fk_bitacora,
+                                $fechaActual,
+     														$horaActual,
      														$a_usuarioAlta);
 		}else {
       $query = "INSERT INTO bitacora_detalle (fk_bitacora,
-    																					prealerta_fechahora,
-    																					arribo_fechahora,
-    																					apertura_fechaHora,
+                                              prealerta_fecha,
+    																					prealerta_hora,
+                                              arribo_fecha,
+    																					arribo_hora,
+                                              apertura_fecha,
+    																					apertura_hora,
     																					usuarioRegistro)
-    																				 VALUES (?,?,?,?,?)";
+    																				 VALUES (?,?,?,?,?,?,?,?)";
        $stmt = $db->prepare($query);
        	if (!($stmt)) {
        		$system_callback['code'] = "500";
@@ -120,11 +125,14 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
        		exit_script($system_callback);
        	}
 
-     	 $stmt->bind_param('sssss',$fk_bitacora,
-     														$a_fechaAlta,
-     														$a_fechaAlta,
-     														$a_fechaAlta,
-     														$a_usuarioAlta);
+     	 $stmt->bind_param('ssssssss',$fk_bitacora,
+                                    $fechaActual,
+                                    $horaActual,
+                                    $fechaActual,
+                                    $horaActual,
+                                    $fechaActual,
+                                    $horaActual,
+         														$a_usuarioAlta);
     }
 
 
@@ -149,6 +157,11 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 		$system_callback['message'] = "El query no hizo ningún cambio a la base de datos";
 		exit_script($system_callback);
 	}
+
+  $descripcion = "Se agrego nueva referencia: $a_referencia en oficina $a_oficina";
+  $seccion = 'trafico';
+
+  require $root . '/pltoolbox/BitacoraProlog/actions/registroActividad.php';
 
 
 		$db->commit();
