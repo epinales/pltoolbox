@@ -15,13 +15,37 @@
   color: rgb(106, 142, 171)!important;
 }
 
-/* a {
-  color: rgb(106, 142, 171);
-  text-decoration: none;
-  background-color: transparent;
-} */
-
 
 input[type=datetime]{
   -webkit-appearance: listbox!important;
 }
+
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057!important;
+  background-color: transparent;
+  border-color: black black transparent!important;
+  font-weight: bolder
+}
+
+.nav-tabs {
+  border-bottom: 1px solid black!important;
+}
+
+
+.input-group-text {
+  padding: .0rem .75rem!important;
+  background-color: transparent!important;
+  border: 2px solid #ddd!important;
+  border-radius: 20pt!important;
+}
+
+
+
+/* SWEETALERT */
+
+.sweet-alert button {
+  width: 180px!important;
+}
+/* FIN SWEETALERT FIN  */

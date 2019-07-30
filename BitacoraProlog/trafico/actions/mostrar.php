@@ -6,9 +6,42 @@ $system_callback = [];
 $data = $_POST;
 
 $oficina = $data['oficina'];
-$andWhere = 'WHERE oficina = ?';
+$andWhere = 'WHERE oficina = ? AND terminado = 0';
 
-$query = "SELECT * FROM bitacora INNER JOIN oficinas ON oficina = o_nombre $andWhere";
+$query = "SELECT
+
+b.pk_bitacora,
+b.nombreCliente,
+b.tipo,
+b.referencia,
+b.oficina,
+b.UsuarioAlta,
+b.fechaAlta,
+b.UsuarioModif,
+b.fechaModif,
+
+bi.pk_indice,
+bi.indice,
+
+SUM(bdp.dp_montoDepo) AS deposito,
+SUM(bdp.dp_montoPago) AS pago,
+
+o.pk_oficina,
+o.o_nombre,
+o.o_amarillo,
+o.o_rojo,
+o.o_alerta
+
+FROM bitacora b
+LEFT JOIN oficinas o ON b.oficina = o.o_nombre
+LEFT JOIN bitacora_indice bi ON b.estatusIndice = bi.pk_indice
+LEFT JOIN bitacora_depoPago bdp ON b.pk_bitacora = bdp.fk_bitacora_dp
+$andWhere GROUP BY b.pk_bitacora ";
+
+
+
+
+
 
 $stmt = $db->prepare($query);
 if (!($stmt)) {
@@ -52,12 +85,20 @@ while ($row = $rslt->fetch_assoc()) {
   $UsuarioAlta = $row['UsuarioAlta'];
   $icono = '';
 
+
   $fechaActual = date("Y-m-d h:i:s");
   $fechaAlta = $row['fechaAlta'];
   $amarillo = $row['o_amarillo'];
   $rojo = $row['o_rojo'];
   $alerta = $row['o_alerta'];
 
+
+  $deposito = number_format($row['deposito'], 2);
+  $pago = number_format($row['pago'], 2);
+
+
+  $pk_indice = $row['pk_indice'];
+  $indice = $row['indice'];
 
 
   $fecha1 = new DateTime($fechaAlta);//fecha inicial
@@ -79,11 +120,12 @@ while ($row = $rslt->fetch_assoc()) {
 
 
 
+
   $system_callback['data'] .="
   <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-8'>
       <span class='ls-3'>
-        <a href='#adminEstatus' data-toggle='modal' class='adminEstatus alink' db-id='$pk_bitacora'>$nombreCliente</a>
+        <a href='#' onclick='correspAsignar($pk_bitacora)' class='alink' db-id='$pk_bitacora'>$nombreCliente</a>
       </span>
       <br> $tipo -- $referencia ($UsuarioAlta) <br />
       <span style='color:rgba(127, 141, 142, 0.71);'>
@@ -91,9 +133,9 @@ while ($row = $rslt->fetch_assoc()) {
       </span>
     </td>
     <td class='col-md-3'>
-      $estatusActual <br />
+      $indice <br />
       Tiempo total : $diferencia <br />
-      Disponible :
+      Disponible : $deposito
     </td>
 
     <td class='col-md-1 text-center'>

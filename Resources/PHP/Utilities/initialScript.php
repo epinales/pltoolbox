@@ -19,7 +19,7 @@ $usuario = $_SESSION['user']['u_tipo']== "usuario";
 $fechaAlta = date('Y-m-d h:i:s');
 $usuarioAlta = $_SESSION['user']['u_usuario'];
 $fechaActual = date('Y-m-d');
-$horaActual = date('h:i');
+$horaActual = date('H:i');
 
 
 

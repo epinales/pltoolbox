@@ -14,6 +14,7 @@
   <title>Bitacora Prolog</title>
 
   <!--***************ESTILOS*****************-->
+<link rel="stylesheet" href="/pltoolbox/Resources/css/bitacoraProlog.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/estilos.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/barraNavegacion.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/modales.css">

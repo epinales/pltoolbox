@@ -113,46 +113,24 @@ li.breadcrumb-item:hover, a.abread:hover{
 .b{
   color: black!important;
 }
+.gris{
+  color: #9a9a9a!important;
+}
 
 .table-hover tbody tr:hover {
     background-color: rgba(127, 141, 142, 0.08)!important;
 }
 
-.bbyellow{
-  border-bottom: solid 1.2px rgba(247, 242, 125, 0.3);
-}
-
-.efecto-1{
-  font-family: 'Source Sans Pro', 'Courier', monospace;
-  background-color: whitesmoke;
-  border: 2px solid #ddd!important;
-  border-radius: 20pt;
-  padding-left: 10pt;
-  padding-right: 10pt;
-  outline: none;
-  transition: 0.2s ease-in-out;
-  color: #333;
-  width: 100%!important;
-}
-
-/* .efecto-1:{
-  font-family: 'Source Sans Pro', 'Courier', monospace;
-  background-color: whitesmoke;
-  border: 2px solid #ddd!important;
-  border-radius: 20pt;
-  padding-left: 10pt;
-  padding-right: 10pt;
-  outline: none;
-  transition: 0.2s ease-in-out;
-  color: #333;
-  width: 100%!important;
-} */
 
 .form{
   font-family: 'Source Sans Pro';
 }
 
 input[type="text"]:focus, input[type="email"]:focus,input[type="date"]:focus, input[type="password"]:focus {
+  border: 2px solid #333!important;
+}
+
+.tiene-contenido{
   border: 2px solid #333!important;
 }
 
@@ -186,8 +164,13 @@ input:focus, input.form-control:focus {
 
 .back-aceptar{
   opacity: 0.7;
-  /* background-color: rgba(119, 167, 120, 0.73)!important; */
   background-color: rgba(139, 167, 139, 0.93)!important;
+}
+
+
+.back-detalle{
+  opacity: 0.7;
+  background-color: rgba(70, 116, 149, 0.93)!important;
 }
 
 .bt{

@@ -41,6 +41,10 @@
     <tbody id="lista_trafico" style="font-family: 'Source Sans Pro';"></tbody>
   </table>
 </form>
+
+
+
+
 <script src="/pltoolbox/BitacoraProlog/trafico/js/trafico.js"></script>
 <!-- <script src="/pltoolbox/BitacoraProlog/js/funciones.js"></script> -->
 

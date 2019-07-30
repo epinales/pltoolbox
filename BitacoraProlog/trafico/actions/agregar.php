@@ -8,14 +8,12 @@ $db->query("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
 
 //variables
 $a_cliente = trim($_POST['a_cliente']);
-$a_estatusActual = trim($_POST['a_estatusActual']);
-$a_estatusSiguiente = trim($_POST['a_estatusSiguiente']);
 $a_oficina = trim($_POST['a_oficina']);
 $a_referencia = trim($_POST['a_referencia']);
-// $a_usuarioAlta = trim($_POST['a_usuarioAlta']);
-// $a_fechaAlta = trim($_POST['a_fechaAlta']);
 $a_estatusTipo = trim($_POST['a_estatusTipo']);
 $a_tipo = trim($_POST['a_tipo']);
+$estatusIndice = trim($_POST['estatusIndice']);
+$terminado = 0;
 
 
 
@@ -50,14 +48,15 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 
 
 		$query = "INSERT INTO bitacora (nombreCliente,
-																		estatusActual,
-																		estatusSiguiente,
 																		oficina,
 																		referencia,
 																		UsuarioAlta,
 																		fechaAlta,
-																		estatusTipo,
-																		tipo) VALUES (?,?,?,?,?,?,?,?,?)";
+                                    estatusTipo,
+																		estatusIndice,
+																		tipo,
+                                    terminado)
+                                    VALUES (?,?,?,?,?,?,?,?,?)";
 
 		$stmt = $db->prepare($query);
 		if (!($stmt)) {
@@ -66,7 +65,7 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 			exit_script($system_callback);
 		}
 
-		$stmt->bind_param('sssssssss',$a_cliente,$a_estatusActual,$a_estatusSiguiente,$a_oficina,$a_referencia,$usuarioAlta,$fechaAlta,$a_estatusTipo,$a_tipo);
+		$stmt->bind_param('sssssssss',$a_cliente,$a_oficina,$a_referencia,$usuarioAlta,$fechaAlta,$a_estatusTipo,$estatusIndice,$a_tipo,$terminado);
 		if (!($stmt)) {
 			$system_callback['code'] = "500";
 			$system_callback['message'] = "Error during variables binding [$stmt->errno]: $stmt->error";

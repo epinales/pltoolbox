@@ -10,7 +10,7 @@
       <div class="mt-3 text-center submodal">
         <input type="hidden" id="pk_oficina">
         CONFIGURACIÓN :
-         <select id="o_nombre" class="custom-select border-0">
+         <select id="o_nombre" class="bt border-0">
           <option value="Nuevo Laredo">Nuevo Laredo</option>
           <option value="Manzanillo">Manzanillo</option>
           <option value="Veracruz">Veracruz</option>
@@ -24,7 +24,7 @@
             <td class="col-md-12 align-items-center">
               Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/circular-amarillo.svg">
               a partir de
-              <select id="o_amarillo" class="custom-select">
+              <select id="o_amarillo">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -44,7 +44,7 @@
             <td class="col-md-12 align-items-center">
               Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/circular-rojo.svg">
               a partir de
-              <select id="o_rojo" class="custom-select">
+              <select id="o_rojo">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -64,7 +64,7 @@
             <td class="col-md-12 align-items-center">
               Mostrar marcador <img class="w-25px" src="/pltoolbox/Resources/iconos/warning.svg">
               a partir de
-              <select id="o_alerta" class="custom-select">
+              <select id="o_alerta">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

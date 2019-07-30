@@ -6,9 +6,10 @@ $system_callback = [];
 $data = $_POST;
 
 $referencia = $data['referencia'];
-// $andWhere = 'WHERE sReferenciaCliente = ?';
 
-$query = "SELECT * FROM bitacora_trafico INNER JOIN lst_clientes ON cveCliente = pk_id_cliente WHERE sReferenciaCliente = ?";
+$query = "SELECT * FROM bitacora_trafico
+INNER JOIN lst_clientes ON cveCliente = pk_id_cliente
+WHERE sReferenciaCliente = ?";
 
 $stmt = $db->prepare($query);
 if (!($stmt)) {
