@@ -148,7 +148,7 @@ listaTrafico();
   })
 
   $('#prealerta_fecha').change(function(){
-    validacion();
+    validacionEstatus();
     fechahora();
 
     if (aperturaF != "") {
@@ -160,7 +160,7 @@ listaTrafico();
   })
 
   $('#arribo_fecha').change(function(){
-    validacion();
+    validacionEstatus();
     fechahora();
 
     if (aperturaF != "") {
@@ -174,7 +174,7 @@ listaTrafico();
 
   $('#apertura_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
 
     if ($('#arribo_fecha').val() == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
@@ -192,7 +192,7 @@ listaTrafico();
 
   $('#capfact_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
     if (arriboF == "" || aperturaF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
@@ -206,7 +206,7 @@ listaTrafico();
 
   $('#clasif_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
     if (arriboF == "" || aperturaF == "" || capfactF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
@@ -220,7 +220,7 @@ listaTrafico();
 
   $('#solant_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
 
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
@@ -235,7 +235,7 @@ listaTrafico();
 
   $('#deposito_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
 
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
@@ -254,7 +254,7 @@ listaTrafico();
 
   $('#pago_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "" || depositoF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
@@ -273,7 +273,7 @@ listaTrafico();
 
   $('#program_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
 
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "" || depositoF == "" || pagoF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
@@ -288,7 +288,7 @@ listaTrafico();
 
   $('#entrega_fecha').change(function(){
     fechahora();
-    validacion();
+    validacionEstatus();
 
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "" || depositoF == "" || pagoF == "" || programF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
@@ -363,7 +363,8 @@ listaTrafico();
   }) //funciona segun revision
 
   $('.actualizar_trafico').click(function(){
-    validacion();
+    validacionEstatus();
+
     var data = {
       pk_bitacora: $('#pk_bitacora').val(),
       pk_indice: $('#pk_indice').val(),
@@ -386,7 +387,8 @@ listaTrafico();
       program_fecha : $('#program_fecha').val(),
       program_hora : $('#program_hora').val(),
       entrega_fecha : $('#entrega_fecha').val(),
-      entrega_hora : $('#entrega_hora').val()
+      entrega_hora : $('#entrega_hora').val(),
+      referencia : $('#referencia').val()
     }
 
     if (arriboF == prealertaF && arriboH < prealertaH ||
@@ -437,11 +439,9 @@ listaTrafico();
           listaTrafico();
           swal("Exito", "Se actualizo.", "success");
           $('.modal').modal('hide');
-          // console.error(r.message);
         } else if (r.code == 2) {
           $('.modal').modal('hide');
           swal("No hay Cambios", "La referencia no se modifico.", "info");
-          // console.error(r.message);
         }else {
           console.error(r.message);
         }
@@ -485,6 +485,7 @@ listaTrafico();
       concepto: "",
       comentarios: "",
       pk_bitacora: $('#pk_bitacora').val(),
+      referencia: $('#referencia').val()
     }
 
     validacion = $('#dep_monto').val() == "";
@@ -519,6 +520,7 @@ listaTrafico();
       concepto: $('#pag_concepto').val(),
       comentarios: $('#pag_comentarios').val(),
       pk_bitacora: $('#pk_bitacora').val(),
+      referencia: $('#referencia').val()
     }
 
     validacion = $('#pag_monto').val() == "" ||
@@ -548,32 +550,10 @@ listaTrafico();
     }
   });
 
-  // $('.folder-factura').click(function(){
-  //    // validar = $('#variable1').val() == "" ||
-  //    //           $('#variable2').val() == "";
-  //
-  //   var data = {
-  //     pk_bitacora: $(this).attr('db-id'),
-  //   }
-  //
-  //   var ajaxCall = $.ajax({
-  //       method: 'POST',
-  //       data: data,
-  //       url: 'actions/depositosPagos/actualizarTerminado.php'
-  //   });
-  //
-  //   ajaxCall.done(function(r) {
-  //     r = JSON.parse(r);
-  //     if (r.code == 1) {
-  //       swal("Exito", "Se actualizo.", "success");
-  //     } else {
-  //       console.error(r.message);
-  //     }
-  //   });
-  // })
   $('.folder-factura').click(function(){
     var data = {
       pk_bitacora: $('#pk_bitacora').val(),
+      referencia: $('#referencia').val()
     }
     swal({
       title: "Estas Seguro?",
@@ -669,7 +649,7 @@ function listaTrafico(){
   });
 }
 
-function validacion(){
+function validacionEstatus(){
   prealertaF = $('#prealerta_fecha').val();
   prealertaH = $('#prealerta_hora').val();
 

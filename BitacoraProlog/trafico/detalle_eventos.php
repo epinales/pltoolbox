@@ -99,7 +99,7 @@ if (!($stmt->execute())) {
                 </h4>
               </div>
               <div class="col-md-2 text-center">
-                <a href="#comentario" data-toggle="modal" class="comentario"><img src='/pltoolbox/Resources/iconos/comentario.svg' class='w-32'></a>
+                <a href="#comentarios" data-toggle="modal" class="comentario"><img src='/pltoolbox/Resources/iconos/comentario.svg' class='w-32'></a>
                 <a href="#" class="folder-factura ml-4" role="button" data-toggle="popover" title="Facturación" data-content="Pasar expediente a facturación"><?php echo $iconoTerminado ?></a>
               </div>
             </div>
@@ -309,6 +309,7 @@ if (!($stmt->execute())) {
   </body>
 
   <script src="/pltoolbox/BitacoraProlog/trafico/js/trafico.js"></script>
+  <script src="/pltoolbox/BitacoraProlog/js/comentarios.js"></script>
   <script src="/pltoolbox/Resources/js/table-fetch-plugin.js"></script>
   <script src="/pltoolbox/Resources/js/popup-list-plugin.js"></script>
   <script src="/pltoolbox/Resources/js/table-fetch-plugin.js"></script>
@@ -317,4 +318,5 @@ if (!($stmt->execute())) {
 
 <?php
 require $root . '/pltoolbox/BitacoraProlog/trafico/modales/modal.php';
+require $root . '/pltoolbox/BitacoraProlog/Comentarios/modales/comentarios.php';
 ?>

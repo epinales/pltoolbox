@@ -29,6 +29,9 @@ $program_hora = trim($_POST['program_hora']);
 $entrega_fecha = trim($_POST['entrega_fecha']);
 $entrega_hora = trim($_POST['entrega_hora']);
 
+// para la bitacora_ediciones
+$referencia = trim($_POST['referencia']);
+
 try {
   $db->begin_transaction(); //Inicia la transaccion
   $query = "UPDATE bitacora
@@ -143,10 +146,10 @@ try {
 
 
 
-  // $descripcion = "Se modifico el trafico: $a_referencia en oficina $a_oficina";
-  // $seccion = 'trafico';
-  //
-  // require $root . '/pltoolbox/BitacoraProlog/actions/registroActividad.php';
+  $descripcion = "Se actualizo el detalle de la bitacora en referencia $referencia";
+  $seccion = 'trafico';
+
+  require $root . '/pltoolbox/BitacoraProlog/actions/registroActividad.php';
 
   $db->commit();
   $db->query('UNLOCK TABLES;');

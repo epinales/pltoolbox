@@ -122,7 +122,7 @@
 
 
       <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/pltoolbox/trafico/index.php">
+        <a href="/pltoolbox/bitacoraProlog/trafico/index.php">
           <span class="title">TRAFICO</span>
         </a>
       </li>

@@ -147,7 +147,7 @@ if ($rsltValidar->num_rows > 0) {
 
 
 
-    $descripcion = "Se modifico el trafico: $referencia en oficina $a_oficina";
+    $descripcion = "Se modifico el trafico, cambio de SN a referencia :$referencia";
     $seccion = 'trafico';
 
     require $root . '/pltoolbox/BitacoraProlog/actions/registroActividad.php';

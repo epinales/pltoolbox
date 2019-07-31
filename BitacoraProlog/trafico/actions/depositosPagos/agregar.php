@@ -9,6 +9,8 @@
  $deposito = trim($_POST['deposito']);
  $pago = trim($_POST['pago']);
  $pk_bitacora = trim($_POST['pk_bitacora']);
+ $referencia = trim($_POST['referencia']);
+
 
 
  $query = "INSERT INTO bitacora_depoPago (dp_tipo,dp_montoDepo,dp_montoPago,dp_iva,dp_concepto,dp_comentarios,dp_usuario,dp_datetime,fk_bitacora_dp) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -50,6 +52,11 @@
    $system_callback['message'] = "El query no hizo ningún cambio a la base de datos";
    exit_script($system_callback);
  }
+
+ $descripcion = "Se agrego nuevo $tipo en la referencia $referencia";
+ $seccion = 'trafico';
+
+ require $root . '/pltoolbox/BitacoraProlog/actions/registroActividad.php';
 
  $system_callback['code'] = 1;
  $system_callback['message'] = "Script called successfully!";
