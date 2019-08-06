@@ -197,7 +197,7 @@
             <td class="col-md-2"></td>
 
             <td class="col-md-8 offset-md-2 mb-5">
-              <textarea id="pag_comentarios" class="efecto-1">Comentarios ...</textarea>
+              <textarea id="pag_comentarios" class="efecto-1" placeholder="Comentario.."></textarea>
             </td>
             <td class="col-md-2"></td>
 

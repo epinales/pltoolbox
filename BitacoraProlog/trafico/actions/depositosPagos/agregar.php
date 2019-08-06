@@ -13,7 +13,7 @@
 
 
 
- $query = "INSERT INTO bitacora_depoPago (dp_tipo,dp_montoDepo,dp_montoPago,dp_iva,dp_concepto,dp_comentarios,dp_usuario,dp_datetime,fk_bitacora_dp) VALUES (?,?,?,?,?,?,?,?,?)";
+ $query = "INSERT INTO bitacora_transaccion (dp_tipo,dp_montoDepo,dp_montoPago,dp_iva,dp_concepto,dp_comentarios,dp_usuario,dp_datetime,fk_bitacora_dp) VALUES (?,?,?,?,?,?,?,?,?)";
 
  $stmt = $db->prepare($query);
  if (!($stmt)) {

@@ -1,5 +1,36 @@
 $(document).ready(function(){
 listaTrafico();
+depositosPagos();
+
+// ESTILOS
+$('.folder-factura').popover({
+  trigger: 'hover'
+})
+
+$('.modalTrafico').click(function(){
+  $('.addtrafico').addClass('activo');
+  $('#addtrafico').show();
+  $('.prealerta').removeClass('activo');
+  $('#prealerta').hide();
+})
+
+$('.addtrafico').click(function(){
+  $('#addtrafico').show();
+  $(this).addClass('activo');
+
+  $('#prealerta').hide();
+  $('.prealerta').removeClass('activo');
+});
+
+$('.prealerta').click(function(){
+  $('#prealerta').show();
+  $(this).addClass('activo');
+
+
+  $('.addtrafico').removeClass('activo');
+  $('#addtrafico').hide();
+});
+// FIN DE ESTILOS
 
   $('.filtroOficina').click(function(){
     var data = { oficina : $(this).attr('db-id')}
@@ -18,34 +49,6 @@ listaTrafico();
         console.error(r.message);
       }
     });
-  });
-
-  $('.folder-factura').popover({
-    trigger: 'hover'
-  })
-
-  $('.modalTrafico').click(function(){
-    $('.addtrafico').addClass('activo');
-    $('#addtrafico').show();
-    $('.prealerta').removeClass('activo');
-    $('#prealerta').hide();
-  })
-
-  $('.addtrafico').click(function(){
-    $('#addtrafico').show();
-    $(this).addClass('activo');
-
-    $('#prealerta').hide();
-    $('.prealerta').removeClass('activo');
-  });
-
-  $('.prealerta').click(function(){
-    $('#prealerta').show();
-    $(this).addClass('activo');
-
-
-    $('.addtrafico').removeClass('activo');
-    $('#addtrafico').hide();
   });
 
   $('.validaRef').click(function(){
@@ -241,9 +244,10 @@ listaTrafico();
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
     }else if ($('#dp_deposito').val() == 0 || $('#dp_disponible').val() == 0) {
+      $(this).val("");
+      actualizar_trafico();
       swal("Ops!","No hay depositos registrados o dinero disponible","info");
       $('#ident').click();
-      $(this).val("");
     }else if (pagoF != "") {
       $('#deposito_hora').val(horaActual);
     }else {
@@ -259,6 +263,7 @@ listaTrafico();
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
     }else if ($('#dp_pago').val() == 0 || $('#dp_disponible').val() == 0) {
+      actualizar_trafico();
       swal("Ops!","No hay pagos registrados o deposito disponible, favor de verificar","info");
       $('#ident').click();
       $('#tab-pagos').click();
@@ -293,8 +298,13 @@ listaTrafico();
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "" || depositoF == "" || pagoF == "" || programF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
+    }else if ($(this).val() == "") {
+      $('#pk_indice').val("9");
+      $('#entrega_hora').val("");
     }else {
       $('#entrega_hora').val(horaActual);
+      // back
+      $('#fechaFinalTrafico').val()
       $('#pk_indice').val("10");
     }
   })
@@ -438,7 +448,11 @@ listaTrafico();
         if (r.code == 1) {
           listaTrafico();
           swal("Exito", "Se actualizo.", "success");
-          $('.modal').modal('hide');
+          // $('.modal').modal('hide');
+
+          setTimeout(function() {
+           window.location.reload();
+         }, 1500);
         } else if (r.code == 2) {
           $('.modal').modal('hide');
           swal("No hay Cambios", "La referencia no se modifico.", "info");
@@ -449,7 +463,12 @@ listaTrafico();
     }// fin del if
   })// FIN DE LA FUNCION
 
-  // FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS
+  $('#inicial').click(function(){
+    window.location.reload();
+  }) // para recargar saldo de disponible
+
+
+// FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS -- FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS //
   $('#a_depPago').change(function(){
     if ($(this).val() == 'Deposito') {
       $('#agregarDepositos').show();
@@ -496,14 +515,15 @@ listaTrafico();
       var ajaxCall = $.ajax({
           method: 'POST',
           data: data,
-          url: 'actions/depositosPagos/agregar.php'
+          url: '/pltoolbox/BitacoraProlog/trafico/actions/depositosPagos/agregar.php'
       });
 
       ajaxCall.done(function(r) {
         r = JSON.parse(r);
         if (r.code == 1) {
+          depositosPagos();
+          $('.modal').modal('hide');
           swal("Exito", "Se guardo correctamente.", "success");
-          $('.modal').hide();
         } else {
           console.error(r.message);
         }
@@ -533,16 +553,16 @@ listaTrafico();
       var ajaxCall = $.ajax({
           method: 'POST',
           data: data,
-          url: 'actions/depositosPagos/agregar.php'
+          url: '/pltoolbox/BitacoraProlog/trafico/actions/depositosPagos/agregar.php'
       });
 
       ajaxCall.done(function(r) {
         r = JSON.parse(r);
         if (r.code == 1) {
+          depositosPagos();
           swal("Exito", "Se guardo correctamente.", "success");
-          $('.modal').hide();
-          // $('#ident').click();
-          // $('#tab-pagos').click();
+          $('.modal').modal('hide');
+          $('#tab-pagos').click();
         } else {
           console.error(r.message);
         }
@@ -550,6 +570,7 @@ listaTrafico();
     }
   });
 
+// pasar expediente a facturacion
   $('.folder-factura').click(function(){
     var data = {
       pk_bitacora: $('#pk_bitacora').val(),
@@ -571,7 +592,7 @@ listaTrafico();
         var ajaxCall = $.ajax({
           method: 'POST',
           data: data,
-          url: 'actions/depositosPagos/actualizarTerminado.php'
+          url: '/pltoolbox/BitacoraProlog/trafico/actions/depositosPagos/actualizarTerminado.php'
         });
 
         ajaxCall.done(function(r) {
@@ -592,36 +613,116 @@ listaTrafico();
     });
   });
 
-
-  $(function(){
-  var data = { pk_bitacora : $('#pk_bitacora').val()}
-    var ajaxCall = $.ajax({
-        method: 'POST',
-        data: data,
-        url: 'actions/depositosPagos/mostrar.php'
-    });
-
-    ajaxCall.done(function(r) {
-      r = JSON.parse(r);
-      if (r.code == 1) {
-        $('#listaDepositos').html(r.deposito);
-        $('#listaPagos').html(r.pago);
-      } else {
-        console.error(r.message);
-      }
-    });
-  })
-
-
-
-  // FIN FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS
+// FIN FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS  -- FIN FUNCIONES PARA AGREGAR PAGOS Y DEPOSITOS //
 
 }); //FIN DEL DOCUMENTO
 
+function depositosPagos(){
+  var data = { pk_bitacora : $('#pk_bitacora').val()}
+  var ajaxCall = $.ajax({
+      method: 'POST',
+      data: data,
+      url: '/pltoolbox/BitacoraProlog/trafico/actions/depositosPagos/mostrar.php'
+  });
 
-function correspAsignar(pk_bitacora){
+  ajaxCall.done(function(r) {
+    r = JSON.parse(r);
+    if (r.code == 1) {
+      $('#listaDepositos').html(r.deposito);
+      $('#listaPagos').html(r.pago);
+    } else {
+      console.error(r.message);
+    }
+  });
+}
+
+function actualizar_trafico(){
+  validacionEstatus();
+
+  var data = {
+    pk_bitacora: $('#pk_bitacora').val(),
+    pk_indice: $('#pk_indice').val(),
+    prealerta_fecha : $('#prealerta_fecha').val(),
+    prealerta_hora : $('#prealerta_hora').val(),
+    arribo_fecha : $('#arribo_fecha').val(),
+    arribo_hora : $('#arribo_hora').val(),
+    apertura_fecha : $('#apertura_fecha').val(),
+    apertura_hora : $('#apertura_hora').val(),
+    capfact_fecha : $('#capfact_fecha').val(),
+    capfact_hora : $('#capfact_hora').val(),
+    clasif_fecha : $('#clasif_fecha').val(),
+    clasif_hora : $('#clasif_hora').val(),
+    solant_fecha : $('#solant_fecha').val(),
+    solant_hora : $('#solant_hora').val(),
+    deposito_fecha : $('#deposito_fecha').val(),
+    deposito_hora : $('#deposito_hora').val(),
+    pago_fecha : $('#pago_fecha').val(),
+    pago_hora : $('#pago_hora').val(),
+    program_fecha : $('#program_fecha').val(),
+    program_hora : $('#program_hora').val(),
+    entrega_fecha : $('#entrega_fecha').val(),
+    entrega_hora : $('#entrega_hora').val(),
+    referencia : $('#referencia').val()
+  }
+
+  if (arriboF == prealertaF && arriboH < prealertaH ||
+    arriboF != "" && arriboF < prealertaF) {
+    $('#arribo_fecha').focus();
+    swal("Error","La fecha y hora de ARRIBO no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (aperturaF == arriboF && aperturaH < arriboH ||
+    aperturaF != "" && aperturaF < arriboF) {
+    $('#apertura_fecha').focus();
+    swal("Error","La fecha y hora de APERTURA no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (capfactF == aperturaF && capfactH < aperturaH ||
+    capfactF != "" && capfactF < aperturaF) {
+    $('#capfact_fecha').focus();
+    swal("Error","La fecha y hora de CAPTURA DE FACTURA no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (clasifF == capfactF && clasifH < capfactH ||
+    clasifF != "" && clasifF < capfactF) {
+    $('#clasif_fecha').focus();
+    swal("Error","La fecha y hora de CLASIFICACION no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (solantF == clasifF && solantH < clasifH ||
+    solantF != "" && solantF < clasifF) {
+    $('#solant_fecha').focus();
+    swal("Error","La fecha y hora de SOLICITUD DE ANTICIPO no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (depositoF == solantF && depositoH < solantH ||
+    depositoF != "" && depositoF < solantF) {
+    $('#deposito_fecha').focus();
+    swal("Error","La fecha y hora de DEPOSITO no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (pagoF == depositoF && pagoH < depositoH ||
+    pagoF != "" && pagoF < depositoF) {
+    $('#pago_fecha').focus();
+    swal("Error","La fecha y hora de PAGO no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (programF == pagoF && programH < pagoH ||
+    programF != "" && programF < pagoF) {
+    $('#program_fecha').focus();
+    swal("Error","La fecha y hora de PROGRAMACION no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else if (entregaF == programF && entregaH < programH ||
+    entregaF != "" && entregaF < programF) {
+    $('#entrega_fecha').focus();
+    swal("Error","La fecha y hora de ENTREGA no puede ser menor a un estatus anterior, favor de verificar","error");
+  }else {
+    var ajaxCall = $.ajax({
+      method: 'POST',
+      data: data,
+      url: 'actions/actualizar.php'
+    });
+    ajaxCall.done(function(r) {
+      r = JSON.parse(r);
+      if (r.code == 1) {
+        listaTrafico();
+        console.error(r.message);
+      } else if (r.code == 2) {
+        console.error(r.message);
+      }else {
+        console.error(r.message);
+      }
+    });
+  }// fin del if
+}// FIN DE LA FUNCION
+
+function detalle_eventos_trafico(pk_bitacora){
   window.location.replace('/pltoolbox/BitacoraProlog/trafico/detalle_eventos.php?evento='+pk_bitacora);
-
   console.log(pk_bitacora);
 }
 
@@ -636,13 +737,14 @@ function listaTrafico(){
   var ajaxCall = $.ajax({
     method: 'POST',
     data: data,
-    url: 'actions/mostrar.php'
+    url: '/pltoolbox/BitacoraProlog/trafico/actions/mostrar.php'
   });
 
   ajaxCall.done(function(r) {
     r = JSON.parse(r);
     if (r.code == 1) {
       $('#lista_trafico').html(r.data);
+      $('#listaRefTrafico').html(r.dataFact);
     } else {
       console.error(r.message);
     }

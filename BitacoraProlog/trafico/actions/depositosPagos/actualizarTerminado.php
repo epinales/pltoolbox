@@ -6,12 +6,12 @@ $system_callback = [];
 
 $pk_bitacora = trim($_POST['pk_bitacora']);
 $referencia = trim($_POST['referencia']);
-$terminado = 1;
-$tipo = "Fact";
+$entregadoFact = 1;
+// $tipo = "Fact";
+// $estatusTipo = "Fact";
 
 $query = "UPDATE bitacora
-SET tipo = ?,
-terminado = ?
+SET entregadoFact = ?
 WHERE pk_bitacora = ?";
 
 $stmt = $db->prepare($query);
@@ -21,7 +21,7 @@ if (!($stmt)) {
   exit_script($system_callback);
 }
 
-$stmt->bind_param('sss',$tipo,$terminado,$pk_bitacora);
+$stmt->bind_param('ss',$entregadoFact,$pk_bitacora);
 if (!($stmt)) {
   $system_callback['code'] = "500";
   $system_callback['message'] = "Error during variables binding [$stmt->errno]: $stmt->error";

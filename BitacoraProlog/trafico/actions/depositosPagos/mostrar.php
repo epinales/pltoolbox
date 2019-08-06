@@ -5,7 +5,7 @@ require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 $system_callback = [];
 $pk_bitacora = $_POST['pk_bitacora'];
 
-$queryDeposito = "SELECT * FROM bitacora_depoPago
+$queryDeposito = "SELECT * FROM bitacora_transaccion
 WHERE dp_tipo = 'Deposito' AND fk_bitacora_dp = ?
 ORDER BY pk_depoPago";
 
@@ -76,7 +76,7 @@ $system_callback['message'] = "Script called successfully!";
 
 
 
-$queryPagos = "SELECT * FROM bitacora_depoPago
+$queryPagos = "SELECT * FROM bitacora_transaccion
 WHERE dp_tipo = 'Pago' AND fk_bitacora_dp = ?
 ORDER BY pk_depoPago";
 

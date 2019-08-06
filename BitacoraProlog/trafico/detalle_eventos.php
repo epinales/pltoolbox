@@ -48,7 +48,7 @@ if (!($stmt->execute())) {
   $queryDepoPago = "SELECT
   SUM(dp_montoDepo) AS deposito,
   SUM(dp_montoPago) AS pago
-  FROM bitacora_depoPago WHERE fk_bitacora_dp = ?";
+  FROM bitacora_transaccion WHERE fk_bitacora_dp = ?";
 
   $stmtDepoPago = $db->prepare($queryDepoPago);
   $stmtDepoPago->bind_param('s', $pk_bitacora);
@@ -109,15 +109,15 @@ if (!($stmt->execute())) {
               <tbody>
                 <tr class="row">
                   <td class="col-md-12">
-                    <input type="hidden" id="dp_deposito" value="<?php echo $rowdp['deposito'] ?>">
-                    <input type="hidden" id="dp_pago" value="<?php echo $rowdp['pago'] ?>">
-                    <input type="hidden" id="pk_indice" value="<?php echo $row['pk_indice'] ?>">
-                    <input type="hidden" id="indice" value="<?php echo $row['indice'] ?>">
+                    <input id="dp_deposito" type="hidden" value="<?php echo $rowdp['deposito'] ?>">
+                    <input id="dp_pago" type="hidden" value="<?php echo $rowdp['pago'] ?>">
+                    <input id="pk_indice" type="hidden" value="<?php echo $row['pk_indice'] ?>">
+                    <input id="indice" type="hidden" value="<?php echo $row['indice'] ?>">
                     <input id="pk_bitacora" type="hidden"  value="<?php echo $pk_bitacora ?>">
                     <input id="referencia" type="hidden" value="<?php echo $row['referencia'] ?>">
                     <input id="nombreCliente" type="hidden" value="<?php echo $row['nombreCliente'] ?>">
-                    <input id='user-modif' value="<?php echo $usuarioAlta ?>" type="hidden">
-                    <input id='fecha-modif' value="<?php echo $fechaAlta ?>" type="hidden">
+                    <input id='user-modif' type="hidden" value="<?php echo $usuarioAlta ?>" >
+                    <input id='fecha-modif' type="hidden" value="<?php echo $fechaAlta ?>" >
                     <input class="fecha" type="hidden" value="<?php echo $fechaActual ?>">
                     <input class="hora" type="hidden" value="<?php echo $horaActual ?>">
                   </td>

@@ -13,7 +13,8 @@ $a_referencia = trim($_POST['a_referencia']);
 $a_estatusTipo = trim($_POST['a_estatusTipo']);
 $a_tipo = trim($_POST['a_tipo']);
 $estatusIndice = trim($_POST['estatusIndice']);
-$terminado = 0;
+$entregadoFact = 0;
+$terminadoFact = 0;
 
 
 
@@ -55,8 +56,9 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
                                     estatusTipo,
 																		estatusIndice,
 																		tipo,
-                                    terminado)
-                                    VALUES (?,?,?,?,?,?,?,?,?)";
+                                    entregadoFact,
+                                    recibidoFact)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 		$stmt = $db->prepare($query);
 		if (!($stmt)) {
@@ -65,7 +67,7 @@ if ($rsltValidar->num_rows > 0 AND $a_referencia != "SN") {
 			exit_script($system_callback);
 		}
 
-		$stmt->bind_param('sssssssss',$a_cliente,$a_oficina,$a_referencia,$usuarioAlta,$fechaAlta,$a_estatusTipo,$estatusIndice,$a_tipo,$terminado);
+		$stmt->bind_param('ssssssssss',$a_cliente,$a_oficina,$a_referencia,$usuarioAlta,$fechaAlta,$a_estatusTipo,$estatusIndice,$a_tipo,$entregadoFact,$terminadoFact);
 		if (!($stmt)) {
 			$system_callback['code'] = "500";
 			$system_callback['message'] = "Error during variables binding [$stmt->errno]: $stmt->error";
