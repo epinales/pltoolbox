@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
 $pk_indice = trim($_POST['pk_indice']);
 $pk_bitacora = trim($_POST['pk_bitacora']);
