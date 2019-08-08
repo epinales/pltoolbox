@@ -9,7 +9,7 @@ date_default_timezone_set('America/Monterrey');
 
 if (!isset($_SESSION['user'])) {
   header("location:/pltoolbox/index.php");
-}
+} 
 
 
  ?>
