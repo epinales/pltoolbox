@@ -1,0 +1,56 @@
+.side-menu{
+  height: 100%;
+  width: 20%;
+  letter-spacing: 2px;
+  font-weight: bolder;
+}
+
+.side-menu * li{
+  border-top: solid .5px rgba(127, 141, 142, 0.08);
+}
+
+.side-menu * a{
+  color: black!important;
+}
+
+/* .side-menu * a.active{
+  background-color: rgba(127, 141, 142, 0.08)!important;
+  color: black!important;
+} */
+
+.side-menu * a:hover, .side-menu * a.active{
+  background-color: #414141;
+  color: whitesmoke!important;
+}
+
+.side-menu * li:hover{
+  background-color: rgba(127, 141, 142, 0.08);
+  letter-spacing: 3px;
+}
+
+/* .options-list{
+  max-width: 75%;
+} */
+
+.bbyellow{
+  border-bottom: solid 1.2px rgba(247, 242, 125, 0.3);
+}
+
+.btyellow{
+  border-top: solid 1.2px rgba(247, 242, 125, 0.3);
+}
+
+/* .border-ri */
+
+.efecto-1{
+  font-family: 'Source Sans Pro', 'Courier', monospace;
+  background-color: transparent;
+  border: 2px solid #ddd!important;
+  border-radius: 20pt;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  color: #333;
+  width: 100%!important;
+}

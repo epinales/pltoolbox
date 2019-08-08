@@ -3,5 +3,5 @@
 session_start();
 session_destroy();
 
-header("Location: /BitacoraProlog/index.php");
+header("Location: /pltoolbox/index.php");
 ?>

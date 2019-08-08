@@ -1,0 +1,27 @@
+
+.border-grafica{
+  border: solid 1px rgba(247, 242, 125, 0.5);
+  border-radius: 10px;
+}
+
+.border-grafica:hover{
+  border: solid 2px black;
+  border-radius: 10px;
+}
+.titulo-grafica{
+  background-color: rgba(127, 141, 142, 0.04)!important;
+  text-align:center;
+}
+
+.efecto-2{
+  font-family: 'Source Sans Pro', 'Courier', monospace;
+  background-color: whitesmoke;
+  border: 2px solid #ddd;
+  border-radius: 20pt;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  color: #333;
+  /* width: 100%!important; */
+}

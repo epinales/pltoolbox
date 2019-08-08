@@ -43,7 +43,7 @@ li.btn a {
 }
 
 
-.bblack a:hover {
+.bblack a:hover,.bblack a:focus  {
   background-color: #414141;
   color: whitesmoke
 }
@@ -69,11 +69,11 @@ a:hover .arrow {
   bottom: -8px;
 }
 
-.active,
+/* .active,
 a:active,
 a:focus {
   background-color: #414141;
-}
+} */
 
 .active .arrow,
 a:active .arrow,
@@ -142,4 +142,12 @@ list-style: none;
   font-weight: normal;
   list-style: none;
 
+}
+
+.border-dark:hover{
+  border: solid 2px;
+}
+
+.text-dark:hover{
+  letter-spacing: 8px!important;
 }

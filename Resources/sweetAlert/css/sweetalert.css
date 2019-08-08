@@ -195,7 +195,7 @@ body.stop-scrolling {
     padding: 5px 32px;
     margin: 26px 5px 0 5px;
     cursor: pointer;
-    width: 150px!important;
+    width: 150px;
    }
     .sweet-alert button:focus {
       outline: none;
