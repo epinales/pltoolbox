@@ -1,19 +1,19 @@
 <?php
 
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/utilities/initialGlobal.php';
 
 $system_callback = [];
 $data = $_POST;
 
 $data['string'];
 $text = "%" . $data['string'] . "%";
-$query = "SELECT * FROM lst_clientes  WHERE s_nombre LIKE ?";
+$query = "SELECT sRazonSocial,sCveCliente FROM cu_cliente  WHERE sRazonSocial LIKE ? LIMIT 10";
 
-$stmt = $db->prepare($query);
+$stmt = $global->prepare($query);
 if (!($stmt)) {
   $system_callback['code'] = "500";
-  $system_callback['message'] = "Error during query prepare [$db->errno]: $db->error";
+  $system_callback['message'] = "Error during query prepare [$global->errno]: $global->error";
   exit_script($system_callback);
 }
 
@@ -41,8 +41,11 @@ if ($rslt->num_rows == 0) {
 }
 
 while ($row = $rslt->fetch_assoc()) {
+  $pk_cliente = utf8_encode($row['sCveCliente']);
+  $cliente = utf8_encode($row['sRazonSocial']);
+
   $system_callback['data'] .=
-  "<p db-id='$row[pk_id_cliente]'>$row[s_nombre]</p>";
+  "<p db-id='$pk_cliente'>$cliente</p>";
 }
 
 $system_callback['code'] = 1;

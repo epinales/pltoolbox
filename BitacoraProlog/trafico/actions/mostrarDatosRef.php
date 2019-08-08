@@ -1,20 +1,29 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/utilities/initialGlobal.php';
 
 $system_callback = [];
 $data = $_POST;
 
 $referencia = $data['referencia'];
 
-$query = "SELECT * FROM bitacora_trafico
-INNER JOIN lst_clientes ON cveCliente = pk_id_cliente
-WHERE sReferenciaCliente = ?";
+$query = "SELECT
+t.eTipoOperacion,
+t.sCveTrafico,
+t.sCveCliente,
 
-$stmt = $db->prepare($query);
+
+c.sCveCliente,
+c.sRazonSocial
+
+FROM cb_trafico t
+INNER JOIN cu_cliente c ON t.sCveCliente = c.sCveCliente
+WHERE sCveTrafico = ?";
+
+$stmt = $global->prepare($query);
 if (!($stmt)) {
   $system_callback['code'] = "500";
-  $system_callback['message'] = "Error durante la preparacion del query [$db->errno]: $db->error";
+  $system_callback['message'] = "Error durante la preparacion del query [$global->errno]: $global->error";
   exit_script($system_callback);
 }
 
@@ -41,10 +50,10 @@ if ($rslt->num_rows == 0) {
 }
 
 while ($row = $rslt->fetch_assoc()) {
-  $s_nombre = $row['s_nombre'];
-  $sReferenciaCliente = $row['sReferenciaCliente'];
+  $sRazonSocial = $row['sRazonSocial'];
+  $sCveTrafico = $row['sCveTrafico'];
   $tipo = $row['eTipoOperacion'];
-  $primeraLetra = substr($sReferenciaCliente,0,1);
+  $primeraLetra = substr($sCveTrafico,0,1);
   $impoExpo = "";
   $oficina = "";
 
@@ -71,7 +80,7 @@ while ($row = $rslt->fetch_assoc()) {
   $system_callback['data'] .="
     <td class='col-md-12'>
       <input id='a_oficina' type='hidden' value='$oficina'>
-      Cliente : <input id='a_cliente' type='text' value='$s_nombre' class='w-100 bt border-0'>
+      Cliente : <input id='a_cliente' type='text' value='$sRazonSocial' class='w-100 bt border-0'>
     </td>
 
     <td class='col-md-12'>
