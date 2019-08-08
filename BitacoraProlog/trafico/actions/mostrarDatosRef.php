@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialGlobal.php';
+require $root . '/pltoolbox/Resources/PHP/Utilities/initialGlobal.php';
 
 $system_callback = [];
 $data = $_POST;

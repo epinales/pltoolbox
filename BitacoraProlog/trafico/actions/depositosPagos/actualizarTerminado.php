@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
 $system_callback = [];
 

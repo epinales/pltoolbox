@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/fitcoControl/Resources/PHP/utilities/initialScript.php';
+require $root . '/fitcoControl/Resources/PHP/Utilities/initialScript.php';
 
 $system_callback = [];
 $data = $_POST;
