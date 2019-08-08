@@ -17,7 +17,7 @@ function exit_script($input_array){
  global $global;
  $global->close();
  die();
-}
+} 
 
 
  ?>

@@ -29,7 +29,7 @@ function exit_script($input_array){
  echo $json_string;
  global $db;
  $db->close();
- die();
+ die(); 
 
 }
 
