@@ -1,6 +1,6 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
 $system_callback = [];
 $data = $_POST;
@@ -12,7 +12,6 @@ $query = "SELECT
 
 b.pk_bitacora,
 b.nombreCliente,
--- b.tipo,
 b.referencia,
 b.oficina,
 b.UsuarioAlta,
@@ -80,30 +79,14 @@ while ($row = $rslt->fetch_assoc()) {
   $recibido = $row['recibidoFact'];
   $estatusTipo = $row['estatusTipo'];
 
-  // $estatusSiguiente = $row['estatusSiguiente'];
-  // $oficina = $row['oficina'];
-  // $fechaModif = $row['fechaModif'];
-  // $UsuarioModif = $row['UsuarioModif'];
-  // $UsuarioAlta = $row['UsuarioAlta'];
-  // $entregadoFact = $row['entregadoFact'];
-  // $icono = '';
-  // $fechaActual = date("Y-m-d h:i:s");
-  // $fechaAlta = $row['fechaAlta'];
-  // $amarillo = $row['o_amarillo'];
-  // $rojo = $row['o_rojo'];
-  // $alerta = $row['o_alerta'];
-  //
-  //
-  // $deposito = number_format($row['deposito'], 2);
-  // $pago = number_format($row['pago'], 2);
 
-
-  $onclick = "detalle_eventos_facturacion($pk_bitacora)";
 
   if ($estatusTipo == "Facturacion" AND $recibido == "1") {
     $color = "";
+    $onclick = "detalle_eventos_facturacion($pk_bitacora)";
   }else {
     $color = "rgb(171, 42, 42)";
+    $onclick = "recibirExpediente($pk_bitacora)";
   }
 
 
@@ -112,7 +95,7 @@ while ($row = $rslt->fetch_assoc()) {
   <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-12'>
       <span class='ls-3'>
-        <a href='#' onclick='$onclick' class='alink' db-id='$pk_bitacora'>$nombreCliente</a>
+        <a href='#' onclick='$onclick' class='$expediente alink' db-id='$pk_bitacora'>$nombreCliente</a>
       </span>
       <br>
       <span style='color:$color'>$referencia --  $indice</span>
