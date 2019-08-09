@@ -111,8 +111,8 @@ if (!($stmt->execute())) {
                   <td class="col-md-12">
                     <input id="dp_deposito" type="hidden" value="<?php echo $rowdp['deposito'] ?>">
                     <input id="dp_pago" type="hidden" value="<?php echo $rowdp['pago'] ?>">
-                    <input id="pk_indice" type="text" value="<?php echo $row['pk_indice'] ?>">
-                    <input id="indice" type="text" value="<?php echo $row['indice'] ?>">
+                    <input id="pk_indice" type="hidden" value="<?php echo $row['pk_indice'] ?>">
+                    <input id="indice" type="hidden" value="<?php echo $row['indice'] ?>">
                     <input id="pk_bitacora" type="hidden"  value="<?php echo $pk_bitacora ?>">
                     <input id="referencia" type="hidden" value="<?php echo $row['referencia'] ?>">
                     <input id="nombreCliente" type="hidden" value="<?php echo $row['nombreCliente'] ?>">
