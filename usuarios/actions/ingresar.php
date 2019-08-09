@@ -1,7 +1,18 @@
 <?php
+session_start();
 
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
+// require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
+
+include($root . '/pltoolbox/Resources/PHP/DataBases/conexion.php');
+function exit_script($input_array){
+ $json_string = json_encode($input_array);
+ echo $json_string;
+ global $db;
+ $db->close();
+ die();
+
+}
 
 
 $system_callback = [];
