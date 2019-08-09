@@ -95,7 +95,7 @@ while ($row = $rslt->fetch_assoc()) {
   <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-12'>
       <span class='ls-3'>
-        <a href='#' onclick='$onclick' class='$expediente alink' db-id='$pk_bitacora'>$nombreCliente</a>
+        <a id='' href='#' onclick='$onclick' referencia='$referencia' class='$expediente alink detalle' db-id='$pk_bitacora'>$nombreCliente</a>
       </span>
       <br>
       <span style='color:$color'>$referencia --  $indice</span>

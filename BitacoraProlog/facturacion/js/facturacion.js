@@ -85,8 +85,11 @@ function listaFacturasEntregadas(){
 
 function recibirExpediente(pk_bitacora){
   var data = {
-    pk_bitacora: pk_bitacora
+    pk_bitacora: pk_bitacora,
+    referencia: $('.detalle').attr('referencia')
   }
+
+//  console.log(data);
 
   swal({
     title: "Estas Seguro?",
