@@ -401,38 +401,63 @@ $('.prealerta').click(function(){
       referencia : $('#referencia').val()
     }
 
+
     if (arriboF == prealertaF && arriboH < prealertaH ||
       arriboF != "" && arriboF < prealertaF) {
       $('#arribo_fecha').focus();
       swal("Error","La fecha y hora de ARRIBO no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (arriboF == "" && aperturaF != "") {
+      $('#arribo_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (aperturaF == arriboF && aperturaH < arriboH ||
       aperturaF != "" && aperturaF < arriboF) {
       $('#apertura_fecha').focus();
       swal("Error","La fecha y hora de APERTURA no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (aperturaF == "" && capfactF != "") {
+      $('#apertura_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (capfactF == aperturaF && capfactH < aperturaH ||
       capfactF != "" && capfactF < aperturaF) {
       $('#capfact_fecha').focus();
       swal("Error","La fecha y hora de CAPTURA DE FACTURA no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (capfactF == "" && clasifF != "") {
+      $('#capfact_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (clasifF == capfactF && clasifH < capfactH ||
       clasifF != "" && clasifF < capfactF) {
       $('#clasif_fecha').focus();
       swal("Error","La fecha y hora de CLASIFICACION no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (clasifF == "" && solantF != "") {
+      $('#clasif_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (solantF == clasifF && solantH < clasifH ||
       solantF != "" && solantF < clasifF) {
       $('#solant_fecha').focus();
       swal("Error","La fecha y hora de SOLICITUD DE ANTICIPO no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (solantF == "" && depositoF != "") {
+      $('#solant_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (depositoF == solantF && depositoH < solantH ||
       depositoF != "" && depositoF < solantF) {
       $('#deposito_fecha').focus();
       swal("Error","La fecha y hora de DEPOSITO no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (depositoF == "" && pagoF != "") {
+      $('#deposito_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (pagoF == depositoF && pagoH < depositoH ||
       pagoF != "" && pagoF < depositoF) {
       $('#pago_fecha').focus();
       swal("Error","La fecha y hora de PAGO no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (pagoF == "" && programF != "") {
+      $('#pago_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (programF == pagoF && programH < pagoH ||
       programF != "" && programF < pagoF) {
       $('#program_fecha').focus();
       swal("Error","La fecha y hora de PROGRAMACION no puede ser menor a un estatus anterior, favor de verificar","error");
+    }else if (programF == "" && entregaF != "") {
+      $('#program_fecha').focus();
+      swal("Error","hay estatus siguientes llenos, este no puede estar vacio","error");
     }else if (entregaF == programF && entregaH < programH ||
       entregaF != "" && entregaF < programF) {
       $('#entrega_fecha').focus();
