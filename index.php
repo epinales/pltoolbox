@@ -28,7 +28,7 @@
       </tr>
       <tr class="row">
         <td class="col-md-12">
-          <input id="ingresar" class="ingresar w-50" type="submit">
+          <input id="ingresar" class="ingresar w-50" type="submit" value="INGRESAR">
         </td>
       </tr>
     </table>

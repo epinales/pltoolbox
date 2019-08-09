@@ -6,31 +6,71 @@ $system_callback = [];
 $db->query('LOCK TABLES bitacora WRITE;');
 $db->query("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
 
-$pk_bitacora = trim($_POST['pk_bitacora']);
-$pk_indice = trim($_POST['pk_indice']);
-$prealerta_fecha = trim($_POST['prealerta_fecha']);
-$prealerta_hora = trim($_POST['prealerta_hora']);
-$arribo_fecha = trim($_POST['arribo_fecha']);
-$arribo_hora = trim($_POST['arribo_hora']);
-$apertura_fecha = trim($_POST['apertura_fecha']);
-$apertura_hora = trim($_POST['apertura_hora']);
-$capfact_fecha = trim($_POST['capfact_fecha']);
-$capfact_hora = trim($_POST['capfact_hora']);
-$clasif_fecha = trim($_POST['clasif_fecha']);
-$clasif_hora = trim($_POST['clasif_hora']);
-$solant_fecha = trim($_POST['solant_fecha']);
-$solant_hora = trim($_POST['solant_hora']);
-$deposito_fecha = trim($_POST['deposito_fecha']);
-$deposito_hora = trim($_POST['deposito_hora']);
-$pago_fecha = trim($_POST['pago_fecha']);
-$pago_hora = trim($_POST['pago_hora']);
-$program_fecha = trim($_POST['program_fecha']);
-$program_hora = trim($_POST['program_hora']);
-$entrega_fecha = trim($_POST['entrega_fecha']);
-$entrega_hora = trim($_POST['entrega_hora']);
+$pk_bitacora = $_POST['pk_bitacora'];
+$pk_indice = $_POST['pk_indice'];
+
+$prealerta = $_POST['prealerta_fecha'];
+if ($prealerta == "") { $prealerta_fecha = NULL;}else {$prealerta_fecha = $prealerta;}
+$prealerta_hora = $_POST['prealerta_hora'];
+
+
+$arribo = $_POST['arribo_fecha'];
+if ($arribo == "") {$arribo_fecha = NULL;}else {$arribo_fecha = $arribo;}
+$arribo_hora = $_POST['arribo_hora'];
+
+
+$apertura = $_POST['apertura_fecha'];
+if ($apertura == "") {$apertura_fecha = NULL;}else {$apertura_fecha = $apertura;}
+$apertura_hora = $_POST['apertura_hora'];
+
+
+$capfact = $_POST['capfact_fecha'];
+if ($capfact == "") {$capfact_fecha = NULL;}else {$capfact_fecha = $capfact;}
+$capfact_hora = $_POST['capfact_hora'];
+
+
+$clasif = $_POST['clasif_fecha'];
+if ($clasif == "") {$clasif_fecha = NULL;}else {$clasif_fecha = $clasif;}
+$clasif_hora = $_POST['clasif_hora'];
+
+
+$solant = $_POST['solant_fecha'];
+if ($solant == "") {$solant_fecha = NULL;}else {$solant_fecha = $solant;}
+$solant_hora = $_POST['solant_hora'];
+
+
+$deposito = $_POST['deposito_fecha'];
+if ($deposito == "") {$deposito_fecha = NULL;}else {$deposito_fecha = $deposito;}
+$deposito_hora = $_POST['deposito_hora'];
+
+
+$pago = $_POST['pago_fecha'];
+if ($pago == "") {$pago_fecha = NULL;}else {$pago_fecha = $pago;}
+$pago_hora = $_POST['pago_hora'];
+
+
+$program = $_POST['program_fecha'];
+if ($program == "") {$program_fecha = NULL;}else {$program_fecha = $program;}
+$program_hora = $_POST['program_hora'];
+
+
+$entrega = $_POST['entrega_fecha'];
+if ($entrega == "") {$entrega_fecha = NULL;}else {$entrega_fecha = $entrega;}
+$entrega_hora = $_POST['entrega_hora'];
+
+// $solant_fecha = $_POST['solant_fecha'];
+// $solant_hora = $_POST['solant_hora'];
+// $deposito_fecha = $_POST['deposito_fecha'];
+// $deposito_hora = $_POST['deposito_hora'];
+// $pago_fecha = $_POST['pago_fecha'];
+// $pago_hora = $_POST['pago_hora'];
+// $program_fecha = $_POST['program_fecha'];
+// $program_hora = $_POST['program_hora'];
+// $entrega_fecha = $_POST['entrega_fecha'];
+// $entrega_hora = $_POST['entrega_hora'];
 
 // para la bitacora_ediciones
-$referencia = trim($_POST['referencia']);
+$referencia = $_POST['referencia'];
 
 try {
   $db->begin_transaction(); //Inicia la transaccion
