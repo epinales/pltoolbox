@@ -6,14 +6,11 @@ listaFacturasEntregadas();
   $('.modalFacturacion').popover({
     trigger: 'hover'
   })
-
 // FIN DE ESTILO
 
   $('#add_fact').click(function(){
     $('#agregarFacturacion').modal('show');
   })
-
-
 
 
   $('.add_factura_SN').click(function(){
@@ -51,6 +48,18 @@ listaFacturasEntregadas();
   });
 
 
+  // $('.recibirExpediente').click(function(){
+  //
+  //   var data = {
+  //     pk_bitacora: $(this).attr('db-id')
+  //   }
+  //
+  //   alert('recibir expediente');
+  //
+  //   console.log(data);
+  //
+  // });
+
 
 })//fin del documento
 
@@ -70,6 +79,48 @@ function listaFacturasEntregadas(){
       $('#listaRefFacturacion').html(r.data);
     } else {
       console.error(r.message);
+    }
+  });
+}
+
+function recibirExpediente(pk_bitacora){
+  var data = {
+    pk_bitacora: pk_bitacora
+  }
+
+  swal({
+    title: "Estas Seguro?",
+    text: "Recibiras este expediente!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonClass: "btn-danger",
+    confirmButtonText: "Si, Recibir",
+    cancelButtonText: "No, Cancelar",
+    closeOnConfirm: false,
+    closeOnCancel: false
+  },
+  function(isConfirm) {
+    if (isConfirm) {
+      var ajaxCall = $.ajax({
+        method: 'POST',
+        data: data,
+        url: '/pltoolbox/BitacoraProlog/facturacion/actions/recibirExpediente.php'
+      });
+
+      ajaxCall.done(function(r) {
+        r = JSON.parse(r);
+        if (r.code == 1) {
+          swal("Enviado!", "Recibiste este expediente.", "success");
+          setTimeout(function(){
+            window.location.replace('/pltoolbox/BitacoraProlog/facturacion/index.php');
+          }, 1500);
+        } else {
+          console.error(r.message);
+        }
+      });
+
+    } else {
+      swal("Cancelado", "No has recibido este expediente :)", "error");
     }
   });
 }
