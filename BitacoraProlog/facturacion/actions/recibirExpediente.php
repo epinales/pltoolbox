@@ -8,6 +8,7 @@ $db->query('LOCK TABLES bitacora WRITE;');
 $db->query("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
 
 $pk_bitacora = trim($_POST['pk_bitacora']);
+$referencia = trim($_POST['referencia']);
 $recibidoFact = 1;
 $estatusTipo = "Facturacion";
 $estatusIndice = "11";
