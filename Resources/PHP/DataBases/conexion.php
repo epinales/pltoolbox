@@ -8,7 +8,7 @@ $pwd = 'root';
 
 /*PRODUCTION ENVIRONMENT*/
 $datab = 'pltoolbox';
-$host = 10.1.4.10;
+$host = '10.1.4.10';
 $port = 3306;
 $usr = 'prolog';
 $pwd = 'f4Tnps.03';
