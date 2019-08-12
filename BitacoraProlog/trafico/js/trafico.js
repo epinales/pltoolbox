@@ -30,6 +30,11 @@ $('.prealerta').click(function(){
   $('.addtrafico').removeClass('activo');
   $('#addtrafico').hide();
 });
+
+ $('#a_referencia').change(function(){
+   $('#a_cliente').val("");
+   $('#a_tipo').val("");
+ })
 // FIN DE ESTILOS
 
   $('.filtroOficina').click(function(){

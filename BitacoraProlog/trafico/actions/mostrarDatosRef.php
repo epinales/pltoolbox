@@ -80,11 +80,11 @@ while ($row = $rslt->fetch_assoc()) {
   $system_callback['data'] .="
     <td class='col-md-12'>
       <input id='a_oficina' type='hidden' value='$oficina'>
-      Cliente : <input id='a_cliente' type='text' value='$sRazonSocial' class='w-100 bt border-0'>
+      Cliente : <input id='a_cliente' type='text' value='$sRazonSocial' class='w-100 bt border-0' readonly>
     </td>
 
     <td class='col-md-12'>
-      Tipo : <input id='a_tipo' type='text' value='$impoExpo' class='bt border-0'>
+      Tipo : <input id='a_tipo' type='text' value='$impoExpo' class='bt border-0' readonly>
     </td>";
 
 }
