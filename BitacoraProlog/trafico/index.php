@@ -14,7 +14,10 @@
     <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
     <li class="breadcrumb-item b"><b>Trafico</b></li>
     <li class="b ml-auto text-center mr-4">
-      <a href="#agregarTrafico" data-toggle="modal"  class="modalTrafico bt noborder w-100 mr-2">
+
+      <button type="button" class="modalTrafico add-boton btn-outline-dark mr-2" data-toggle="modal" data-target="#agregarTrafico">Agregar</button>
+
+      <a id="mas" href="#" class="bt noborder w-100 mr-2" style="display:none">
         <span class="img3">
           <svg class="w-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 502">
           	<path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans"
@@ -32,6 +35,20 @@
           	<path d="M217,258h-56c-5.522,0-10-4.477-10-10s4.478-10,10-10h56c5.522,0,10,4.477,10,10S222.522,258,217,258z"/>
             <path d="M126.671,258h-22.887c-5.522,0-10-4.477-10-10s4.478-10,10-10h22.887c5.522,0,10,4.477,10,10S132.193,258,126.671,258z"
       				/>
+          </svg>
+        </span>
+      </a>
+
+
+
+      <a id="menos" href="#" class="bt noborder w-100 mr-2">
+        <span class="img3">
+          <svg class="w-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.238 44.238">
+            <path d="M22.119,44.237C9.922,44.237,0,34.315,0,22.12C0,9.924,9.922,0.001,22.119,0.001S44.238,9.923,44.238,22.12
+        			S34.316,44.237,22.119,44.237z M22.119,1.501C10.75,1.501,1.5,10.751,1.5,22.12s9.25,20.619,20.619,20.619
+        			s20.619-9.25,20.619-20.619S33.488,1.501,22.119,1.501z"/>
+              <path d="M31.434,22.869H12.805c-0.414,0-0.75-0.336-0.75-0.75s0.336-0.75,0.75-0.75h18.628c0.414,0,0.75,0.336,0.75,0.75
+        				S31.848,22.869,31.434,22.869z"/>
           </svg>
         </span>
       </a>

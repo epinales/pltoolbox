@@ -31,16 +31,35 @@ $('.prealerta').click(function(){
   $('#addtrafico').hide();
 });
 
- $('#a_referencia').change(function(){
-   $('#a_cliente').val("");
-   $('#a_tipo').val("");
- })
 
- $('val_referencia').change(function(){
-   $('#a_cliente').val("");
-   $('#a_tipo').val("");
- })
+
+  $('#menos').click(function(){
+    $(this).hide();
+    $('#mas').show();
+    $('.infoMenos').show();
+    $('.infoMas').hide();
+
+  })
+
+  $('#mas').click(function(){
+    $(this).hide();
+    $('#menos').show();
+
+    $('.infoMas').show();
+    $('.infoMenos').hide();
+  })
 // FIN DE ESTILOS
+
+
+  $('#a_referencia').change(function(){
+    $('#a_cliente').val("");
+    $('#a_tipo').val("");
+  })
+
+  $('val_referencia').change(function(){
+    $('#a_cliente').val("");
+    $('#a_tipo').val("");
+  })
 
   $('.filtroOficina').click(function(){
     var data = { oficina : $(this).attr('db-id')}

@@ -23,6 +23,12 @@
   color: whitesmoke!important;
 }
 
+
+/* #regresar a:hover, #regresar a.active{
+  background-color: red;
+  color: whitesmoke!important;
+} */
+
 .side-menu * li:hover{
   background-color: rgba(127, 141, 142, 0.08);
   letter-spacing: 3px;
@@ -53,4 +59,9 @@
   transition: 0.2s ease-in-out;
   color: #333;
   width: 100%!important;
+}
+
+.add-boton{
+  border-radius: 8px;
+  background-color: transparent;
 }
