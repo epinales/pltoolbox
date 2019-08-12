@@ -17,7 +17,7 @@
 
       <button type="button" class="modalTrafico add-boton btn-outline-dark mr-2" data-toggle="modal" data-target="#agregarTrafico">Agregar</button>
 
-      <a id="mas" href="#" class="bt noborder w-100 mr-2" style="display:none">
+      <a id="mas" href="#" class="bt noborder w-100 mr-2">
         <span class="img3">
           <svg class="w-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 502">
           	<path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans"
@@ -41,7 +41,7 @@
 
 
 
-      <a id="menos" href="#" class="bt noborder w-100 mr-2">
+      <a id="menos" href="#" class="bt noborder w-100 mr-2" style="display:none">
         <span class="img3">
           <svg class="w-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.238 44.238">
             <path d="M22.119,44.237C9.922,44.237,0,34.315,0,22.12C0,9.924,9.922,0.001,22.119,0.001S44.238,9.923,44.238,22.12

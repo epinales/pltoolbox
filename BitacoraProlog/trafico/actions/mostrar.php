@@ -132,7 +132,7 @@ while ($row = $rslt->fetch_assoc()) {
   }
 
   $system_callback['data'] .="
-  <tr class='row m-0 align-items-center bbyellow infoMas'>
+  <tr class='row m-0 align-items-center bbyellow infoMas' style='display:none'>
     <td class='col-md-8'>
       <span class='ls-3'>
         <a href='#' onclick='$onclick' class='alink' db-id='$pk_bitacora'>$nombreCliente</a>
@@ -152,13 +152,16 @@ while ($row = $rslt->fetch_assoc()) {
     </td>
   </tr>
 
-  <tr id='' class='row m-0 align-items-center bbyellow infoMenos' style='display:none'>
-    <td class='col-md-9 py-2'>
+  <tr id='' class='row m-0 mt-2 align-items-center bbyellow infoMenos' >
+    <td class='col-md-8 py-2'>
       <span class='ls-2'>
         <a href='#' onclick='$onclick' class='alink' db-id='$pk_bitacora'>$nombreCliente</a>
       </span><span class='font18'>($referencia)</span>
     </td>
     <td class='col-md-3 py-2'>$indice</td>
+    <td class='col-md-1 text-center py-2'>
+      <img class='w-30'  src='/pltoolbox/Resources/iconos/$icono'>
+    </td>
   </tr>";
 
 
