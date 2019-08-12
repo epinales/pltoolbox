@@ -35,6 +35,11 @@ $('.prealerta').click(function(){
    $('#a_cliente').val("");
    $('#a_tipo').val("");
  })
+
+ $('val_referencia').change(function(){
+   $('#a_cliente').val("");
+   $('#a_tipo').val("");
+ })
 // FIN DE ESTILOS
 
   $('.filtroOficina').click(function(){
