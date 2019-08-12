@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="/pltoolbox/Resources/css/barraNavegacion.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/modales.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/css/estilosBootstrap.css">
-<!-- <link rel="stylesheet" href="/pltoolbox/Resources/bootstrap/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="/pltoolbox/Resources/Bootstrap_4_3/css/bootstrap.min.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/sweetAlert/css/sweetalert.css">
 <link rel="stylesheet" href="/pltoolbox/Resources/alertify/css/alertify.min.css">
@@ -31,7 +30,6 @@
 <script src="/pltoolbox/Resources/sweetAlert/js/sweetalert.min.js"></script>
 <script src="/pltoolbox/Resources/js/popper.js"></script>
 <script src="/pltoolbox/Resources/js/tether.min.js"></script>
-<!-- <script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script> -->
 <script src="/pltoolbox/Resources/Bootstrap_4_3/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -113,10 +111,10 @@
         </a>
 
         <div class="dropdown-menu mt-3">
-          <a class="dropdown-item" href="/pltoolbox/Ubicaciones/usuarios/usuarios.php">Usuarios</a>
+          <!-- <a class="dropdown-item" href="/pltoolbox/Ubicaciones/usuarios/usuarios.php">Usuarios</a> -->
           <a class="opcOficina dropdown-item" href="#opcOficina" data-toggle="modal" db-id="<?php echo $_SESSION['user']['u_oficina'] ?>" >Opciones de Oficina</a>
-          <a class="dropdown-item" href="#">Cuentas Bancarias</a>
-          <a class="dropdown-item" href="#">Reportes</a>
+          <!-- <a class="dropdown-item" href="#">Cuentas Bancarias</a>
+          <a class="dropdown-item" href="#">Reportes</a> -->
         </div>
       </li>
 
@@ -127,15 +125,24 @@
         </a>
       </li>
       <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+        <a href="#">
           <span class="title">FACTURACION</span>
         </a>
       </li>
-      <li class="p-0 btn text bblack f19">
+
+<!-- descomentar cuando este completa -->
+      <!-- <li class="p-0 btn text bblack f19">
+        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+          <span class="title">FACTURACION</span>
+        </a>
+      </li> -->
+
+
+      <!-- <li class="p-0 btn text bblack f19">
         <a href="#">
           <span class="title">BANCOS</span>
         </a>
-      </li>
+      </li> -->
 
     <?php else: ?>
       <li class="p-0 btn text bblack f19">
@@ -144,15 +151,21 @@
         </a>
       </li>
       <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+        <a href="#">
           <span class="title">FACTURACION</span>
         </a>
       </li>
-      <li class="p-0 btn text bblack f19">
+
+      <!-- <li class="p-0 btn text bblack f19">
+        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+          <span class="title">FACTURACION</span>
+        </a>
+      </li> -->
+      <!-- <li class="p-0 btn text bblack f19">
         <a href="#">
           <span class="title">BANCOS</span>
         </a>
-      </li>
+      </li> -->
     <?php endif; ?>
   </ul>
 </body>
