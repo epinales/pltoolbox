@@ -71,9 +71,14 @@ if (!($stmt->execute())) {
       <aside class="border-right h-100 d-fixed side-menu">
         <div class="">
           <ul class="nav flex-column" id="sideMenu" role="tablist">
-            <li class="p-0 btn text bblack f19">
+            <!-- <li class="p-0 btn text bblack f19">
               <a id="back" href="/pltoolbox/BitacoraProlog/trafico/index.php">
                 <span class="title">REGRESAR</span>
+              </a>
+            </li> -->
+            <li class="p-0 btn text f19">
+              <a class="regresar" id="regresar" href="/pltoolbox/BitacoraProlog/trafico/index.php">
+                <span class="title"> << REGRESAR</span>
               </a>
             </li>
             <li class="p-0 btn text bblack f19">
