@@ -3,7 +3,7 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
-$file_factura_mayoral = fopen($root . '/pltoolbox/mayoral/resources/helper_files/factura_aeropuerto_II.csv','r');
+$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000318 - 20/factura_csv.csv','r');
 // $factura = array();
 
 $facturas = array();
@@ -50,7 +50,7 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
     continue;
   }
 
-  $valor_factura[$row[1]] += $row[21];
+  $valor_factura[$row[1]] += (float)$row[21];
 
   $facturas[$row[1]]['header'] = array(
     $row[1],  //NumeroFactura
@@ -72,13 +72,16 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
     "",          //DescripcionIngles
     $row[18],    //CantUMC
     $row[17],    //UMC
-    $row[21]/$row[18],    //PrecioUnitario
+    (float)$row[21]/$row[18],    //PrecioUnitario
     2,0,         //UnidadPesoUnitario - PesoUnitario
     $row[13],   //Fraccion
     $row[20],   //CantUMT
-    1,          //FactorAjuste
+    (float)$row[20]/(float)$row[18],          //FactorAjuste
     $row[16],   //PaisOrigen
-    0           //ValorAgregado
+    0,           //ValorAgregado
+    $row[36], //Marca
+    $row[11], //Modelo
+    "" //Serie, se manda en blanco.
   );
 
   // $identificadores[$row[10]] = array();
@@ -142,7 +145,8 @@ foreach ($facturas as $factura) {
       $txt_file .= $valor_item . "|";
     }
   }
-  $txt_file = rtrim($txt_file, "|");
+  // $txt_file = rtrim($txt_file, "|");
+  $txt_file = substr($txt_file, 0, -1);
   $txt_file .= "^";
 }
 
