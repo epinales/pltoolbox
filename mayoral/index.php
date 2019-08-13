@@ -3,11 +3,14 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
-$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000318 - 20/factura_csv.csv','r');
+$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000314 - 19/factura_csv.csv','r');
 // $factura = array();
 
 $facturas = array();
 $identificadores = array();
+$hour = date('H');
+$minute = date('i');
+
 
 $precios_estimados = "SELECT * FROM mayoral_precio_estimado";
 $precios = array();
@@ -67,7 +70,7 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
   );
 
   $facturas[$row[1]]['items'][] = array(
-    $row[10],    //NumeroParte
+    $row[10].$hour.$minute,    //NumeroParte
     $row[14],    //Descripcion
     "",          //DescripcionIngles
     $row[18],    //CantUMC
@@ -88,23 +91,23 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
 
   if ($row[29] != "") {
     $identif1 = explode(",",$row[29]);
-    array_unshift($identif1, $row[10]);
-    $identificadores[$row[10]][] = $identif1;
+    array_unshift($identif1, $row[10].$hour.$minute);
+    $identificadores[$row[10].$hour.$minute][] = $identif1;
   }
   if ($row[30] != "") {
     $identif2 = explode(",",$row[30]);
-    array_unshift($identif2, $row[10]);
-    $identificadores[$row[10]][] = $identif2;
+    array_unshift($identif2, $row[10].$hour.$minute);
+    $identificadores[$row[10].$hour.$minute][] = $identif2;
   }
   if ($row[31] != "") {
     $identif3 = explode(",",$row[31]);
-    array_unshift($identif3, $row[10]);
-    $identificadores[$row[10]][] = $identif3;
+    array_unshift($identif3, $row[10].$hour.$minute);
+    $identificadores[$row[10].$hour.$minute][] = $identif3;
   }
   if ($row[32] != "") {
     $identif4 = explode(",",$row[32]);
-    array_unshift($identif4, $row[10]);
-    $identificadores[$row[10]][] = $identif4;
+    array_unshift($identif4, $row[10].$hour.$minute);
+    $identificadores[$row[10].$hour.$minute][] = $identif4;
   }
 
   if ($precios[$row[13]]['precio_estimado'] != "") {
@@ -118,12 +121,12 @@ while ($row = fgetcsv($file_factura_mayoral,1000)) {
     }
 
     if ($compare) {
-      $identificadores[$row[10]][] = array($row[10], 'EX', $comple_ex);
+      $identificadores[$row[10].$hour.$minute][] = array($row[10].$hour.$minute, 'EX', $comple_ex);
     }
   }
 
   if ($row[23] == "TL") {
-    $identificadores[$row[10]][] = array($row[10], 'TL', $row['24']);
+    $identificadores[$row[10].$hour.$minute][] = array($row[10].$hour.$minute, 'TL', $row['24']);
   }
 
 }
