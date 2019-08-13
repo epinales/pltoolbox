@@ -153,7 +153,7 @@
                <div class="input-group-text w-100">
                  <input id="dep_iva" type="checkbox" class="checkbox mr-3">IVA
 
-                 <input id="dep_ivadepo" type="text" name="" value="0">
+                 <input id="dep_ivadepo" type="hidden" name="" value="0">
                </div>
              </div>
             </td>
@@ -174,7 +174,7 @@
               <div class="input-group-prepend">
                <div class="input-group-text w-100">
                  <input id="pag_iva" type="checkbox" class="mr-3">IVA
-                 <input id="pag_ivapago" type="hidden" name="" value="">
+                 <input id="pag_ivapago" type="hidden" name="" value="0">
 
                </div>
              </div>
