@@ -122,7 +122,7 @@ while ($row = $rslt->fetch_assoc()) {
   if ($dp_iva == 1) {
     $iva = "Con IVA";
   }else {
-    $iva = "+ IVA";
+    $iva = "SIN IVA";
   }
 
 
