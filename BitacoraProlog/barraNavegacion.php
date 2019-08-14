@@ -3,7 +3,7 @@
   require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
   date_default_timezone_set('America/Mexico_City');
-
+  $activo = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +79,7 @@
       </li>
       <?php else: ?>
         <li id="home" class="p-0 btn img f5 bblack">
-          <a class="nav-link" href="/pltoolbox/Ubicaciones/bienvenido.php" role="button">
+          <a class="nav-link" href="/pltoolbox/bienvenido.php" role="button">
             <span class="img">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" >
                 <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M509.014,262.276L263.213,16.475c-3.985-3.983-10.441-3.983-14.425,0L2.987,262.276 c-2.916,2.916-3.789,7.304-2.211,11.114c1.579,3.81,5.297,6.296,9.423,6.296h40.532v208.627c0,5.633,4.567,10.199,10.199,10.199
@@ -102,7 +102,9 @@
 
 
 
-    <?php if ($admin || $global): ?>
+
+
+    <?php if ($global): ?>
 
       <li class="p-0 btn text bblack f19 dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -111,61 +113,75 @@
         </a>
 
         <div class="dropdown-menu mt-3">
-          <!-- <a class="dropdown-item" href="/pltoolbox/Ubicaciones/usuarios/usuarios.php">Usuarios</a> -->
           <a class="opcOficina dropdown-item" href="#opcOficina" data-toggle="modal" db-id="<?php echo $_SESSION['user']['u_oficina'] ?>" >Opciones de Oficina</a>
-          <!-- <a class="dropdown-item" href="#">Cuentas Bancarias</a>
-          <a class="dropdown-item" href="#">Reportes</a> -->
+          <a class="dropdown-item" href="#">Cuentas Bancarias</a>
+          <a class="dropdown-item" href="#">Reportes</a>
         </div>
       </li>
 
 
       <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/trafico/index.php">
+        <a class="<?php echo $activoTrafico ?>" href="/pltoolbox/bitacoraProlog/trafico/index.php">
+          <span class="title">TRAFICO</span>
+        </a>
+      </li>
+
+
+      <li class="p-0 btn text bblack f19">
+        <a class="<?php echo $activoFact ?>" href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+          <span class="title">FACTURACION</span>
+        </a>
+      </li>
+
+
+      <li class="p-0 btn text bblack f19">
+        <a href="#">
+          <span class="title">BANCOS</span>
+        </a>
+      </li>
+
+    <?php elseif ($admin): ?>
+      <li class="p-0 btn text bblack f19 dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+          <span class="tile">ADMIN</span>
+          <div class="arrow"></div>
+        </a>
+
+        <div class="dropdown-menu mt-3">
+          <a class="opcOficina dropdown-item" href="#opcOficina" data-toggle="modal" db-id="<?php echo $_SESSION['user']['u_oficina'] ?>" >Opciones de Oficina</a>
+        </div>
+      </li>
+
+
+      <li class="p-0 btn text bblack f19">
+        <a class="<?php echo $activoTrafico ?>" href="/pltoolbox/bitacoraProlog/trafico/index.php">
           <span class="title">TRAFICO</span>
         </a>
       </li>
       <li class="p-0 btn text bblack f19">
-        <a href="#">
+        <a class="<?php echo $activoFact ?>" href="#">
           <span class="title">FACTURACION</span>
         </a>
       </li>
 
-<!-- descomentar cuando este completa -->
-      <!-- <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
-          <span class="title">FACTURACION</span>
-        </a>
-      </li> -->
-
-
-      <!-- <li class="p-0 btn text bblack f19">
-        <a href="#">
-          <span class="title">BANCOS</span>
-        </a>
-      </li> -->
 
     <?php else: ?>
       <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/trafico/index.php">
+        <a class="<?php echo $activoTrafico ?>" href="/pltoolbox/bitacoraProlog/trafico/index.php">
           <span class="title">TRAFICO</span>
         </a>
       </li>
+      <!-- <li class="p-0 btn text bblack f19">
+        <a class="<?php echo $activoFact ?>" href="/pltoolbox/bitacoraProlog/facturacion/index.php">
+          <span class="title">FACTURACION</span>
+        </a>
+      </li> -->
+
       <li class="p-0 btn text bblack f19">
-        <a href="#">
+        <a class="<?php echo $activoFact ?>" href="#">
           <span class="title">FACTURACION</span>
         </a>
       </li>
-
-      <!-- <li class="p-0 btn text bblack f19">
-        <a href="/pltoolbox/bitacoraProlog/facturacion/index.php">
-          <span class="title">FACTURACION</span>
-        </a>
-      </li> -->
-      <!-- <li class="p-0 btn text bblack f19">
-        <a href="#">
-          <span class="title">BANCOS</span>
-        </a>
-      </li> -->
     <?php endif; ?>
   </ul>
 </body>

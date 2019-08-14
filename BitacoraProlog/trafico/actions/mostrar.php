@@ -96,8 +96,11 @@ while ($row = $rslt->fetch_assoc()) {
   $alerta = $row['o_alerta'];
 
 
-  $deposito = number_format($row['deposito'], 2);
-  $pago = number_format($row['pago'], 2);
+  $deposito = $row['deposito'];
+  $pago = $row['pago'];
+  // $pago = number_format($row['pago'], 2);
+
+  $disponible = number_format($deposito - $pago,2);
 
 
   $pk_indice = $row['pk_indice'];
@@ -145,14 +148,14 @@ while ($row = $rslt->fetch_assoc()) {
     <td class='col-md-3'>
       $indice <br />
       Tiempo total : $diferencia <br />
-      Disponible : $deposito
+      Disponible : $ $disponible
     </td>
     <td class='col-md-1 text-center'>
       <img class='w-32'  src='/pltoolbox/Resources/iconos/$icono'>
     </td>
   </tr>
 
-  <tr id='' class='row m-0 mt-2 align-items-center bbyellow infoMenos' >
+  <tr id='' class='row m-0 align-items-center bbyellow infoMenos' >
     <td class='col-md-8 py-2'>
       <span class='ls-2'>
         <a href='#' onclick='$onclick' class='alink' db-id='$pk_bitacora'>$nombreCliente</a>
@@ -167,11 +170,11 @@ while ($row = $rslt->fetch_assoc()) {
 
   $system_callback['dataFact'] .="
   <tr class='row m-0 align-items-center bbyellow border-right'>
-    <td class='col-md-12'>
-      <span class='ls-3 alink'>
+    <td class='col-md-12 font14 py-1'>
+      <span class='ls-2 alink'>
         $nombreCliente
-      </span>
-      <br> $referencia //  $indice <br />
+      </span>($referencia )
+      <br> $indice <br />
     </td>
   </tr>";
 

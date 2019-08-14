@@ -4,18 +4,22 @@
   if (!isset($_SESSION['user'])) {
     header("Location: /pltoolbox/index.php");
   }
+
+  $activoTrafico = "activo b";
+  $activoFact = "";
+
   $root = $_SERVER['DOCUMENT_ROOT'];
   require $root . '/pltoolbox/BitacoraProlog/barraNavegacion.php';
 ?>
 
 
 <form class="p-0 mb-5">
-  <ol class="breadcrumb bread py-2 mb-1">
-    <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
-    <li class="breadcrumb-item b"><b>Trafico</b></li>
+  <ol class="breadcrumb bread py-2 mb-1 align-items-center">
+    <li class="breadcrumb-item abread">Bitacora Prolog</li>
+    <li class="breadcrumb-item b"><b><?php echo $_SESSION['user']['u_oficina'] ?></b></li>
     <li class="b ml-auto text-center mr-4">
 
-      <button type="button" class="modalTrafico add-boton btn-outline-dark mr-2" data-toggle="modal" data-target="#agregarTrafico">Agregar</button>
+      <button type="button" class="modalTrafico add-boton btn-outline-dark mr-3" data-toggle="modal" data-target="#agregarTrafico">Agregar</button>
 
       <a id="mas" href="#" class="bt noborder w-100 mr-2">
         <span class="img3">
@@ -54,7 +58,7 @@
       </a>
     </li>
   </ol>
-  <table class="table table-hover fixed-table mb-5">
+  <table class="table table-hover fixed-table mb-5 mt-3">
     <tbody id="lista_trafico" style="font-family: 'Source Sans Pro';"></tbody>
   </table>
 </form>

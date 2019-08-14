@@ -58,16 +58,6 @@ $entrega = $_POST['entrega_fecha'];
 if ($entrega == "") {$entrega_fecha = NULL;}else {$entrega_fecha = $entrega;}
 $entrega_hora = $_POST['entrega_hora'];
 
-// $solant_fecha = $_POST['solant_fecha'];
-// $solant_hora = $_POST['solant_hora'];
-// $deposito_fecha = $_POST['deposito_fecha'];
-// $deposito_hora = $_POST['deposito_hora'];
-// $pago_fecha = $_POST['pago_fecha'];
-// $pago_hora = $_POST['pago_hora'];
-// $program_fecha = $_POST['program_fecha'];
-// $program_hora = $_POST['program_hora'];
-// $entrega_fecha = $_POST['entrega_fecha'];
-// $entrega_hora = $_POST['entrega_hora'];
 
 // para la bitacora_ediciones
 $referencia = $_POST['referencia'];
@@ -75,7 +65,9 @@ $referencia = $_POST['referencia'];
 try {
   $db->begin_transaction(); //Inicia la transaccion
   $query = "UPDATE bitacora
-  SET estatusIndice = ?
+  SET UsuarioModif = ?,
+  fechaModif = ?,
+  estatusIndice = ?
   WHERE pk_bitacora = ?";
 
   $stmt = $db->prepare($query);
@@ -85,7 +77,7 @@ try {
     exit_script($system_callback);
   }
 
-  $stmt->bind_param('ss',$pk_indice,$pk_bitacora);
+  $stmt->bind_param('ssss',$usuarioAlta,$fechaAlta,$pk_indice,$pk_bitacora);
   if (!($stmt)) {
     $system_callback['code'] = "500";
     $system_callback['message'] = "Error during variables binding [$stmt->errno]: $stmt->error";

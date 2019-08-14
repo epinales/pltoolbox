@@ -329,18 +329,16 @@ $('.prealerta').click(function(){
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
     }else if ($('#dp_pago').val() == 0 || $('#dp_disponible').val() == 0) {
+      $(this).val("");
+      
       actualizar_trafico();
       swal("Ops!","No hay pagos registrados o deposito disponible, favor de verificar","info");
       $('#ident').click();
       $('#tab-pagos').click();
-      $(this).val("");
     }else if ($(this).val() == "" && programF == "") {
       $('#pago_hora').val("");
       $('#pk_indice').val("7");
     }
-    // else if (programF != "") {
-    //   $('#pago_hora').val(horaActual);
-    // }
     else if ($(this).val() == "") {
       $('#pago_hora').val("");
     }else {
