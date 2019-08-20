@@ -62,11 +62,9 @@ $('.prealerta').click(function(){
   })
 
 
-  // $('.filtroOficina').unbind();
   $('.filtroOficina').click(function(){
     var filtro = $(this).attr('db-id');
     $('#pruebaOficina').val(filtro);
-    $('#pruebaOficinaFact').val(filtro);
 
     var data = { oficina : filtro}
     var ajaxCall = $.ajax({
@@ -78,13 +76,35 @@ $('.prealerta').click(function(){
     ajaxCall.done(function(r) {
       r = JSON.parse(r);
       if (r.code == 1) {
-        $('#lista_trafico').html(r.data);
         $('#listaRefTrafico').html(r.dataFact);
+        $('#lista_trafico').html(r.data);
       } else {
         console.error(r.message);
       }
     });
   });
+
+
+  // $('.pruebaOficinaFact').change(function(){
+  //   var filtro = $(this).val();
+  //   $('#pruebaOficina').val(filtro);
+  //
+  //   var data = { oficina : filtro}
+  //   var ajaxCall = $.ajax({
+  //     method: 'POST',
+  //     data: data,
+  //     url: '/pltoolbox/BitacoraProlog/trafico/actions/mostrar.php'
+  //   });
+  //
+  //   ajaxCall.done(function(r) {
+  //     r = JSON.parse(r);
+  //     if (r.code == 1) {
+  //       $('#listaRefTrafico').html(r.dataFact);
+  //     } else {
+  //       console.error(r.message);
+  //     }
+  //   });
+  // })
 
 
 

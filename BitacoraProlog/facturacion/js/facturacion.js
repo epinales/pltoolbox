@@ -11,7 +11,6 @@ listaFacturasEntregadas();
 
   $('.filtroOficina').click(function(){
     var filtro = $(this).attr('db-id');
-    // $('#pruebaOficina').val(filtro);
     $('#pruebaOficinaFact').val(filtro);
 
     var data = { oficina : filtro}
@@ -143,20 +142,35 @@ $('.add_program_cobranza').click(function(){
 
 
   $('.actualizar_factura').click(function(){
+
+    if ($('#honorarios').val() ==  "") {
+      honorarios = 0;
+    }else {
+      honorarios = $('#honorarios').val();
+    }
+
+    if ($('#saldo').val() == "") {
+      saldo = 0;
+    }else {
+      saldo = $('#saldo').val();
+    }
+
+
+
     var data = {
       pk_bitacora: $('#pk_bitacora').val(),
       referencia: $('#referencia').val(),
       pk_indice: $('#pk_indice').val(),
       numCuenta: $('#numCuenta').val(),
       trackId: $('#trackId').val(),
-      saldo: $('#saldo').val(),
+      saldo: saldo,
       tipoSaldo: $('#tipoSaldo').val(),
       ctaGastos_fecha: $('#ctaGastos_fecha').val(),
       ctaGastos_hora: $('#ctaGastos_hora').val(),
       cobDev_fecha: $('#cobDev_fecha').val(),
       cobDev_hora: $('#cobDev_hora').val(),
       vencimientoFact: $('#vencimientoFact').val(),
-      honorarios: $('#honorarios').val(),
+      honorarios: honorarios,
       finalizar: 0,
     }
 
