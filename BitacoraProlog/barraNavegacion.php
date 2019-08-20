@@ -159,10 +159,15 @@
         </a>
       </li>
       <li class="p-0 btn text bblack f19">
-        <a class="<?php echo $activoFact ?>" href="#">
+        <a class="<?php echo $activoFact ?>" href="/pltoolbox/bitacoraProlog/facturacion/index.php">
           <span class="title">FACTURACION</span>
         </a>
       </li>
+      <!-- <li class="p-0 btn text bblack f19">
+        <a class="<?php echo $activoFact ?>" href="#">
+          <span class="title">FACTURACION</span>
+        </a>
+      </li> -->
 
 
     <?php else: ?>
