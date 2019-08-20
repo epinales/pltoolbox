@@ -66,6 +66,7 @@ $rslt = $stmt->get_result();
 if ($rslt->num_rows == 0) {
   $system_callback['code'] = 1;
   $system_callback['data'] ="<p db-id=''>No se encontraron resultados</p>";
+  $system_callback['dataFact'] ="<p db-id=''>No se encontraron resultados</p>";
   $system_callback['message'] = "Script called successfully but there are no rows to display.";
   exit_script($system_callback);
 }
