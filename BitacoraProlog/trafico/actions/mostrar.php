@@ -169,7 +169,7 @@ while ($row = $rslt->fetch_assoc()) {
 
 
   $system_callback['dataFact'] .="
-  <tr class='row m-0 align-items-center bbyellow border-right'>
+  <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-12 font14 py-1'>
       <span class='ls-2 alink'>
         $nombreCliente

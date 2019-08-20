@@ -65,3 +65,8 @@
   border-radius: 8px;
   background-color: transparent;
 }
+
+.rojo{
+  color: rgb(171, 42, 42)!important;
+  font-weight: bolder;
+}

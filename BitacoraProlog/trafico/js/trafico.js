@@ -330,7 +330,7 @@ $('.prealerta').click(function(){
       $(this).val("");
     }else if ($('#dp_pago').val() == 0 || $('#dp_disponible').val() == 0) {
       $(this).val("");
-      
+
       actualizar_trafico();
       swal("Ops!","No hay pagos registrados o deposito disponible, favor de verificar","info");
       $('#ident').click();
@@ -744,6 +744,9 @@ function depositosPagos(){
     if (r.code == 1) {
       $('#listaDepositos').html(r.deposito);
       $('#listaPagos').html(r.pago);
+
+      $('#listaDepositosFact').html(r.deposito);
+      $('#listaPagosFact').html(r.pago);
     } else {
       console.error(r.message);
     }

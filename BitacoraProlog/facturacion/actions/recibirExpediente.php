@@ -12,6 +12,10 @@ $referencia = trim($_POST['referencia']);
 $recibidoFact = 1;
 $estatusTipo = "Facturacion";
 $estatusIndice = "11";
+$finalizar = 0;
+
+$fecha = strtotime ( '+1 day' , strtotime ( $fechaAlta ) ) ;
+$fecha = date ( 'Y-m-d h:i:s' , $fecha );
 
 try {
 
@@ -57,7 +61,7 @@ try {
   $stmt_detalle = $db->prepare($query_detalle);
    if (!($stmt_detalle)) {
      $system_callback['code'] = "500";
-     $system_callback['message'] = "Error durante la ejecucion del query [$db->errno]: $db->error";
+     $system_callback['message'] = "Error AL PREPARPAR QUERY_DETALLE [$db->errno]: $db->error";
      exit_script($system_callback);
    }
 
@@ -73,7 +77,7 @@ try {
 
    if (!($stmt_detalle->execute())) {
    $system_callback['code'] = "500";
-   $system_callback['message'] = "Error durante la ejecucion [$stmt_detalle->errno]: $stmt_detalle->error";
+   $system_callback['message'] = "Error durante la ejecucion DETALLE TRAFICO [$stmt_detalle->errno]: $stmt_detalle->error";
    exit_script($system_callback);
    }
 
@@ -81,13 +85,51 @@ try {
    $system_callback['affected'] = $affected_detalle;
    $system_callback['datos'] = $_POST;
 
-   if ($affected_detalle == 0 AND $affected == 0) {
+
+
+
+   $query_detalle_fact = "INSERT INTO bitacora_detalle_facturacion (fk_bitacora,
+    recibidoFact,
+    vencimientoFact,
+    finalizar)
+    VALUES (?,?,?,?)";
+
+   $stmt_detalle_fact = $db->prepare($query_detalle_fact);
+    if (!($stmt_detalle_fact)) {
+      $system_callback['code'] = "500";
+      $system_callback['message'] = "Error AL PREPARPAR QUERY_detalle_fact  [$db->errno]: $db->error";
+      exit_script($system_callback);
+    }
+
+    $stmt_detalle_fact->bind_param('ssss',$pk_bitacora,
+                                           $fechaAlta,
+                                           $fecha,
+                                           $finalizar);
+
+
+    if (!($stmt_detalle_fact)) {
+    $system_callback['code'] = "500";
+    $system_callback['message'] = "Error during variables binding [$stmt_detalle_fact->errno]: $stmt_detalle_fact->error";
+    exit_script($system_callback);
+    }
+
+    if (!($stmt_detalle_fact->execute())) {
+    $system_callback['code'] = "500";
+    $system_callback['message'] = "Error AL AGREGAR DETALLE FACT [$stmt_detalle_fact->errno]: $stmt_detalle_fact->error";
+    exit_script($system_callback);
+    }
+
+    $affected_detalle_fact = $stmt_detalle_fact->affected_rows;
+    $system_callback['affected'] = $affected_detalle_fact;
+    $system_callback['datos'] = $_POST;
+
+
+
+   if ($affected_detalle == 0 AND $affected == 0 AND $affected_detalle_fact == 0) {
    $system_callback['code'] = 2;
    $system_callback['message'] = "No hubo ningun cambio";
    exit_script($system_callback);
    }
-
-
 
 
   $descripcion = "A recibido el expediente con referencia $referencia";

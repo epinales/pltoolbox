@@ -32,12 +32,17 @@ o.pk_oficina,
 o.o_nombre,
 o.o_amarillo,
 o.o_rojo,
-o.o_alerta
+o.o_alerta,
+
+bdf.recibidoFact AS bdfRecibido,
+bdf.vencimientoFact AS bdfVencimiento,
+bdf.finalizar
 
 FROM bitacora b
 LEFT JOIN oficinas o ON b.oficina = o.o_nombre
 LEFT JOIN bitacora_indice bi ON b.estatusIndice = bi.pk_indice
 LEFT JOIN bitacora_transaccion bdp ON b.pk_bitacora = bdp.fk_bitacora_dp
+LEFT JOIN bitacora_detalle_facturacion bdf ON b.pk_bitacora = bdf.fk_bitacora
 $andWhere GROUP BY b.pk_bitacora ";
 
 
@@ -79,27 +84,65 @@ while ($row = $rslt->fetch_assoc()) {
   $recibido = $row['recibidoFact'];
   $estatusTipo = $row['estatusTipo'];
 
+  $finalizar = $row['finalizar'];
 
 
-  if ($estatusTipo == "Facturacion" AND $recibido == "1") {
+
+  $bdfRecibido = $row['bdfRecibido'];
+  $bdfVencimiento = $row['bdfVencimiento'];
+
+
+  $fecha1 = new DateTime($bdfRecibido);//fecha inicial
+  $fecha2 = new DateTime($bdfVencimiento);//fecha de cierre
+  $intervalo = $fecha1->diff($fecha2);
+
+  $dias = $intervalo->format('%d');
+
+  $fecha3 = new DateTime($fechaAlta);//fecha de cierre
+  $intervaloReal = $fecha1->diff($fecha3);
+  $diasReal = $intervaloReal->format('%d');
+
+
+  if ($recibido == "1" AND $diasReal > $dias) {
+    $rojo = "rojo";
+  }else {
+    $rojo = "";
+  }
+
+  if ($estatusTipo == "Facturacion" AND $recibido == "1" AND $finalizar == 0) {
     $color = "";
     $onclick = "detalle_eventos_facturacion($pk_bitacora)";
+  }elseif ($finalizar == 1) {
+    $onclick = "";
   }else {
-    $color = "rgb(171, 42, 42)";
+    $color = "rojo";
     $onclick = "recibirExpediente($pk_bitacora)";
   }
 
 
+  $concluir = "";
+
+  if ($finalizar == 1) {
+    $concluir = "<img class='w-30'  src='/pltoolbox/Resources/iconos/check-mark.svg'>";
+  }else {
+    $concluir = $diasReal;
+  }
+
+
+
+// $diasReal > $dias  // $diasReal
+
 
   $system_callback['data'] .="
   <tr class='row m-0 align-items-center bbyellow'>
-    <td class='col-md-12'>
+    <td class='col-md-11 py-1'>
       <span class='ls-3'>
         <a id='' href='#' onclick='$onclick' referencia='$referencia' class='$expediente alink detalle' db-id='$pk_bitacora'>$nombreCliente</a>
       </span>
       <br>
-      <span style='color:$color'>$referencia --  $indice</span>
+      <span class='$color'>$referencia --  $indice</span>
     </td>
+    <td class='col-md-1 py-1 $rojo'>$concluir</td>
   </tr>";
 
 }
