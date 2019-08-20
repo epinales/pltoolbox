@@ -9,13 +9,58 @@ listaFacturasEntregadas();
 
 // FIN DE ESTILO
 
+  $('.filtroOficina').click(function(){
+    var filtro = $(this).attr('db-id');
+    // $('#pruebaOficina').val(filtro);
+    $('#pruebaOficinaFact').val(filtro);
+
+    var data = { oficina : filtro}
+    var ajaxCall = $.ajax({
+      method: 'POST',
+      data: data,
+      url: '/pltoolbox/BitacoraProlog/facturacion/actions/mostrar.php'
+    });
+
+    ajaxCall.done(function(r) {
+      r = JSON.parse(r);
+      if (r.code == 1) {
+        $('#listaRefFacturacion').html(r.data);
+      } else {
+        console.error(r.message);
+      }
+    });
+  });
+
+
+  // $('.filtroOficina').change(function(){
+  //   var filtro = $(this).val();
+  //   // $('#pruebaOficina').val(filtro);
+  //
+  //
+  //   var data = { oficina : filtro}
+  //
+  //   var ajaxCall = $.ajax({
+  //       method: 'POST',
+  //       data: data,
+  //       url: '/pltoolbox/BitacoraProlog/facturacion/actions/mostrar.php'
+  //   });
+  //
+  //   ajaxCall.done(function(r) {
+  //     r = JSON.parse(r);
+  //     if (r.code == 1) {
+  //       $('#lista_trafico').html(r.data);
+  //       $('#listaRefTrafico').html(r.dataFact);
+  //     } else {
+  //       console.error(r.message);
+  //     }
+  //   });
+  // });
+
   $('#add_fact').click(function(){
     $('#agregarFacturacion').modal('show');
   })
 
-
   $('.add_factura_SN').click(function(){
-
     var data = {
       fa_cliente: $('#fa_cliente').val(),
       fa_identCuenta: $('#fa_identCuenta').val(),
@@ -262,3 +307,27 @@ function incrementarFecha(days){
 
     $('#a_vencimiento').val(fecha_actual_incrementada);
 }
+
+
+// function filtroTrafico(){
+//   var filtro = $(this).attr('db-id');
+//   $('#pruebaOficina').val(filtro);
+//   $('#pruebaOficinaFact').val(filtro);
+//
+//   var data = { oficina : filtro}
+//   var ajaxCall = $.ajax({
+//     method: 'POST',
+//     data: data,
+//     url: '/pltoolbox/BitacoraProlog/trafico/actions/mostrar.php'
+//   });
+//
+//   ajaxCall.done(function(r) {
+//     r = JSON.parse(r);
+//     if (r.code == 1) {
+//       $('#lista_trafico').html(r.data);
+//       $('#listaRefTrafico').html(r.dataFact);
+//     } else {
+//       console.error(r.message);
+//     }
+//   });
+// }

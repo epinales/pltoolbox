@@ -41,10 +41,6 @@ LEFT JOIN bitacora_transaccion bdp ON b.pk_bitacora = bdp.fk_bitacora_dp
 $andWhere GROUP BY b.pk_bitacora ";
 
 
-
-
-
-
 $stmt = $db->prepare($query);
 if (!($stmt)) {
   $system_callback['code'] = "500";
@@ -167,13 +163,12 @@ while ($row = $rslt->fetch_assoc()) {
     </td>
   </tr>";
 
-
   $system_callback['dataFact'] .="
   <tr class='row m-0 align-items-center bbyellow'>
     <td class='col-md-12 font14 py-1'>
       <span class='ls-2 alink'>
         $nombreCliente
-      </span>($referencia )
+      </span>($referencia)
       <br> $indice <br />
     </td>
   </tr>";

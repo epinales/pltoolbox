@@ -16,7 +16,18 @@
 <form class="p-0 mb-5">
   <ol class="breadcrumb bread py-2 mb-1 align-items-center">
     <li class="breadcrumb-item abread">Bitacora Prolog</li>
-    <li class="breadcrumb-item b"><b><?php echo $_SESSION['user']['u_oficina'] ?></b></li>
+    <li class="breadcrumb-item b">
+      <b>
+        <input class="bt border-0" id="pruebaOficina" type="text" value="<?php echo $_SESSION['user']['u_oficina'] ?>" readonly>
+      </b>
+      <!-- <select class="bt border-0" id="pruebaOficina" type="text" value="<?php echo $_SESSION['user']['u_oficina'] ?>">
+        <option value="Nuevo Laredo">Nuevo Laredo</option>
+        <option value="Laredo Texas">Laredo Texas</option>
+        <option value="Manzanillo">Manzanillo</option>
+        <option value="Aeropuerto">Aeropuerto</option>
+        <option value="Veracruz">Veracruz</option>
+      </select> -->
+    </li>
     <li class="b ml-auto text-center mr-4">
 
       <button type="button" class="modalTrafico add-boton btn-outline-dark mr-3" data-toggle="modal" data-target="#agregarTrafico">Agregar</button>

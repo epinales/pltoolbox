@@ -61,24 +61,59 @@ $('.prealerta').click(function(){
     $('#a_tipo').val("");
   })
 
-  $('.filtroOficina').click(function(){
-    var data = { oficina : $(this).attr('db-id')}
 
+  // $('.filtroOficina').unbind();
+  $('.filtroOficina').click(function(){
+    var filtro = $(this).attr('db-id');
+    $('#pruebaOficina').val(filtro);
+    $('#pruebaOficinaFact').val(filtro);
+
+    var data = { oficina : filtro}
     var ajaxCall = $.ajax({
-        method: 'POST',
-        data: data,
-        url: 'actions/mostrar.php'
+      method: 'POST',
+      data: data,
+      url: '/pltoolbox/BitacoraProlog/trafico/actions/mostrar.php'
     });
 
     ajaxCall.done(function(r) {
       r = JSON.parse(r);
       if (r.code == 1) {
         $('#lista_trafico').html(r.data);
+        $('#listaRefTrafico').html(r.dataFact);
       } else {
         console.error(r.message);
       }
     });
   });
+
+
+
+
+  // $('.filtroOficina').change(function(){
+  //   var filtro = $(this).val();
+  //   // $('#pruebaOficina').val(filtro);
+  //
+  //
+  //   var data = { oficina : filtro}
+  //
+  //   var ajaxCall = $.ajax({
+  //       method: 'POST',
+  //       data: data,
+  //       url: '/pltoolbox/BitacoraProlog/trafico/actions/mostrar.php'
+  //   });
+  //
+  //   ajaxCall.done(function(r) {
+  //     r = JSON.parse(r);
+  //     if (r.code == 1) {
+  //       $('#lista_trafico').html(r.data);
+  //       $('#listaRefTrafico').html(r.dataFact);
+  //     } else {
+  //       console.error(r.message);
+  //     }
+  //   });
+  // });
+
+
 
   $('.validaRef').click(function(){
     var data = { referencia : $('#a_referencia').val()}
