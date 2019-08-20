@@ -167,12 +167,6 @@ $('.add_program_cobranza').click(function(){
     }
   })
 
-  
-
-
-
-
-
 })//fin del documento
 
 
@@ -242,9 +236,14 @@ function recibirExpediente(pk_bitacora){
 function detalle_eventos_facturacion(pk_bitacora){
   window.location.replace('/pltoolbox/BitacoraProlog/facturacion/detalle_eventos.php?evento='+pk_bitacora);
 
-  console.log(pk_bitacora);
+  // console.log(pk_bitacora);
 }
 
+function detalle_fetch(pk_bitacora){
+  window.location.replace('/pltoolbox/BitacoraProlog/facturacion/detalle_consultar.php?evento='+pk_bitacora);
+
+  // console.log(pk_bitacora);
+}
 
 function incrementarFecha(days){
     milisegundos=parseInt(35*24*60*60*1000);

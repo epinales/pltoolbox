@@ -35,16 +35,6 @@ if (!($stmt->execute())) {
   $rslt = $stmt->get_result();
   $row = $rslt->fetch_assoc();
 
-  $concluir = "";
-  $indiceFact = $row['estatusIndice'];
-  if ($indiceFact == "12") {
-    $concluir = "<button id='' type='button' class='concluirCuenta add-boton btn-outline-dark mr-3'>Concluir</button>";
-  }else {
-    $concluir = "";
-  }
-
-  // $tipoSaldo = $row['tipoSaldo'];
-
 
   $queryDepoPago = "SELECT
   SUM(dp_montoDepo) AS deposito,
@@ -64,13 +54,6 @@ if (!($stmt->execute())) {
     $deposito = $rowdp['deposito'];
     $pago = $rowdp['pago'];
     $disponible = $deposito - $pago;
-
-
-    // if ($disponible < 0) {
-    //   $tipoSaldo = "En contra";
-    // }else {
-    //   $tipoSaldo = "A favor";
-    // }
  ?>
  <link rel="stylesheet" href="/pltoolbox/Resources/css/bitacoraProlog.css">
 
@@ -107,30 +90,13 @@ if (!($stmt->execute())) {
                 </h4>
               </div>
               <div class="col-md-2 text-center">
-                <a href="#comentarios" data-toggle="modal" class="comentario mr-4"><img src='/pltoolbox/Resources/iconos/comentario.svg' class='w-32'></a>
-
-                <?php echo $concluir ?>
+                <a href="#comentariosDetalle" data-toggle="modal" class="mr-4"><img src='/pltoolbox/Resources/iconos/comentario.svg' class='w-32'></a>
               </div>
             </div>
 
             <hr class="bbyellow">
             <table class="table text-center">
               <tbody>
-                <tr class="row">
-                  <td class="col-md-12">
-                    <input id="dp_deposito" type="hidden" value="<?php echo $rowdp['deposito'] ?>">
-                    <input id="dp_pago" type="hidden" value="<?php echo $rowdp['pago'] ?>">
-                    <input id="pk_indice" type="hidden" value="<?php echo $row['pk_indice'] ?>">
-                    <input id="indice" type="hidden" value="<?php echo $row['indice'] ?>">
-                    <input id="pk_bitacora" type="hidden"  value="<?php echo $pk_bitacora ?>">
-                    <input id="recibidoFact" type="hidden" value="<?php echo $row['recibidoFact'] ?>">
-                    <input id="vencimientoFact" type="hidden" value="<?php echo $row['vencimientoFact'] ?>">
-                    <input class="fecha" type="hidden" value="<?php echo $fechaActual ?>">
-                    <input class="hora" type="hidden" value="<?php echo $horaActual ?>">
-                    <input id="referencia" type="hidden" value="<?php echo $row['referencia'] ?>">
-                  </td>
-                </tr>
-
                 <tr class="row align-items-center">
                   <td class="col-md-3 submodal py-0">
                     <label class="m-0 b activo">Numero de Cuenta</label>
@@ -139,7 +105,7 @@ if (!($stmt->execute())) {
                     <label class="m-0 b activo">Track  ID</label>
                   </td>
                   <td class="col-md-2 py-0">
-
+                    <input id="pk_bitacora" type="hidden" value="<?php echo $row['pk_bitacora'] ?>">
                   </td>
                   <td class="col-md-3 submodal py-0">
                     <label class="m-0 b activo">Saldo</label>
@@ -151,35 +117,19 @@ if (!($stmt->execute())) {
 
                 <tr class="row">
                   <td class="col-md-3">
-                    <input id="numCuenta" class="efecto-1" type="text" value='<?php echo $row['numCuenta'] ?>' placeholder="Numero de Cuenta">
+                    <input class="efecto-1" type="text" value='<?php echo $row['numCuenta'] ?>' placeholder="Numero de Cuenta" readonly>
                   </td>
                   <td class="col-md-2">
-                    <input id="trackId" class="efecto-1" type="text" value='<?php echo $row['trackId'] ?>' placeholder="Track Id">
+                    <input class="efecto-1" type="text" value='<?php echo $row['trackId'] ?>' placeholder="Track Id" readonly>
                   </td>
                   <td class="col-md-2"></td>
 
                   <td class="col-md-3">
-                    <input id="saldo" class="efecto-1" type="text" value='<?php echo $row['saldo'] ?>' placeholder="Saldo">
+                    <input class="efecto-1" type="text" value='<?php echo $row['saldo'] ?>' placeholder="Saldo" readonly>
                   </td>
                   <td class="col-md-2">
-                    <input id="tipoSaldo" list="saldoEstatus" class="efecto-1" value='<?php echo $row['tipoSaldo'] ?>' placeholder="Tipo de Saldo">
-                    <datalist id="saldoEstatus">
-                      <option value="A favor">A favor</option>
-                      <option value="En contra">En contra</option>
-                    </datalist>
+                    <input type="text" class="efecto-1" value='<?php echo $row['tipoSaldo']?>' readonly>
                   </td>
-
-
-                  <!-- <td class="col-md-3">
-                    <input id="saldo" class="efecto-1" type="text" value='<?php echo $diferencia ?>' placeholder="Saldo">
-                  </td>
-                  <td class="col-md-2">
-                    <input id="tipoSaldo" list="saldoEstatus" class="efecto-1" value='<?php echo $tipoSaldo ?>' placeholder="Tipo de Saldo">
-                    <datalist id="saldoEstatus">
-                      <option value="A favor">A favor</option>
-                      <option value="En contra">En contra</option>
-                    </datalist>
-                  </td> -->
                 </tr>
 
 
@@ -195,17 +145,17 @@ if (!($stmt->execute())) {
 
                 <tr class="row">
                   <td class="col-md-3">
-                    <input id="ctaGastos_fecha" class="efecto-1" type="date" indice="11" value='<?php echo $row['ctaGastos_fecha'] ?>'>
+                    <input class="efecto-1" type="date" indice="11" value='<?php echo $row['ctaGastos_fecha'] ?>' readonly>
                   </td>
                   <td class="col-md-2">
-                    <input id="ctaGastos_hora" class="efecto-1" type="time" value='<?php echo $row['ctaGastos_hora'] ?>'>
+                    <input class="efecto-1" type="time" value='<?php echo $row['ctaGastos_hora'] ?>' readonly>
                   </td>
                   <td class="col-md-2"></td>
                   <td class="col-md-3">
-                    <input id="cobDev_fecha" class="efecto-1" type="date" indice="12" value='<?php echo $row['cobDev_fecha'] ?>'>
+                    <input class="efecto-1" type="date" indice="12" value='<?php echo $row['cobDev_fecha'] ?>' readonly>
                   </td>
                   <td class="col-md-2">
-                    <input id="cobDev_hora" class="efecto-1" type="time" value='<?php echo $row['cobDev_hora'] ?>'>
+                    <input class="efecto-1" type="time" value='<?php echo $row['cobDev_hora'] ?>' readonly>
                   </td>
                 </tr>
 
@@ -217,35 +167,22 @@ if (!($stmt->execute())) {
 
                 <tr class="row justify-content-center align-items-center">
                   <td class="col-md-3">
-                    <input id="vencimientoFact" class="efecto-1" type="date" value='<?php echo $row['vencimientoFact'] ?>' readonly>
+                    <input class="efecto-1" type="date" value='<?php echo $row['vencimientoFact'] ?>' readonly>
                   </td>
-                  <td class="col-md-1 text-left pl-0">
-                    <a href="#financiamiento" data-toggle="modal"><img src='/pltoolbox/Resources/iconos/calendar.svg' class='w-32'> </a>
-
-
-                  </td>
-
                   <td class="col-md-1 px-0">Honorarios :</td>
                   <td class="col-md-2 pl-1">
-                    <input id="honorarios" class="efecto-1" type="text" value='<?php echo $row['honorarios'] ?>' placeholder="Honorarios">
+                    <input class="efecto-1" type="text" value='<?php echo $row['honorarios'] ?>' placeholder="Honorarios" readonly>
                   </td>
                 </tr>
 
 
                 <tr class="row mt-5 bbyellow btyellow">
                   <td class="col-md-12">
-                    DISPONIBLE :<input type="text" id="dpFact_disponible" class="bt border-0 text-center" value="<?php echo $disponible ?>" readonly>
+                    DISPONIBLE :<input type="text" class="bt border-0 text-center" value="<?php echo $disponible ?>" readonly>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div id='a_ctaGastos' class="text-center border-0 mb-4 m-0 mt-5">
-              <div class="row justify-content-center">
-                <div class="col-md-3">
-                  <input class="back-aceptar actualizar_factura" type="submit" value="ACTUALIZAR">
-                </div>
-              </div>
-            </div>
           </div>
 
 
@@ -255,27 +192,22 @@ if (!($stmt->execute())) {
 
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active gris" id="tab-deposito" data-toggle="tab" href="#deposito" role="tab" aria-controls="deposito" aria-selected="true">Deposito</a>
+                  <a class="nav-link active gris" id="tab-deposito" data-toggle="tab" href="#depositoDetalle" role="tab" aria-controls="depositoDetalle" aria-selected="true">Deposito</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link gris" id="tab-pagos" data-toggle="tab" href="#pagos" role="tab" aria-controls="pagos" aria-selected="false">Pagos y Honorarios</a>
+                  <a class="nav-link gris" id="tab-pagos" data-toggle="tab" href="#pagosDetalle" role="tab" aria-controls="pagosDetalle" aria-selected="false">Pagos y Honorarios</a>
                 </li>
               </ul>
-              <div class="tab-content" id="myTabContent">
-                <button type="button" class="btn btn-outline-dark float-right mb-4 mt-3" data-toggle="modal" data-target='#depositoPago'>Agregar</button>
-
-
-                <div class="tab-pane fade show active" id="deposito" role="tabpanel" aria-labelledby="tab-deposito">
+              <div class="tab-content mt-4" id="myTabContent">
+                <div class="tab-pane fade show active" id="depositoDetalle" role="tabpanel" aria-labelledby="tab-deposito">
                   <table class="table table-hover fixed-table mb-5">
-                    <tbody id="listaDepositosFact" style="font-family: 'Source Sans Pro';"></tbody>
+                    <tbody id="listaDepositosDetalle" style="font-family: 'Source Sans Pro';"></tbody>
                   </table>
                 </div>
 
-
-
-                <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="tab-pagos">
+                <div class="tab-pane fade" id="pagosDetalle" role="tabpanel" aria-labelledby="tab-pagos">
                   <table class="table table-hover fixed-table mb-5">
-                    <tbody id="listaPagosFact" style="font-family: 'Source Sans Pro';"></tbody>
+                    <tbody id="listaPagosDetalle" style="font-family: 'Source Sans Pro';"></tbody>
                   </table>
                 </div>
               </div>

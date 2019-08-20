@@ -113,7 +113,7 @@ while ($row = $rslt->fetch_assoc()) {
     $color = "";
     $onclick = "detalle_eventos_facturacion($pk_bitacora)";
   }elseif ($finalizar == 1) {
-    $onclick = "";
+    $onclick = "detalle_fetch($pk_bitacora)";
   }else {
     $color = "rojo";
     $onclick = "recibirExpediente($pk_bitacora)";
@@ -121,14 +121,11 @@ while ($row = $rslt->fetch_assoc()) {
 
 
   $concluir = "";
-
   if ($finalizar == 1) {
     $concluir = "<img class='w-30'  src='/pltoolbox/Resources/iconos/check-mark.svg'>";
   }else {
     $concluir = $diasReal;
   }
-
-
 
 // $diasReal > $dias  // $diasReal
 
@@ -142,7 +139,7 @@ while ($row = $rslt->fetch_assoc()) {
       <br>
       <span class='$color'>$referencia --  $indice</span>
     </td>
-    <td class='col-md-1 py-1 $rojo'>$concluir</td>
+    <td class='col-md-1 py-1 font18 text-center $rojo'>$concluir</td>
   </tr>";
 
 }

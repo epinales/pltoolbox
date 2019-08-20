@@ -171,17 +171,17 @@
           <span class="title">TRAFICO</span>
         </a>
       </li>
-      <!-- <li class="p-0 btn text bblack f19">
+      <li class="p-0 btn text bblack f19">
         <a class="<?php echo $activoFact ?>" href="/pltoolbox/bitacoraProlog/facturacion/index.php">
           <span class="title">FACTURACION</span>
         </a>
-      </li> -->
+      </li>
 
-      <li class="p-0 btn text bblack f19">
+      <!-- <li class="p-0 btn text bblack f19">
         <a class="<?php echo $activoFact ?>" href="#">
           <span class="title">FACTURACION</span>
         </a>
-      </li>
+      </li> -->
     <?php endif; ?>
   </ul>
 </body>

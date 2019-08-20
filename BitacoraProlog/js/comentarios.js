@@ -53,6 +53,8 @@ function listaComentarios(){
       r = JSON.parse(r);
       if (r.code == 1) {
         $('#lista_comentarios').html(r.data);
+
+        $('#lista_comentariosDetalle').html(r.data);
       } else {
         console.error(r.message);
       }

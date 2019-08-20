@@ -747,6 +747,9 @@ function depositosPagos(){
 
       $('#listaDepositosFact').html(r.deposito);
       $('#listaPagosFact').html(r.pago);
+
+      $('#listaDepositosDetalle').html(r.deposito);
+      $('#listaPagosDetalle').html(r.pago);
     } else {
       console.error(r.message);
     }
