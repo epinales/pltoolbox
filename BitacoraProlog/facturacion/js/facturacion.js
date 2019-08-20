@@ -216,9 +216,9 @@ $('.add_program_cobranza').click(function(){
         r = JSON.parse(r);
         if (r.code == 1) {
           swal("Exito", "Se actualizo.", "success");
-          setTimeout(function() {
-           window.location.reload();
-           }, 1500);
+          setTimeout(function(){
+            window.location.replace('/pltoolbox/BitacoraProlog/facturacion/index.php');
+          }, 1500);
         } else {
           console.error(r.message);
         }
