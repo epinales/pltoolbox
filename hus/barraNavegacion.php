@@ -26,4 +26,11 @@
 
 
 </head>
+
+<form class="p-0">
+    <ol class="breadcrumb bread py-2 mb-1">
+        <li class="breadcrumb-item"><a href="/pltoolbox/bienvenido.php" class="abread">Home</a></li>
+        <li class="breadcrumb-item b"><b>HU's Control</b></li>
+    </ol>
+</form>
 </html>

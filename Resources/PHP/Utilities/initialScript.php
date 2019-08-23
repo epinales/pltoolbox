@@ -5,6 +5,10 @@ error_reporting(E_ALL);
 $root = $_SERVER['DOCUMENT_ROOT'];
 // require $root . '/BitacoraProlog/Resources/PHP/Utilities/session.php';
 
+spl_autoload_register(function ($class_name) {
+    include $_SERVER['DOCUMENT_ROOT'] . '/pltoolbox/Resources/classes/' . $class_name . '.php';
+});
+
 
 session_start();
 if (!isset($_SESSION['user'])) {
