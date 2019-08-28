@@ -43,7 +43,7 @@ if (!($stmt->execute())) {
     $concluir = "";
   }
 
-  // $tipoSaldo = $row['tipoSaldo'];
+
 
 
   $queryDepoPago = "SELECT
@@ -185,11 +185,11 @@ if (!($stmt->execute())) {
 
                 <tr class="row mt-5">
                   <td class="col-md-5 p-0 submodal">
-                    <label class="m-0 b activo">Cuenta de Gastos</label>
+                    <label class="m-0 b activo">Factura Electronica</label>
                   </td>
                   <td class="col-md-2"></td>
                   <td class="col-md-5 p-0 submodal">
-                    <label class="m-0 b activo">Cobranza / Devolucion</label>
+                    <label class="m-0 b activo">Pago de Cuenta / Devolucion</label>
                   </td>
                 </tr>
 
@@ -204,6 +204,11 @@ if (!($stmt->execute())) {
                   <td class="col-md-3">
                     <input id="cobDev_fecha" class="efecto-1" type="date" indice="12" value='<?php echo $row['cobDev_fecha'] ?>'>
                   </td>
+
+                  <!-- atras -->
+<!-- 
+                  fecha de recibo :<input type="date" name="" value="<?php echo $reciboPago ?>"><br>
+                  fecha de cobranza :<input type="date" name="" value="<?php echo $fechaCobranza?>"><br> -->
                   <td class="col-md-2">
                     <input id="cobDev_hora" class="efecto-1" type="time" value='<?php echo $row['cobDev_hora'] ?>'>
                   </td>

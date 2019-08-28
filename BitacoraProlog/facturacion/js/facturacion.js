@@ -226,7 +226,50 @@ $('.add_program_cobranza').click(function(){
     }
   })
 
+
 })//fin del documento
+
+function botonReciboPago(){
+  $('.modalrecibopago').click(function(){
+    var pk_bitacora = $(this).attr('db-id');
+    $('#add_pk_bitacora').val(pk_bitacora);
+
+    $('#agregarCorte').modal('show');
+  });
+
+
+
+  $('.add_reciboPago').click(function(){
+    validar = $('#reciboPago').val() == "";
+
+    var data = {
+      pk_bitacora : $('#add_pk_bitacora').val(),
+      reciboPago : $('#reciboPago').val()
+    }
+
+    if (validar) {
+      swal("Error","El campo de fecha es obligatorio");
+    }else{
+      var ajaxCall = $.ajax({
+          method: 'POST',
+          data: data,
+          url: 'actions/envioReciboPago.php'
+      });
+
+      ajaxCall.done(function(r) {
+        r = JSON.parse(r);
+        if (r.code == 1) {
+          swal("Exito", "Se actualizo.", "success");
+          listaFacturasEntregadas();
+          $('.modal').modal('hide');
+        } else {
+          console.error(r.message);
+        }
+      });
+    }
+  })
+
+}
 
 
 function listaFacturasEntregadas(){
@@ -242,6 +285,7 @@ function listaFacturasEntregadas(){
     r = JSON.parse(r);
     if (r.code == 1) {
       $('#listaRefFacturacion').html(r.data);
+      botonReciboPago();
     } else {
       console.error(r.message);
     }

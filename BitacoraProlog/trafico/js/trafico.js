@@ -357,14 +357,12 @@ $('.prealerta').click(function(){
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
-    }else if ($('#dp_deposito').val() == 0 || $('#dp_disponible').val() == 0) {
-      $(this).val("");
-      actualizar_trafico();
-      swal("Ops!","No hay depositos registrados o dinero disponible","info");
-      $('#ident').click();
     }
-    // else if (pagoF != "") {
-    //   $('#deposito_hora').val(horaActual);
+    // else if ($('#dp_deposito').val() == 0 || $('#dp_disponible').val() == 0) {
+    //   $(this).val("");
+    //   actualizar_trafico();
+    //   swal("Ops!","No hay depositos registrados o dinero disponible","info");
+    //   $('#ident').click();
     // }
     else if ($(this).val() == "" && pagoF == "") {
       $('#deposito_hora').val("");
@@ -383,18 +381,19 @@ $('.prealerta').click(function(){
     if (arriboF == "" || aperturaF == "" || capfactF == "" || clasifF == "" || solantF == "" || depositoF == "") {
       swal("Error","Hay estatus anteriores sin llenar","error");
       $(this).val("");
-    }else if ($('#dp_pago').val() == 0 || $('#dp_disponible').val() == 0) {
-      $(this).val("");
-
-      actualizar_trafico();
-      swal("Ops!","No hay pagos registrados o deposito disponible, favor de verificar","info");
-      $('#ident').click();
-      $('#tab-pagos').click();
-    }else if ($(this).val() == "" && programF == "") {
+    }
+    // else if ($('#dp_pago').val() == 0 || $('#dp_disponible').val() == 0) {
+    //   $(this).val("");
+    //
+    //   actualizar_trafico();
+    //   swal("Ops!","No hay pagos registrados o deposito disponible, favor de verificar","info");
+    //   $('#ident').click();
+    //   $('#tab-pagos').click();
+    // }
+    else if ($(this).val() == "" && programF == "") {
       $('#pago_hora').val("");
       $('#pk_indice').val("7");
-    }
-    else if ($(this).val() == "") {
+    }else if ($(this).val() == "") {
       $('#pago_hora').val("");
     }else {
       $('#pago_hora').val(horaActual);
@@ -412,11 +411,7 @@ $('.prealerta').click(function(){
     }else if ($(this).val() == "" && entregaF == "") {
       $('#program_hora').val("");
       $('#pk_indice').val("8");
-    }
-    // else if (entregaF != "") {
-    //   $('#program_hora').val(horaActual);
-    // }
-    else if ($(this).val() == "") {
+    }else if ($(this).val() == "") {
       $('#program_hora').val("");
     }else {
       $('#program_hora').val(horaActual);
@@ -434,18 +429,8 @@ $('.prealerta').click(function(){
     }else if ($(this).val() == "") {
       $('#pk_indice').val("9");
       $('#entrega_hora').val("");
-    }
-    // else if ($(this).val() == "") {
-    //   $('#entrega_hora').val("");
-    //   $('#pk_indice').val("9");
-
-    // }else if ($(this).val() == "" && entregaF == "") {
-    //   $('#program_hora').val("");
-    // }
-    else {
+    }else {
       $('#entrega_hora').val(horaActual);
-      // back
-      // $('#fechaFinalTrafico').val();
       $('#pk_indice').val("10");
     }
   })

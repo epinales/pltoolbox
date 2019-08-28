@@ -36,6 +36,8 @@ o.o_alerta,
 
 bdf.recibidoFact AS bdfRecibido,
 bdf.vencimientoFact AS bdfVencimiento,
+bdf.cobDev_fecha,
+bdf.fechaReciboPago,
 bdf.finalizar
 
 FROM bitacora b
@@ -90,6 +92,8 @@ while ($row = $rslt->fetch_assoc()) {
 
   $bdfRecibido = $row['bdfRecibido'];
   $bdfVencimiento = $row['bdfVencimiento'];
+  $fecha_ReciboPago = $row['fechaReciboPago'];
+
 
 
   $fecha1 = new DateTime($bdfRecibido);//fecha inicial
@@ -102,12 +106,32 @@ while ($row = $rslt->fetch_assoc()) {
   $intervaloReal = $fecha1->diff($fecha3);
   $diasReal = $intervaloReal->format('%d');
 
+  $cobranza = $row['cobDev_fecha'];
+  $month = date('m',strtotime($cobranza));
+  $year = date('Y',strtotime($cobranza));
+  $fechaReciboPago = date('Y-m-d', mktime(0,0,0, $month+1, 9, $year));
+
+
+
+
+
+  if ($fecha_ReciboPago != NULL OR $fecha_ReciboPago != "" AND $finalizar == '1') {
+    $reciboPago = "";
+  }elseif ( $finalizar == '1' AND $fechaActual < $fechaReciboPago) {
+    $reciboPago = " <a href='#RecibodePago' data-toggle='modal' class='alink modalrecibopago' db-id='$pk_bitacora'>Pendiente Recibo de Pago</a>";
+  }elseif ($finalizar == '1' AND $fechaActual > $fechaReciboPago) {
+    $reciboPago = " <a href='#RecibodePago' data-toggle='modal' class='rojo modalrecibopago' db-id='$pk_bitacora'>Pendiente Recibo de Pago</a>";
+  }else {
+    $reciboPago = "";
+  }
+
 
   if ($recibido == "1" AND $diasReal > $dias) {
     $rojo = "rojo";
   }else {
     $rojo = "";
   }
+
 
   if ($estatusTipo == "Facturacion" AND $recibido == "1" AND $finalizar == 0) {
     $color = "";
@@ -132,13 +156,14 @@ while ($row = $rslt->fetch_assoc()) {
 
   $system_callback['data'] .="
   <tr class='row m-0 align-items-center bbyellow'>
-    <td class='col-md-11 py-1'>
+    <td class='col-md-8 py-1'>
       <span class='ls-3'>
-        <a id='' href='#' onclick='$onclick' referencia='$referencia' class='$expediente alink detalle' db-id='$pk_bitacora'>$nombreCliente</a>
+        <a id='' href='#' onclick='$onclick' referencia='$referencia' class='$expediente ls-0 alink detalle' db-id='$pk_bitacora'>$nombreCliente</a>
       </span>
       <br>
       <span class='$color'>$referencia --  $indice</span>
     </td>
+    <td class='col-md-3'>$reciboPago</td>
     <td class='col-md-1 py-1 font18 text-center $rojo'>$concluir</td>
   </tr>";
 

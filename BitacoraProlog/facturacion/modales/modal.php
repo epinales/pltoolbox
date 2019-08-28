@@ -116,3 +116,47 @@
     </div>
   </div>
 </div>
+
+
+
+<div class="modal fade" id="RecibodePago">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bordenegro">
+      <div class="modal-header border-0">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close mr-5" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="mt-3 text-center submodal">
+        <div class="row">
+          <div class="col-md-12">
+            <span class="b">Fecha de Envio de Recibo de Pago</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tbody>
+            <tr class="row justify-content-center">
+              <td class="col-md-6">
+                <input id="add_pk_bitacora" class="efecto-1" type="hidden" value="">
+
+                <label class="ml-2 m-0">Fecha</label>
+                <input id="reciboPago" class="efecto-1" type="date" value="">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="border-0 mt-5">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-3">
+              <input class="back-aceptar add_reciboPago" type="submit" value="Agregar">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -135,11 +135,11 @@ if (!($stmt->execute())) {
 
                 <tr class="row mt-5">
                   <td class="col-md-5 p-0 submodal">
-                    <label class="m-0 b activo">Cuenta de Gastos</label>
+                    <label class="m-0 b activo">Factura Electronica</label>
                   </td>
                   <td class="col-md-2"></td>
                   <td class="col-md-5 p-0 submodal">
-                    <label class="m-0 b activo">Cobranza / Devolucion</label>
+                    <label class="m-0 b activo">Pago de Cuenta  / Devolucion</label>
                   </td>
                 </tr>
 
