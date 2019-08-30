@@ -6,7 +6,7 @@ $system_callback = [];
 $data = $_POST;
 
 $oficina = $data['oficina'];
-$andWhere = 'WHERE oficina = ? AND recibidoFact = 0';
+$andWhere = 'WHERE oficina = ? AND b.recibidoFact = 0';
 
 $query = "SELECT
 
@@ -32,12 +32,15 @@ o.pk_oficina,
 o.o_nombre,
 o.o_amarillo,
 o.o_rojo,
-o.o_alerta
+o.o_alerta,
+
+bdet.arribo_fecha
 
 FROM bitacora b
 LEFT JOIN oficinas o ON b.oficina = o.o_nombre
 LEFT JOIN bitacora_indice bi ON b.estatusIndice = bi.pk_indice
 LEFT JOIN bitacora_transaccion bdp ON b.pk_bitacora = bdp.fk_bitacora_dp
+LEFT JOIN bitacora_detalle bdet ON b.pk_bitacora = bdet.fk_bitacora
 $andWhere GROUP BY b.pk_bitacora ";
 
 
@@ -88,6 +91,7 @@ while ($row = $rslt->fetch_assoc()) {
 
   $fechaActual = date("Y-m-d h:i:s");
   $fechaAlta = $row['fechaAlta'];
+  $arribo_fecha = $row['arribo_fecha'];
   $amarillo = $row['o_amarillo'];
   $rojo = $row['o_rojo'];
   $alerta = $row['o_alerta'];
@@ -104,7 +108,8 @@ while ($row = $rslt->fetch_assoc()) {
   $indice = $row['indice'];
 
 
-  $fecha1 = new DateTime($fechaAlta);//fecha inicial
+  $fecha1 = new DateTime($arribo_fecha);//fecha inicial
+  // $fecha1 = new DateTime($fechaAlta);//fecha inicial
   $fecha2 = new DateTime($fechaActual);//fecha de cierre
   $intervalo = $fecha1->diff($fecha2);
   $diferencia = $intervalo->format('%d dias %H:%i horas');
