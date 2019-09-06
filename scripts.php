@@ -6,3 +6,4 @@
 <script src="/pltoolbox/Resources/js/popper.js"></script>
 <script src="/pltoolbox/Resources/js/tether.min.js"></script>
 <script src="/pltoolbox/Resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plsuite/Resources/fa_5/js/fontawesome-all.min.js" data-auto-replace-svg="nest" charset="utf-8"></script>
