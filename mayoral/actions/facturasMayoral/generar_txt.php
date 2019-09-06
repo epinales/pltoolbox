@@ -337,7 +337,7 @@ $txt_file = str_replace("ñ","n",$txt_file);
 $txt_file = str_replace("Ñ","N",$txt_file);
 
 $uniq = uniqid();
-$txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_{$contenedor}_{$uniq}.txt";
+$txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_{$uniq}.txt";
 file_put_contents($txt_file_path, $txt_file);
 
 $system_callback['code'] = 1;
