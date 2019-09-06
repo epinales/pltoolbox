@@ -432,6 +432,32 @@ $(document).ready(function(){
 
   });
 
+
+  //Eventos FacturaMayoralCSV
+  $('#generar_txt').click(function(){
+    var data = new FormData;
+    var fileInput = $('#input_factura_csv');
+
+    data.append('file', fileInput.prop('files')[0]);
+
+    var generar_txt = $.ajax({
+      method: 'POST',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      url: 'actions/facturasMayoral/generar_txt.php'
+    });
+
+    generar_txt.done(function(r){
+      r = JSON.parse(r);
+      console.log(r);
+    }).fail(function(x,y,z){
+      console.error(x + ": " + x);
+    });
+
+  });
+
   //EventosModalSubirFactura
   $('.custom-file-input').change(function(e){
     fileName = e.target.files[0].name;

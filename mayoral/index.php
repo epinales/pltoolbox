@@ -3,7 +3,7 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
-$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000314 - 19/factura_csv.csv','r');
+$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000337 - 23/Factura_csv.csv','r');
 // $factura = array();
 
 $facturas = array();
@@ -205,7 +205,7 @@ $json_print = json_encode(array($facturas, $identificadores));
               <a class="nav-link" id="preciosEstimados-tab" data-toggle="tab" href="#preciosEstimados-pane" role="tab" aria-controls="preciosEstimados" aria-selected="false">Precios Estimados</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="facturasMayoral-tab" data-toggle="tab" href="#facturasMayoral-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
+              <a class="nav-link" id="facturasMayoralcsv-tab" data-toggle="tab" href="#facturasMayoralcsv-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
             </li>
           </ul>
         </div>
@@ -313,6 +313,31 @@ $json_print = json_encode(array($facturas, $identificadores));
             <?php echo $txt_file ?>
             <div class="" id="insert-here-off">
 
+            </div>
+          </div>
+          <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
+            <div class="">
+              <h4>Factuas CSV</h4>
+            </div>
+            <hr>
+            <div class="">
+              <b>Instrucciones:</b>
+              <p>
+                <ol>
+                  <li>Convierte la factura de mayoral a CSV.</li>
+                  <li>Selecciona el archivo CSV abajo, y haz click en procesar para generar el TXT que se subirá a Global.</li>
+                  <li>Si hay algún error, se describirán abajo y tendrás que corregirlos en el CSV</li>
+                  <li>Si no hay ningún error, se generará un archivo TXT y un archivo CSV. El CSV es solamente informativo para que puedas conocer el contenido del TXT de una manera amigable. El Archivo TXT es el que importa que hay que subir a global.</li>
+                  <li>Descarga el TXT y subelo a Global, usando el Layout 19.</li>
+                </ol>
+                <form class="form-inline justify-content-around">
+                  <div class="custom-file w-75">
+                    <input type="file" class="custom-file-input" id="input_factura_csv">
+                    <label class="custom-file-label" for="customFile">Selecciona la factura en CSV</label>
+                  </div>
+                  <button type="button" class="btn btn-primary" name="button" id="generar_txt">Generar TXT</button>
+                </form>
+              </p>
             </div>
           </div>
         </div>
