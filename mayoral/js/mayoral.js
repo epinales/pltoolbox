@@ -443,8 +443,11 @@ $(document).ready(function(){
 
     //Init everything to normal
     $('#tbody_alertas').html('');
-    $('#btn-descargar-txt').data('uniq', '').fadeOut();
-    $('#btn-descargar-csv').data('uniq', '').fadeOut();
+    $('#btn-descargar-txt').data('uniq', '');
+    $('#btn-descargar-csv').data('uniq', '');
+    $('#banner-success-csv').fadeOut();
+    $('#banner-errores-csv').fadeOut();
+
 
     data.append('file', fileInput.prop('files')[0]);
     data.append('uvnom', uvnom);
