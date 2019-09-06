@@ -62,13 +62,13 @@ if ($rslt->num_rows == 0) {
 }
 
 while ($row = $rslt->fetch_assoc()) {
-  $system_callback['data'] .= "
+  $system_callback['data'] .= utf8_encode("
   <tr>
     <td>$row[fraccion]</td>
     <td>$row[umt]</td>
     <td>$row[precio_estimado]</td>
     <td>$row[descripcion]</td>
-  </tr>";
+  </tr>");
 }
 
 $system_callback['code'] = 1;
