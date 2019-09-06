@@ -298,7 +298,7 @@ foreach ($pbs_descripciones as $descripcion) {
 
 $system_callback['pbs'] = $pbs;
 $system_callback['pbs_origenes'] = $pbs_origenes_unique;
-$system_callback['pbs_descripcioes'] = $pbs_descripcioes_unique;
+$system_callback['pbs_descripciones'] = $pbs_descripciones_unique;
 
 if (count($alertas) > 0) {
   foreach ($alertas as $alerta) {
