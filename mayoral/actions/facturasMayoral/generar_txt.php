@@ -250,7 +250,7 @@ foreach ($invoice_items as $item) {
       $pbs_origenes[] = $clave_identificador . "~" . $item[16];
       $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
 
-      $pbs[$clave_identificador]['totales'] = array(
+      $pbss['totales'] = array(
         'items' => $pbs[$clave_identificador]['items'] + 1,
         'umcs' => $pbs[$clave_identificador]['umcs'] + $item[54],
       );
@@ -264,20 +264,20 @@ foreach ($invoice_items as $item) {
 
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     unset($identificadores[$numero_parte][$idents['pk_identificador']]);
-    $pbs_origenes[] = $clave_identificador . "~" . $item[16];
-    $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
-    if ($idents['identificador'] == "PB") {
-      $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
-      $pbs[$clave_identificador] = array(
-        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
-        'items' => $pbs[$clave_identificador]['items'] - 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] - $item[54],
-      );
-      $pbs[$clave_identificador]['totales'] = array(
-        'items' => $pbs[$clave_identificador]['items'] - 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] - $item[54],
-      );
-    }
+    // $pbs_origenes[] = $clave_identificador . "~" . $item[16];
+    // $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
+    // if ($idents['identificador'] == "PB") {
+    //   $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
+    //   $pbs[$clave_identificador] = array(
+    //     'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
+    //     'items' => $pbs[$clave_identificador]['items'] - 1,
+    //     'umcs' => $pbs[$clave_identificador]['umcs'] - $item[54],
+    //   );
+    //   $pbs['totales'] = array(
+    //     'items' => $pbs[$clave_identificador]['items'] - 1,
+    //     'umcs' => $pbs[$clave_identificador]['umcs'] - $item[54],
+    //   );
+    // }
   }
 }
 
