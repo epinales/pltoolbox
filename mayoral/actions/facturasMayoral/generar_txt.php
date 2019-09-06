@@ -16,6 +16,7 @@ $identificadores = array();
 $today = date('Y-m-d');
 $mh = date('Hi');
 
+
 $codigo_paises = array(
   "BD"=>"BGD",
   "EG"=>"EGY",
@@ -38,6 +39,7 @@ $codigo_paises = array(
 
 $uvnom = "UVNOM" . $_POST['uvnom'];
 $fecha_factura = $_POST['fecha_factura'];
+$contenedor = $_POST['contenedor'];
 
 $pbs = array();
 $pbs_origenes = array();
@@ -290,14 +292,14 @@ foreach ($pbs_descripciones as $descripcion) {
 }
 
 
-// if (count($alertas) > 0) {
-//   foreach ($alertas as $alerta) {
-//     $system_callback['alertas'] .= "<tr><td>$alerta[line_item]</td><td>$alerta[message]</td><td>$alerta[comentarios]</td></tr>";
-//   }
-//
-//   $system_callback['code'] = 2;
-//   exit_script($system_callback);
-// }
+if (count($alertas) > 0) {
+  foreach ($alertas as $alerta) {
+    $system_callback['alertas'] .= "<tr><td>$alerta[line_item]</td><td>$alerta[message]</td><td>$alerta[comentarios]</td></tr>";
+  }
+
+  $system_callback['code'] = 2;
+  exit_script($system_callback);
+}
 
 foreach ($txt_array as $factura) {
   foreach ($factura['header'] as $valor_header) {
@@ -330,7 +332,7 @@ $txt_file = str_replace("ñ","n",$txt_file);
 $txt_file = str_replace("Ñ","N",$txt_file);
 
 $uniq = uniqid();
-$txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_$uniq.txt";
+$txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_{$contenedor}_{$uniq}.txt";
 file_put_contents($txt_file_path, $txt_file);
 
 $system_callback['code'] = 1;

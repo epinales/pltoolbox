@@ -438,10 +438,12 @@ $(document).ready(function(){
     var data = new FormData;
     var uvnom = $('#unidad_verificadora_csv').val();
     var fecha_factura = $('#fecha_factura_csv').val();
+    var contenedor = $('#contenedor_csv').val();
     var fileInput = $('#input_factura_csv');
 
     data.append('file', fileInput.prop('files')[0]);
     data.append('uvnom', uvnom);
+    data.append('contenedor', contenedor);
     data.append('fecha_factura', fecha_factura);
 
     var generar_txt = $.ajax({

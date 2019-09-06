@@ -355,6 +355,10 @@ $json_print = json_encode(array($facturas, $identificadores));
                   <input type="date" class="form-control" name="" value="" id="fecha_factura_csv">
                 </div>
                 <div class="form-group">
+                  <label for="">Contenedor</label>
+                  <input type="text" class="form-control" name="" value="" id="contenedor_csv">
+                </div>
+                <div class="form-group">
                   <label for="">Unidad Verificadora</label>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
