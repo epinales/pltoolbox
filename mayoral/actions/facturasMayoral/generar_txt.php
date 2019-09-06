@@ -16,6 +16,29 @@ $identificadores = array();
 $today = date('Y-m-d');
 $mh = date('Hi');
 
+$codigo_paises = array(
+  "BD"=>"BGD",
+  "EG"=>"EGY",
+  "ES"=>"ESP",
+  "IN"=>"IND",
+  "KH"=>"KHM",
+  "MA"=>"MAR",
+  "PK"=>"PAK",
+  "PL"=>"POL",
+  "PT"=>"PRT",
+  "TR"=>"TUR",
+  "VN"=>"VNM",
+  "TH"=>"THA",
+  "CN"=>"CHN",
+  "PT"=>"PRT",
+  "TW"=>"TWN",
+  "IT"=>"ITA",
+  "MM"=>"MMR"
+);
+
+$uvnom = "UVNOM" . $_POST['uvnom'];
+$fecha_factura = $_POST['fecha_factura'];
+
 $pbs = array();
 $pbs_origenes = array();
 $pbs_descripciones = array();
@@ -98,6 +121,8 @@ $i = 1;
 
 foreach ($invoice_items as $item) {
   $i++;
+  $pais_origen = "";
+
   if ($item[1] == "") {
     continue;
   }
@@ -118,6 +143,16 @@ foreach ($invoice_items as $item) {
     $c_umt = $item[12] / 2;
   } else {
     // Record error on this PN.
+  }
+
+  if (array_key_exists($item[16], $codigo_paises)) {
+    $pais_origen = $codigo_paises[$item[16]];
+  } else {
+    $alertas[] = array(
+      'line_item'=>$i,
+      'message'=>"El codigo de país $item[16] no existe en el programa.",
+      'comentarios'=>"Porfavor reportarlo a sistemas para corregir."
+    );
   }
 
   $txt_array[$invoice_num]['header'] = array(
@@ -145,7 +180,7 @@ foreach ($invoice_items as $item) {
     $item[10],                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
     (double) $c_umt / $item[12],                                     //FactorAjuste
-    $item[16],                                              //PaisOrigen,
+    $pais_origen,                                              //PaisOrigen,
     0,                                                      //ValorAgregado
     $item[21] == "NUKUTAVAKE" ? $item[21] : $item[21] . " Y DISENO", //Marca,
     $item[2],                                               //Modelo
@@ -159,9 +194,9 @@ foreach ($invoice_items as $item) {
     $precio_estimado_item = $precios_estimados[$item[10]];
     if ($item[13] > $precio_estimado_item) {
       if ($capitulo == 64) {
-        $identificadores[$numero_parte][] = array('EX', '29');
+        $identificadores[$numero_parte][] = array($numero_parte, 'EX', '29');
       } elseif ($capitulo >= 50 && $capitulo <= 63) {
-        $identificadores[$numero_parte][] = array('EX', '31');
+        $identificadores[$numero_parte][] = array($numero_parte, 'EX', '31');
       }
     } else {
       $alertas[] = array(
@@ -172,14 +207,19 @@ foreach ($invoice_items as $item) {
     }
   }
 
+  //Aplicar identificador TL - EMU si eta en la lista de trato preferencial.
+  if (in_array($pais_origen, $trato_preferencial)) {
+    $identificadores[$numero_parte][] = array($numero_parte, 'TL', 'EMU');
+  }
+
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
   if (in_array($item[10], $anexo30)) {
     if ($item[21] == "NUKUTAVAKE") {
-      $identificadores[$numero_parte][] = array('MC', '2', '1', '1');
+      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '2', '1', '1');
     } elseif ($item[21] == "MAYORAL" || $item[10] == 39262099) {
-      $identificadores[$numero_parte][] = array('MC', '2', '1', '4');
+      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
-      $identificadores[$numero_parte][] = array('MC', '4', '4');
+      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '4', '4');
     }
   }
 
@@ -188,12 +228,14 @@ foreach ($invoice_items as $item) {
   $identificadores_aplicables = $identificadores_aplicables_query->get_result();
 
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
-    $identificadores[$numero_parte][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $idents['complemento1'], $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
+    $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
+
+    $identificadores[$numero_parte][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
 
     if ($idents['identificador'] == "PB") {
-      $clave_identificador = $idents['identificador'] . $idents['complemento1'] . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
+      $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
       $pbs[$clave_identificador] = array(
-        'norma' => $idents['identificador'] . "," . $idents['complemento1'] . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
+        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
         'items' => $pbs[$clave_identificador]['items'] + 1,
         'umcs' => $pbs[$clave_identificador]['umcs'] + $item[54],
       );
@@ -218,9 +260,9 @@ foreach ($invoice_items as $item) {
     $pbs_origenes[] = $clave_identificador . "~" . $item[16];
     $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
     if ($idents['identificador'] == "PB") {
-      $clave_identificador = $idents['identificador'] . $idents['complemento1'] . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
+      $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
       $pbs[$clave_identificador] = array(
-        'norma' => $idents['identificador'] . "," . $idents['complemento1'] . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
+        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
         'items' => $pbs[$clave_identificador]['items'] - 1,
         'umcs' => $pbs[$clave_identificador]['umcs'] - $item[54],
       );
@@ -248,14 +290,52 @@ foreach ($pbs_descripciones as $descripcion) {
 }
 
 
-$system_callback['identificadores'] = $identificadores;
-$system_callback['pbs'] = $pbs;
-$system_callback['pbs_origenes'] = $pbs_origenes_unique;
-$system_callback['pbs_descripciones'] = $pbs_descripciones_unique;
-$system_callback['alertas'] = $alertas;
-$system_callback['advertencias'] = $advertencias;
+// if (count($alertas) > 0) {
+//   foreach ($alertas as $alerta) {
+//     $system_callback['alertas'] .= "<tr><td>$alerta[line_item]</td><td>$alerta[message]</td><td>$alerta[comentarios]</td></tr>";
+//   }
+//
+//   $system_callback['code'] = 2;
+//   exit_script($system_callback);
+// }
 
-$system_callback['txt_array'] = $txt_array;
+foreach ($txt_array as $factura) {
+  foreach ($factura['header'] as $valor_header) {
+    $txt_file .= $valor_header . "|";
+  }
+  foreach ($factura['items'] as $item) {
+    foreach ($item as $valor_item) {
+      $txt_file .= $valor_item . "|";
+    }
+  }
+  // $txt_file = rtrim($txt_file, "|");
+  $txt_file = substr($txt_file, 0, -1);
+  $txt_file .= "^";
+}
+
+$txt_file = rtrim($txt_file, "^");
+$txt_file .= "~";
+
+foreach ($identificadores as $identificadores_parte) {
+  foreach ($identificadores_parte as $identificador) {
+    for ($i=0; $i < 7; $i++) {
+      $txt_file .= $identificador[$i] . "|";
+    }
+  }
+}
+
+$txt_file .= "@||||||";
+
+$txt_file = str_replace("ñ","n",$txt_file);
+$txt_file = str_replace("Ñ","N",$txt_file);
+
+$uniq = uniqid();
+$txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_$uniq.txt";
+file_put_contents($txt_file_path, $txt_file);
+
+$system_callback['code'] = 1;
+$system_callback['uniq'] = $uniq;
+$system_callback['txt_file'] = $txt_file;
 
 exit_script($system_callback);
 

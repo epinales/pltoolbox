@@ -265,3 +265,9 @@ a {
 font-weight: 800;
 text-shadow: 0.09px 0.25px rgba(247, 242, 125, 0.88);
 }
+
+.loading-screen{
+  background-color: rgba(197, 197, 200, 0.45);
+  z-index: 9999;
+  margin: -.5rem;
+}

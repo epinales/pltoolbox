@@ -325,19 +325,53 @@ $json_print = json_encode(array($facturas, $identificadores));
               <p>
                 <ol>
                   <li>Convierte la factura de mayoral a CSV.</li>
+                  <li>Indica la fecha de la(s) facturas</li>
+                  <li>Selecciona la unidad verificadora que se utilizará</li>
                   <li>Selecciona el archivo CSV abajo, y haz click en procesar para generar el TXT que se subirá a Global.</li>
                   <li>Si hay algún error, se describirán abajo y tendrás que corregirlos en el CSV</li>
                   <li>Si no hay ningún error, se generará un archivo TXT y un archivo CSV. El CSV es solamente informativo para que puedas conocer el contenido del TXT de una manera amigable. El Archivo TXT es el que importa que hay que subir a global.</li>
                   <li>Descarga el TXT y subelo a Global, usando el Layout 19.</li>
                 </ol>
-                <form class="form-inline justify-content-around">
-                  <div class="custom-file w-75">
-                    <input type="file" class="custom-file-input" id="input_factura_csv">
-                    <label class="custom-file-label" for="customFile">Selecciona la factura en CSV</label>
-                  </div>
-                  <button type="button" class="btn btn-primary" name="button" id="generar_txt">Generar TXT</button>
-                </form>
               </p>
+              <div class="alert alert-danger" id="banner-errores-csv" style="display: none">
+                <a class="float-right" data-toggle="modal" href="#errores-generacion-csv-modal">Ver Errores</a>
+                <span>Se detectaron errores que no permitieron que se generara el archivo CSV.</span>
+              </div>
+              <div class="alert alert-success" id="banner-success-csv" style="display: none">
+                <div class="float-right">
+                  <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-txt" name="button">Descargar TXT</button>
+                  <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-csv" name="button">Descargar CSV</button>
+                </div>
+                <p>El archivo TXT fue generado con éxito.</p>
+              </div>
+              <form class="w-50 mt-3 p-2 border rounded position-relative">
+                <div class="loading-screen csv h-100 w-100 d-flex position-absolute justify-content-center invisible" z-index=9999>
+                  <div class="align-middle align-self-center">
+                    Procesando Archivo
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Fecha de Factura</label>
+                  <input type="date" class="form-control" name="" value="" id="fecha_factura_csv">
+                </div>
+                <div class="form-group">
+                  <label for="">Unidad Verificadora</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="uvnom_addon">UVNOM</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="Número UV" id="unidad_verificadora_csv">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Archivo CSV de Factura</label>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="input_factura_csv">
+                    <label class="custom-file-label" for="customFile">Selecciona un archivo ...</label>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary" name="button" id="generar_txt">Generar TXT</button>
+              </form>
             </div>
           </div>
         </div>
@@ -349,6 +383,7 @@ $json_print = json_encode(array($facturas, $identificadores));
   require 'modales/agregarIdentificador.php';
   require 'modales/editarIdentificador.php';
   require 'modales/nuevaFactura.php';
+  require 'modales/errores_generacion_csv.php';
   require $root . '/pltoolbox/scripts.php';
    ?>
    <script src="js/mayoral.js" charset="utf-8"></script>

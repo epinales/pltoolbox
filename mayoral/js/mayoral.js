@@ -436,9 +436,13 @@ $(document).ready(function(){
   //Eventos FacturaMayoralCSV
   $('#generar_txt').click(function(){
     var data = new FormData;
+    var uvnom = $('#unidad_verificadora_csv').val();
+    var fecha_factura = $('#fecha_factura_csv').val();
     var fileInput = $('#input_factura_csv');
 
     data.append('file', fileInput.prop('files')[0]);
+    data.append('uvnom', uvnom);
+    data.append('fecha_factura', fecha_factura);
 
     var generar_txt = $.ajax({
       method: 'POST',
@@ -446,16 +450,35 @@ $(document).ready(function(){
       cache: false,
       contentType: false,
       processData: false,
+      beforeSend: function(){
+        $('.loading-screen.csv').removeClass('invisible');
+      },
       url: 'actions/facturasMayoral/generar_txt.php'
     });
 
     generar_txt.done(function(r){
+      $('.loading-screen.csv').addClass('invisible');
       r = JSON.parse(r);
       console.log(r);
+      if (r.code == 1) {
+        $('#banner-success-csv').fadeIn();
+        $('#btn-descargar-txt').data('uniq', r.uniq);
+        $('#btn-descargar-csv').data('uniq', r.uniq);
+        //Fue un exito y hay que manejarlo.
+        console.log(r);
+      } else if (r.code == 2) {
+        //Se detectaron alertas al momento de procesar el CSV.
+        $('#tbody_alertas').html(r.alertas);
+        $('#banner-errores-csv').fadeIn();
+      }
     }).fail(function(x,y,z){
       console.error(x + ": " + x);
     });
 
+  });
+  $('#btn-descargar-txt').click(function(){
+    var uniq = $(this).data('uniq');
+    window.location='actions/facturasMayoral/download_txt.php?uniq=' + uniq;
   });
 
   //EventosModalSubirFactura
