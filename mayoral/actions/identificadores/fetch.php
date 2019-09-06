@@ -63,14 +63,14 @@ if ($rslt->num_rows == 0) {
 }
 
 while ($row = $rslt->fetch_assoc()) {
-  $system_callback['data'] .= "
+  $system_callback['data'] .= utf8_encode("
   <tr data-id='$row[id]' role='button'>
     <td>$row[identificador]</td>
     <td>$row[complemento1]</td>
     <td>$row[complemento2]</td>
     <td>$row[complemento3]</td>
     <td>$row[complemento4]</td>
-  </tr>";
+  </tr>");
 }
 
 $system_callback['code'] = 1;
