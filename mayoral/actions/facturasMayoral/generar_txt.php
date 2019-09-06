@@ -244,15 +244,15 @@ foreach ($invoice_items as $item) {
       $pbs[$clave_identificador] = array(
         'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
         'items' => $pbs[$clave_identificador]['items'] + 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[54],
+        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[12],
       );
 
       $pbs_origenes[] = $clave_identificador . "~" . $item[16];
       $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
 
-      $pbss['totales'] = array(
+      $pbs['totales'] = array(
         'items' => $pbs[$clave_identificador]['items'] + 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[54],
+        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[12],
       );
     }
 
