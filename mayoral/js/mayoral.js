@@ -441,6 +441,11 @@ $(document).ready(function(){
     var contenedor = $('#contenedor_csv').val();
     var fileInput = $('#input_factura_csv');
 
+    //Init everything to normal
+    $('#tbody_alertas').html('');
+    $('#btn-descargar-txt').data('uniq', '').fadeOut();
+    $('#btn-descargar-csv').data('uniq', '').fadeOut();
+
     data.append('file', fileInput.prop('files')[0]);
     data.append('uvnom', uvnom);
     data.append('contenedor', contenedor);

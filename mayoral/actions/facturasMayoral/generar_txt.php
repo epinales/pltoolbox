@@ -130,7 +130,6 @@ foreach ($invoice_items as $item) {
   }
   $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
   $importe_total_factura += (double)$item[14];
-
   $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm;
 
   $c_umt = 0;
@@ -138,7 +137,7 @@ foreach ($invoice_items as $item) {
   if ($item[54] == $item[55]) {
     $c_umt = $item[12];
   } elseif ($item[55] == 1) {
-    $c_umt = $item[18];
+    $c_umt = $item[17];
   } elseif ($item[55] == 9 && $item[54] == 6) {
     $c_umt = $item[12] * 2;
   } elseif ($item[55] == 6 && $item[54] == 9) {
@@ -146,6 +145,7 @@ foreach ($invoice_items as $item) {
   } else {
     // Record error on this PN.
   }
+
 
   if (array_key_exists($item[16], $codigo_paises)) {
     $pais_origen = $codigo_paises[$item[16]];
@@ -181,8 +181,8 @@ foreach ($invoice_items as $item) {
     2,0,                                                    //UnidadPesoUnitario - PesoUnitario
     $item[10],                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
-    (double) $c_umt / $item[12],                                     //FactorAjuste
-    $pais_origen,                                              //PaisOrigen,
+    (double) $c_umt / $item[12],                            //FactorAjuste
+    $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
     $item[21] == "NUKUTAVAKE" ? $item[21] : $item[21] . " Y DISENO", //Marca,
     $item[2],                                               //Modelo
@@ -192,9 +192,14 @@ foreach ($invoice_items as $item) {
   $partida_fraccion = substr($item[10], 0, 4);
 
   //Si la fracción esta en el listado de precios estimados, lo revisa para agergar identificador EX o arrojar una alerta.
+  if ($item[55] == 1) {
+    $precio_unitario_tarifa = $item[14] / $item[17];
+  } else {
+    $precio_unitario_tarifa = $item[13];
+  }
   if (  array_key_exists($item[10], $precios_estimados)) {
     $precio_estimado_item = $precios_estimados[$item[10]];
-    if ($item[13] > $precio_estimado_item) {
+    if ($precio_unitario_tarifa > $precio_estimado_item) {
       if ($capitulo == 64) {
         $identificadores[$numero_parte][] = array($numero_parte, 'EX', '29');
       } elseif ($capitulo >= 50 && $capitulo <= 63) {
