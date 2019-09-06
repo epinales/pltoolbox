@@ -74,9 +74,9 @@ if (!$identificadores_excepciones_query) {
     error_log("Error en prepare queries exceppciones: " . $db->error);
 }
 
-$system_callback['anexo30'] = $anexo30;
-$system_callback['trato_preferencial'] = $trato_preferencial;
-$system_callback['precios_estimados'] = $precios_estimados;
+// $system_callback['anexo30'] = $anexo30;
+// $system_callback['trato_preferencial'] = $trato_preferencial;
+// $system_callback['precios_estimados'] = $precios_estimados;
 
 
 $file = $_FILES;
@@ -296,6 +296,9 @@ foreach ($pbs_descripciones as $descripcion) {
   $pbs_descripciones_unique[$handler_descripcion[0]][] = $handler_descripcion[1];
 }
 
+$system_callback['pbs'] = $pbs;
+$system_callback['pbs_origenes'] = $pbs_origenes_unique;
+$system_callback['pbs_descripcioes'] = $pbs_descripcioes_unique;
 
 if (count($alertas) > 0) {
   foreach ($alertas as $alerta) {
@@ -342,7 +345,6 @@ file_put_contents($txt_file_path, $txt_file);
 
 $system_callback['code'] = 1;
 $system_callback['uniq'] = $uniq;
-$system_callback['txt_file'] = $txt_file;
 
 exit_script($system_callback);
 
