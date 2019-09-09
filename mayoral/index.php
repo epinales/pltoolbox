@@ -3,7 +3,7 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
-$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000337 - 23/Factura_csv.csv','r');
+$file_factura_mayoral = fopen('/Users/EduardoSantos/Google Drive/Prolog/Mayoral/V19000339 - 25/factura_csv.csv','r');
 // $factura = array();
 
 $facturas = array();
@@ -207,6 +207,9 @@ $json_print = json_encode(array($facturas, $identificadores));
             <li class="nav-item">
               <a class="nav-link" id="facturasMayoralcsv-tab" data-toggle="tab" href="#facturasMayoralcsv-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="temp-tab" data-toggle="tab" href="#temp-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
+            </li>
           </ul>
         </div>
       </aside>
@@ -283,7 +286,7 @@ $json_print = json_encode(array($facturas, $identificadores));
               </tbody>
             </table>
           </div>
-          <div class="tab-pane fade mt-5 px-5" id="facturasMayoral-pane" role="tabpanel" aria-labelledby="facturasMayoral-tab">
+          <div class="tab-pane fade mt-5 px-5" id="temp-pane" role="tabpanel" aria-labelledby="temp-tab">
             <div class="">
               <button type="button" class="btn btn-small btn-outline-primary float-right" id="marcasModelos_btn" name="button">Archivo Marcas y Modelos</button>
               <div class="float-right">
