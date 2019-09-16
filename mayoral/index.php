@@ -207,9 +207,9 @@ $json_print = json_encode(array($facturas, $identificadores));
             <li class="nav-item">
               <a class="nav-link" id="facturasMayoralcsv-tab" data-toggle="tab" href="#facturasMayoralcsv-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" id="temp-tab" data-toggle="tab" href="#temp-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </aside>
