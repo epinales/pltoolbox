@@ -1,7 +1,7 @@
 <?php
       $file = $_GET['uniq'];
       $root = $_SERVER['DOCUMENT_ROOT'];
-      $download_path = $root . '/pltoolbox/mayoral/resources/TempFiles/umas_file_'.$file.'.xlsx';
+      $download_path = $root . '/pltoolbox/mayoral/resources/TempFiles/uvas_file_'.$file.'.xlsx';
       $file_to_download = $download_path; // file to be downloaded
       header("Expires: 0");
       header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");

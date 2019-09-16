@@ -408,7 +408,7 @@ for ($i=0; $i < $columns; $i++) {
 
 $writeXLS = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($xls);
 
-$xls_file = $root . "/pltoolbox/mayoral/resources/TempFiles/umas_file_{$uniq}.xlsx";
+$xls_file = $root . "/pltoolbox/mayoral/resources/TempFiles/uvas_file_{$uniq}.xlsx";
 // $file = "/home/esantos/Crons/TempFiles/detalle_pedimentos_$cliente_rfc.xlsx";
 $writeXLS->save($xls_file);
 

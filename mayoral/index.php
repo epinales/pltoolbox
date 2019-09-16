@@ -286,7 +286,7 @@ $json_print = json_encode(array($facturas, $identificadores));
               </tbody>
             </table>
           </div>
-          <div class="tab-pane fade mt-5 px-5" id="temp-pane" role="tabpanel" aria-labelledby="temp-tab">
+          <!-- <div class="tab-pane fade mt-5 px-5" id="temp-pane" role="tabpanel" aria-labelledby="temp-tab">
             <div class="">
               <button type="button" class="btn btn-small btn-outline-primary float-right" id="marcasModelos_btn" name="button">Archivo Marcas y Modelos</button>
               <div class="float-right">
@@ -317,8 +317,8 @@ $json_print = json_encode(array($facturas, $identificadores));
             <div class="" id="insert-here-off">
 
             </div>
-          </div>
-          <!-- <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
+          </div> -->
+          <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
             <div class="">
               <h4>Factuas CSV</h4>
             </div>
@@ -344,7 +344,7 @@ $json_print = json_encode(array($facturas, $identificadores));
                 <div class="float-right">
                   <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-txt" name="button">Descargar TXT</button>
                   <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-csv" name="button">Descargar CSV</button>
-                  <!-- <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-umas" name="button">Descargar UMAs</button>
+                  <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-umas" name="button">Descargar UVAs</button>
                 </div>
                 <p>El archivo TXT fue generado con éxito.</p>
               </div>
@@ -358,10 +358,10 @@ $json_print = json_encode(array($facturas, $identificadores));
                   <label for="">Fecha de Factura</label>
                   <input type="date" class="form-control" name="" value="" id="fecha_factura_csv">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="">Contenedor</label>
                   <input type="text" class="form-control" name="" value="" id="contenedor_csv">
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label for="">Unidad Verificadora</label>
                   <div class="input-group mb-3">
@@ -381,7 +381,7 @@ $json_print = json_encode(array($facturas, $identificadores));
                 <button type="button" class="btn btn-primary" name="button" id="generar_txt">Generar TXT</button>
               </form>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
