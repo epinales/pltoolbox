@@ -318,7 +318,7 @@ $json_print = json_encode(array($facturas, $identificadores));
 
             </div>
           </div>
-          <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
+          <!-- <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
             <div class="">
               <h4>Factuas CSV</h4>
             </div>
@@ -344,7 +344,7 @@ $json_print = json_encode(array($facturas, $identificadores));
                 <div class="float-right">
                   <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-txt" name="button">Descargar TXT</button>
                   <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-csv" name="button">Descargar CSV</button>
-                  <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-umas" name="button">Descargar UMAs</button>
+                  <!-- <button type="button" class="btn btn-secondary" data-uniq="" id="btn-descargar-umas" name="button">Descargar UMAs</button>
                 </div>
                 <p>El archivo TXT fue generado con éxito.</p>
               </div>
@@ -381,7 +381,7 @@ $json_print = json_encode(array($facturas, $identificadores));
                 <button type="button" class="btn btn-primary" name="button" id="generar_txt">Generar TXT</button>
               </form>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
