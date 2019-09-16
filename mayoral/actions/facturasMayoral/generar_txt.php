@@ -4,8 +4,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
+require $root . '/pltoolbox/Resources/vendor/autoload.php';
 
 $system_callback = [];
 $anexo30 = array();
@@ -14,7 +18,8 @@ $precios_estimados = array();
 $txt_array = array();
 $identificadores = array();
 $today = date('Y-m-d');
-$mh = date('Hi');
+$hm = date('Hi');
+$csv_file = array();
 
 
 $codigo_paises = array(
@@ -41,7 +46,9 @@ $uvnom = "UVNOM" . $_POST['uvnom'];
 $fecha_factura = $_POST['fecha_factura'];
 $contenedor = $_POST['contenedor'];
 
+$datos_pbs = array();
 $pbs = array();
+$nopbs = array();
 $pbs_origenes = array();
 $pbs_descripciones = array();
 
@@ -124,13 +131,14 @@ $i = 1;
 foreach ($invoice_items as $item) {
   $i++;
   $pais_origen = "";
+  $identificadores_item = array();
 
   if ($item[1] == "") {
     continue;
   }
   $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
   $importe_total_factura += (double)$item[14];
-  $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm;
+  $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm . "x";
 
   $c_umt = 0;
   //Calcular Cantidad UMT!!
@@ -163,7 +171,7 @@ foreach ($invoice_items as $item) {
     $today,         //Fecha -- Hoy es default
     'ESP',          //Siempre se pone ESP(España) como país facturación
     'MA',           //Siempre se pone MA(Málaga) como entidad de facturación
-    $item[14],      //Moneda --
+    $item[15],      //Moneda --
     'CIF',          //Poner un campo para seleccionar el INCOTERM.
     $importe_total_factura, //Valor Moneda Extranjera
     $importe_total_factura, //Valor Comercial - Factura
@@ -201,9 +209,9 @@ foreach ($invoice_items as $item) {
     $precio_estimado_item = $precios_estimados[$item[10]];
     if ($precio_unitario_tarifa > $precio_estimado_item) {
       if ($capitulo == 64) {
-        $identificadores[$numero_parte][] = array($numero_parte, 'EX', '29');
+        $identificadores[$numero_parte . "_" . $i]['identificadores']['EX'] = array($numero_parte, 'EX', '29');
       } elseif ($capitulo >= 50 && $capitulo <= 63) {
-        $identificadores[$numero_parte][] = array($numero_parte, 'EX', '31');
+        $identificadores[$numero_parte . "_" . $i]['identificadores']['EX'] = array($numero_parte, 'EX', '31');
       }
     } else {
       $alertas[] = array(
@@ -216,17 +224,17 @@ foreach ($invoice_items as $item) {
 
   //Aplicar identificador TL - EMU si eta en la lista de trato preferencial.
   if (in_array($pais_origen, $trato_preferencial)) {
-    $identificadores[$numero_parte][] = array($numero_parte, 'TL', 'EMU');
+    $identificadores[$numero_parte . "_" . $i]['identificadores']['TL'] = array($numero_parte, 'TL', 'EMU');
   }
 
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
   if (in_array($item[10], $anexo30)) {
     if ($item[21] == "NUKUTAVAKE") {
-      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '2', '1', '1');
+      $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
     } elseif ($item[21] == "MAYORAL" || $item[10] == 39262099) {
-      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '2', '1', '4');
+      $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
-      $identificadores[$numero_parte][] = array($numero_parte, 'MC', '4', '4');
+      $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '4', '4');
     }
   }
 
@@ -237,31 +245,8 @@ foreach ($invoice_items as $item) {
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
 
-    $identificadores[$numero_parte][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
 
-    if ($idents['identificador'] == "PB") {
-      $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
-      $pbs[$clave_identificador] = array(
-        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
-        'items' => $pbs[$clave_identificador]['items'] + 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[12],
-      );
-
-      $pbs_origenes[] = $clave_identificador . "~" . $item[16];
-      $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
-
-    } else {
-      $pbs['sin_norma'] = array(
-        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
-        'items' => $pbs[$clave_identificador]['items'] + 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] + $item[12],
-      );
-    }
-    $pbs['totales'] = array(
-      'items' => $pbs[$clave_identificador]['items'] + 1,
-      'umcs' => $pbs[$clave_identificador]['umcs'] + $item[12],
-    );
-
+    $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
   }
 
   $identificadores_excepciones_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10]);
@@ -269,42 +254,43 @@ foreach ($invoice_items as $item) {
   $identificadores_excepciones = $identificadores_excepciones_query->get_result();
 
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
-    unset($identificadores[$numero_parte][$idents['pk_identificador']]);
-    $pbs_origenes[] = $clave_identificador . "~" . $item[16];
-    $pbs_descripciones[] = $clave_identificador . "~" . $item[6];
-    if ($idents['identificador'] == "PB") {
-      $clave_identificador = $idents['identificador'] . $uvnom . $idents['complemento2'] . $idents['complemento3'] . $idents['complemento4'];
-      $pbs[$clave_identificador] = array(
-        'norma' => $idents['identificador'] . "," . $uvnom . "," . $idents['complemento2'] . "," . $idents['complemento3'] . "," . $idents['complemento4'],
-        'items' => $pbs[$clave_identificador]['items'] - 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] - $item[12],
-      );
-      $pbs['totales'] = array(
-        'items' => $pbs[$clave_identificador]['items'] - 1,
-        'umcs' => $pbs[$clave_identificador]['umcs'] - $item[12],
-      );
+    unset($identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']]);
+  }
+  $no_pb = true;
+  foreach ($identificadores[$numero_parte . "_" . $i]['identificadores'] as $identificador) {
+    if ($identificador[1] == "PB") {
+      $no_pb = false;
+      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['items']++;
+      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['umcs'] += $item[12];
+      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['origenes'][]= $pais_origen;
+      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['descripciones'][] = $item[6];
     }
   }
+  if ($no_pb) {
+    $datos_pbs['sin_norma']['items']++;
+    $datos_pbs['sin_norma']['umcs'] += $item[12];
+  }
+
 }
 
-$pbs_origenes = array_unique($pbs_origenes);
-$pbs_descripciones = array_unique($pbs_descripciones);
-$pbs_origenes_unique = array();
-$pbs_descripciones_unique = array();
+// $pbs_origenes = array_unique($pbs_origenes);
+// $pbs_descripciones = array_unique($pbs_descripciones);
+// $pbs_origenes_unique = array();
+// $pbs_descripciones_unique = array();
 
-foreach ($pbs_origenes as $origen) {
-  $handler_origen = explode("~", $origen);
-  $pbs_origenes_unique[$handler_origen[0]][] = $handler_origen[1];
-}
+// foreach ($pbs_origenes as $origen) {
+//   $handler_origen = explode("~", $origen);
+//   $pbs_origenes_unique[$handler_origen[0]][] = $handler_origen[1];
+// }
 
-foreach ($pbs_descripciones as $descripcion) {
-  $handler_descripcion = explode("~", $descripcion);
-  $pbs_descripciones_unique[$handler_descripcion[0]][] = $handler_descripcion[1];
-}
+// foreach ($pbs_descripciones as $descripcion) {
+//   $handler_descripcion = explode("~", $descripcion);
+//   $pbs_descripciones_unique[$handler_descripcion[0]][] = $handler_descripcion[1];
+// }
 
-$system_callback['pbs'] = $pbs;
-$system_callback['pbs_origenes'] = $pbs_origenes_unique;
-$system_callback['pbs_descripciones'] = $pbs_descripciones_unique;
+
+$uniq = uniqid();
+$csv_file = fopen($root . "/pltoolbox/mayoral/resources/TempFiles/csv_file_{$uniq}.csv", "w");
 
 if (count($alertas) > 0) {
   foreach ($alertas as $alerta) {
@@ -319,10 +305,17 @@ foreach ($txt_array as $factura) {
   foreach ($factura['header'] as $valor_header) {
     $txt_file .= $valor_header . "|";
   }
+  fputcsv($csv_file,"Numero Factura,	Número Orden,	Fecha Factura,	Pais Factura,	Entidad Factura,	Moneda,	Incoterm,	Valor Total Factura,	Valor Total USD,	Flete,	Seguros,	Embalajes,	Incrementables,	Deducibles,	Factor Moneda Extranjera");
+  fputcsv($csv_file, $factura['header']);
+
+  fputcsv($csv_file, "Numero Parte,	Descripcion Español,	Descripcion Ingles,	Cantidad UMC,	UMC,	Precio Unitario,	Unidad Peso Unitario,	Peso Unitario,	Fraccion,	Cantidad UMT,	UMT,	Pais Origen,	Valor Agregado,	Marca,	Modelo,	Serie");
+
   foreach ($factura['items'] as $item) {
     foreach ($item as $valor_item) {
       $txt_file .= $valor_item . "|";
     }
+    fputcsv($csv_file, $item);
+
   }
   // $txt_file = rtrim($txt_file, "|");
   $txt_file = substr($txt_file, 0, -1);
@@ -332,10 +325,10 @@ foreach ($txt_array as $factura) {
 $txt_file = rtrim($txt_file, "^");
 $txt_file .= "~";
 
-foreach ($identificadores as $identificadores_parte) {
-  foreach ($identificadores_parte as $identificador) {
+foreach ($identificadores as $identificadores_item) {
+  foreach($identificadores_item['identificadores'] as $identificador_parte){
     for ($i=0; $i < 7; $i++) {
-      $txt_file .= $identificador[$i] . "|";
+      $txt_file .= $identificador_parte[$i] . "|";
     }
   }
 }
@@ -345,10 +338,77 @@ $txt_file .= "@||||||";
 $txt_file = str_replace("ñ","n",$txt_file);
 $txt_file = str_replace("Ñ","N",$txt_file);
 
-$uniq = uniqid();
 $txt_file_path = $root . "/pltoolbox/mayoral/resources/TempFiles/txt_file_{$uniq}.txt";
 file_put_contents($txt_file_path, $txt_file);
+fclose($csv_file);
 
+foreach ($datos_pbs as $norma_id => $datos_norma) {
+  $datos_pbs[$norma_id]['origenes'] = array_unique($datos_pbs[$norma_id]['origenes']);
+  $datos_pbs[$norma_id]['descripciones'] = array_unique($datos_pbs[$norma_id]['descripciones']);
+}
+
+$pbs_origenes_unique = array_unique($pbs_origenes);
+$pbs_descripciones_unique = array_unique($pbs_descripciones);
+
+$xls = new Spreadsheet();
+$xlsActive = $xls->getActiveSheet();
+$rows_var = "FGHIJKLMNOPQRSTUVWXY";
+
+$xlsActive->setCellValue('B3', "Norma");
+$xlsActive->setCellValue('C3', "Items");
+$xlsActive->setCellValue('D3', "UMCs");
+
+$i = 3;
+foreach ($datos_pbs as $norma => $datos) {
+  $i++;
+  $xlsActive->setCellValue("B$i", utf8_encode($norma));
+  $xlsActive->setCellValue("C$i", utf8_encode($datos['items']));
+  $xlsActive->setCellValue("D$i", utf8_encode($datos['umcs']));
+}
+
+
+$c1=0;
+foreach ($datos_pbs as $norma => $datos) {
+
+  if ($norma == "sin_norma") {
+    continue;
+  }
+
+  $r=2;
+  $c2=$c1+1;
+  $xlsActive->mergeCells("$rows_var[$c1]$r:$rows_var[$c2]$r");
+  $xlsActive->setCellValue("$rows_var[$c1]$r", utf8_encode($norma));
+  $r_data = 3;
+  $xlsActive->setCellValue("$rows_var[$c1]$r_data", "Origenes");
+  foreach ($datos['origenes'] as $origen) {
+    $r_data++;
+    $xlsActive->setCellValue("$rows_var[$c1]$r_data", utf8_encode($origen));
+  }
+  $r_data = 3;
+  $xlsActive->setCellValue("$rows_var[$c2]$r_data", "Descripciones");
+  foreach ($datos['descripciones'] as $descripcion) {
+    $r_data++;
+    $xlsActive->setCellValue("$rows_var[$c2]$r_data", utf8_encode($descripcion));
+  }
+
+  $c1++;
+  $c1++;
+}
+
+$columns = strlen($rows_var);
+for ($i=0; $i < $columns; $i++) {
+  $xlsActive->getColumnDimension($rows_var[$i])->setAutoSize(true);
+}
+
+
+$writeXLS = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($xls);
+
+$xls_file = $root . "/pltoolbox/mayoral/resources/TempFiles/umas_file_{$uniq}.xlsx";
+// $file = "/home/esantos/Crons/TempFiles/detalle_pedimentos_$cliente_rfc.xlsx";
+$writeXLS->save($xls_file);
+
+
+$system_callback['pbs'] = $datos_pbs;
 $system_callback['code'] = 1;
 $system_callback['uniq'] = $uniq;
 

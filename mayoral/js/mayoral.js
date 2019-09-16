@@ -474,6 +474,7 @@ $(document).ready(function(){
         $('#banner-success-csv').fadeIn();
         $('#btn-descargar-txt').data('uniq', r.uniq);
         $('#btn-descargar-csv').data('uniq', r.uniq);
+        $('#btn-descargar-umas').data('uniq', r.uniq);
         //Fue un exito y hay que manejarlo.
         console.log(r);
       } else if (r.code == 2) {
@@ -482,6 +483,7 @@ $(document).ready(function(){
         $('#banner-errores-csv').fadeIn();
       }
     }).fail(function(x,y,z){
+      $('.loading-screen.csv').addClass('invisible');
       console.error(x + ": " + x);
     });
 
@@ -489,6 +491,14 @@ $(document).ready(function(){
   $('#btn-descargar-txt').click(function(){
     var uniq = $(this).data('uniq');
     window.location='actions/facturasMayoral/download_txt.php?uniq=' + uniq;
+  });
+  $('#btn-descargar-csv').click(function(){
+    var uniq = $(this).data('uniq');
+    window.location='actions/facturasMayoral/download_csv.php?uniq=' + uniq;
+  });
+  $('#btn-descargar-umas').click(function(){
+    var uniq = $(this).data('uniq');
+    window.location='actions/facturasMayoral/download_umas.php?uniq=' + uniq;
   });
 
   //EventosModalSubirFactura
