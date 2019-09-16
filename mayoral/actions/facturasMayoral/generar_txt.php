@@ -7,6 +7,11 @@ if (session_status() == PHP_SESSION_NONE) {
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+function remove_n($txt){
+  $txt = str_replace("ñ","n",$txt);
+  $txt = str_replace("Ñ","N",$txt);
+}
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 require $root . '/pltoolbox/Resources/vendor/autoload.php';
@@ -181,7 +186,7 @@ foreach ($invoice_items as $item) {
 
   $txt_array[$invoice_num]['items'][] = array(
     $numero_parte,   //Numero de Parte,
-    $item[6],                                               //Descripcion MX
+    remove_n($item[6]),                                               //Descripcion MX
     "",                                                     //Descripcion Inglés
     $item[12],                                              //Cantidad UMC
     $item[54],                                              //UMC
@@ -263,7 +268,7 @@ foreach ($invoice_items as $item) {
       $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['items']++;
       $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['umcs'] += $item[12];
       $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['origenes'][]= $pais_origen;
-      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['descripciones'][] = $item[6];
+      $datos_pbs[$identificador[1].",".$identificador[2].",".$identificador[3]]['descripciones'][] = remove_n($item[6]);
     }
   }
   if ($no_pb) {
