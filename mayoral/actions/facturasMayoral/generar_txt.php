@@ -10,6 +10,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 function remove_n($txt){
   $txt = str_replace("ñ","n",$txt);
   $txt = str_replace("Ñ","N",$txt);
+
+  return $txt;
 }
 
 $root = $_SERVER['DOCUMENT_ROOT'];
