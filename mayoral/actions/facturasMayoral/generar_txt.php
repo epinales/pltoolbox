@@ -138,6 +138,9 @@ foreach ($invoice_items as $item) {
   $pais_origen = "";
   $identificadores_item = array();
 
+  //Si la marca es New Born, se debe cambiar por mayoral.
+  $marca = $item[21] == "New Born" ? "Mayoral" : $item[21];
+
   if ($item[1] == "") {
     continue;
   }
@@ -197,7 +200,7 @@ foreach ($invoice_items as $item) {
     (double) $c_umt / $item[12],                            //FactorAjuste
     $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
-    $item[21] == "NUKUTAVAKE" ? $item[21] : $item[21] . " Y DISENO", //Marca,
+    $marca == "NUKUTAVAKE" ? $marca : $marca . " Y DISENO", //Marca,
     $item[2],                                               //Modelo
     ""                                                       //Serie se manda en blanco.
   );
