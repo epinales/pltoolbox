@@ -240,9 +240,9 @@ foreach ($invoice_items as $item) {
 
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
   if (in_array($item[10], $anexo30)) {
-    if ($item[21] == "NUKUTAVAKE") {
+    if ($marca == "NUKUTAVAKE") {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
-    } elseif ($item[21] == "MAYORAL" || $item[10] == 39262099) {
+    } elseif ($marca == "MAYORAL" || $item[10] == 39262099) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '4', '4');
