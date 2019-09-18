@@ -50,7 +50,7 @@ $codigo_paises = array(
 );
 
 $uvnom = "UVNOM" . $_POST['uvnom'];
-$fecha_factura = date('Y-m-d', $_POST['fecha_factura']);
+$fecha_factura = date('Y-m-d', strtotime($_POST['fecha_factura']));
 $fecha_factura = date_format($fecha_factura, 'd/m/Y');
 $contenedor = $_POST['contenedor'];
 
