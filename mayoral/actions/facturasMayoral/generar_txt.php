@@ -141,7 +141,7 @@ foreach ($invoice_items as $item) {
   $identificadores_item = array();
 
   //Si la marca es New Born, se debe cambiar por mayoral.
-  $marca = $item[21] == "New Born" ? "Mayoral" : $item[21];
+  $marca = $item[21] == "NEWBORN" ? "MAYORAL" : $item[21];
 
   if ($item[1] == "") {
     continue;
@@ -178,7 +178,7 @@ foreach ($invoice_items as $item) {
   $txt_array[$invoice_num]['header'] = array(
     $invoice_num,   //NumeroFactura
     $invoice_num,   //NumeroFactura - reemplaza número de órden
-    $today,         //Fecha -- Hoy es default
+    $fecha_factura,         //Fecha -- Hoy es default
     'ESP',          //Siempre se pone ESP(España) como país facturación
     'MA',           //Siempre se pone MA(Málaga) como entidad de facturación
     $item[15],      //Moneda --
