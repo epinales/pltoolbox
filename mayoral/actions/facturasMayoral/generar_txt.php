@@ -144,6 +144,11 @@ foreach ($invoice_items as $item) {
   //Si la marca es New Born, se debe cambiar por mayoral.
   $marca = $item[21] == "NEWBORN" ? "MAYORAL" : $item[21];
 
+  //Agregar Y DISEÑO a todas las marcas excepto NUKUTAVAKE (o si hay registros vacíos).
+  if (!($marca == 'NUKUTAVAKE' ||$marca == "")) {
+    $marca .= " Y DISEÑO";
+  }
+
   if ($item[1] == "") {
     continue;
   }
