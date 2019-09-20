@@ -208,7 +208,7 @@ foreach ($invoice_items as $item) {
     (double) $c_umt / $item[12],                            //FactorAjuste
     $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
-    $marca == "NUKUTAVAKE" ? $marca : $marca . " Y DISENO", //Marca,
+    $marca,                                                  //Marca,
     $item[2],                                               //Modelo
     ""                                                       //Serie se manda en blanco.
   );
