@@ -157,14 +157,14 @@ foreach ($invoice_items as $item) {
   $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm . "x";
 
   $c_umt = 0;
-  //Calcular Cantidad UMT!!
-  if ($item[54] == $item[55]) {
+  //Calcular Cantidad UMT!! 54 es UMC
+  if ($item[54] == $item[55]) { //Si UMC = UMT.
     $c_umt = $item[12];
-  } elseif ($item[55] == 1) {
+  } elseif ($item[55] == 1) { //Si UMT = Kilo, usa el peso unitario que viene en la factura.
     $c_umt = $item[17];
-  } elseif ($item[55] == 9 && $item[54] == 6) {
+  } elseif ($item[55] == 9 && $item[54] == 6) { //Si UMC es Pieza y UMT es PAR. Entonces CANTIDAD COMERCIAL * 2.
     $c_umt = $item[12] * 2;
-  } elseif ($item[55] == 6 && $item[54] == 9) {
+  } elseif ($item[55] == 6 && $item[54] == 9) { //Si UMC es Par y UMT es Pieza. Entonces Cantidad Comercial / 2.
     $c_umt = $item[12] / 2;
   } else {
     // Record error on this PN.
@@ -228,6 +228,8 @@ foreach ($invoice_items as $item) {
         $identificadores[$numero_parte . "_" . $i]['identificadores']['EX'] = array($numero_parte, 'EX', '29');
       } elseif ($capitulo >= 50 && $capitulo <= 63) {
         $identificadores[$numero_parte . "_" . $i]['identificadores']['EX'] = array($numero_parte, 'EX', '31');
+      } elseif ($capitulo = 94) {
+        $identificadores[$numero_parte . "_" . $i]['identificadores']['EX'] = array($numero_parte, 'EX', '31');
       }
     } else {
       $alertas[] = array(
@@ -247,7 +249,7 @@ foreach ($invoice_items as $item) {
   if (in_array($item[10], $anexo30)) {
     if ($marca == "NUKUTAVAKE") {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
-    } elseif ($marca == "MAYORAL" || $item[10] == 39262099) {
+    } elseif ($marca == "MAYORAL" || $marca == "ABEL & LULA" || $item[10] == 39262099) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '4', '4');
