@@ -249,7 +249,7 @@ foreach ($invoice_items as $item) {
   if (in_array($item[10], $anexo30)) {
     if ($marca == "NUKUTAVAKE") {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
-    } elseif ($marca == "MAYORAL" ||$marca == "ABEL & LULA" ||$item[10] == 39262099) {
+    } elseif ($marca == "MAYORAL Y DISENO" ||$marca == "ABEL & LULA Y DISENO" ||$item[10] == 39262099) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '4', '4');
