@@ -152,7 +152,9 @@ foreach ($invoice_items as $item) {
   if ($item[1] == "") {
     continue;
   }
+
   $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
+  $invoice_num = $item[1];
   $importe_total_factura += (double)$item[14];
   $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm . "x";
 
@@ -271,7 +273,7 @@ foreach ($invoice_items as $item) {
   $identificadores_excepciones_query->execute();
   $identificadores_excepciones = $identificadores_excepciones_query->get_result();
 
-  while ($idents = $identificadores_aplicables->fetch_assoc()) {
+  while ($idents = $identificadores_excepciones->fetch_assoc()) {
     unset($identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']]);
   }
   $no_pb = true;
@@ -309,6 +311,7 @@ foreach ($invoice_items as $item) {
 
 $uniq = uniqid();
 $csv_file = fopen($root . "/pltoolbox/mayoral/resources/TempFiles/csv_file_{$uniq}.csv", "w");
+$identificadores_csv = fopen($root . "/pltoolbox/mayoral/resources/TempFiles/csv_identificadores_{$uniq}.csv", "w");
 
 if (count($alertas) > 0) {
   foreach ($alertas as $alerta) {
@@ -346,8 +349,11 @@ foreach ($txt_array as $factura) {
 $txt_file = rtrim($txt_file, "^");
 $txt_file .= "~";
 
+$identificadores_print = "";
+
 foreach ($identificadores as $identificadores_item) {
   foreach($identificadores_item['identificadores'] as $identificador_parte){
+    fputcsv($identificadores_csv, $identificador_parte);
     for ($i=0; $i < 7; $i++) {
       $txt_file .= $identificador_parte[$i] . "|";
     }
