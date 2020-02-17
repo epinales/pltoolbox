@@ -143,7 +143,7 @@ foreach ($invoice_items as $item) {
 
   //Si la marca es New Born, se debe cambiar por mayoral.
   $marca = str_replace('MAYORAL     ', 'MAYORAL', $marca);
-  $marca = preg_replace('/[^A-Za-z0-9\-]/', '', $marca);
+  $marca = preg_replace('/[^a-zA-Z0-9]+/', '', $marca);
   $marca = $item[21] == "NEWBORN" ? "MAYORAL" : $item[21];
 
   if ($marca == "MAYORAL     ") {
