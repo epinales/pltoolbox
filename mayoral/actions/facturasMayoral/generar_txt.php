@@ -141,9 +141,14 @@ foreach ($invoice_items as $item) {
   $pais_origen = "";
   $identificadores_item = array();
 
+  $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
+  $invoice_num = $item[1];
+  $importe_total_factura += (double)$item[14];
+  $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm . "x";
+
   //Si la marca es New Born, se debe cambiar por mayoral.
-  $marca = str_replace('MAYORAL     ', 'MAYORAL', $marca);
-  $marca = preg_replace('/[^a-zA-Z0-9]+/', '', $marca);
+  // $marca = str_replace('MAYORAL     ', 'MAYORAL', $marca);
+  $marca = preg_replace('/[^a-zA-Z0-9]+/', '', $item[21]);
   $marca = $item[21] == "NEWBORN" ? "MAYORAL" : $item[21];
 
   if ($marca == "MAYORAL     ") {
@@ -159,10 +164,6 @@ foreach ($invoice_items as $item) {
     continue;
   }
 
-  $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
-  $invoice_num = $item[1];
-  $importe_total_factura += (double)$item[14];
-  $numero_parte = $invoice_num . $item[2] . $item[3] . $i . $item[10] . $hm . "x";
 
   $c_umt = 0;
   //Calcular Cantidad UMT!! 54 es UMC
