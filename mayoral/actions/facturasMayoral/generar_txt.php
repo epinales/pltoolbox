@@ -142,7 +142,13 @@ foreach ($invoice_items as $item) {
   $identificadores_item = array();
 
   //Si la marca es New Born, se debe cambiar por mayoral.
+  $marca = str_replace('MAYORAL     ', 'MAYORAL', $marca);
+  $marca = preg_replace('/[^A-Za-z0-9\-]/', '', $marca);
   $marca = $item[21] == "NEWBORN" ? "MAYORAL" : $item[21];
+
+  if ($marca == "MAYORAL     ") {
+    $advertencias[$numero_parte . "_" . $i] = "La marca es extraña. Marca: $marca";
+  }
 
   //Agregar Y DISEÑO a todas las marcas excepto NUKUTAVAKE (o si hay registros vacíos).
   if (!($marca == 'NUKUTAVAKE' ||$marca == "" ||$marca == " ")) {
@@ -255,6 +261,8 @@ foreach ($invoice_items as $item) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '4');
     } elseif ($capitulo == 42) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '4', '4');
+    } else {
+      $advertencias[$numero_parte . "_" . $i] = "No se encontró que identificador aplicar. Marca: $marca";
     }
   }
 
@@ -438,6 +446,7 @@ $writeXLS->save($xls_file);
 $system_callback['pbs'] = $datos_pbs;
 $system_callback['code'] = 1;
 $system_callback['uniq'] = $uniq;
+$system_callback['advertencias'] = $advertencias;
 
 exit_script($system_callback);
 
