@@ -157,7 +157,8 @@ foreach ($invoice_items as $item) {
 
   //Agregar Y DISEÑO a todas las marcas excepto NUKUTAVAKE (o si hay registros vacíos).
   if (!($marca == 'NUKUTAVAKE' ||$marca == "" ||$marca == " ")) {
-    if(substr($marca, -1) = " "){
+    $test = substr($marca, -1);
+    if($test = " "){
       $marca .= "Y DISENO";
     } else {
       $marca .= " Y DISENO";
