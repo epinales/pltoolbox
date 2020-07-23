@@ -219,7 +219,8 @@ foreach ($invoice_items as $item) {
     2,0,                                                    //UnidadPesoUnitario - PesoUnitario
     $item[10],                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
-    (double) $c_umt / $item[12],                            //FactorAjuste
+    "",
+    // (double) $c_umt / $item[12],                            //FactorAjuste
     $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
     $marca,                                                  //Marca,
