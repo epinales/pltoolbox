@@ -128,7 +128,7 @@ error_log("Real Header encoding:" . mb_detect_encoding($headers[0]));
 
 for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
-    error_log($headers[$i]);
+    error_log("$i: " . $headers[$i]);
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . htmlentities($headers[$i], ENT_QUOTES, 'utf-8');
     error_log(mb_detect_encoding($documented_headers[$i]));
