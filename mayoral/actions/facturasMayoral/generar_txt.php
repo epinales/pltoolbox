@@ -124,6 +124,7 @@ $num_headers = count($documented_headers);
 error_log($documented_headers[0]);
 
 error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . mb_strlen($documented_headers[0]));
+error_log("Real Header encoding: " . mb_detect_encoding($headers[0]) . ", Length: " . strlen($headers[0]) . " string: " . mb_strlen($headers[0]));
 
 for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
