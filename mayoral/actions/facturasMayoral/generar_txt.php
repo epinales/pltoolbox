@@ -204,6 +204,9 @@ error_log(
 );
 
 for ($i=0; $i < $num_headers; $i++) {
+  $internal_header = mb_strtoupper($documented_headers[$i]);
+  $document_header = mb_strtoupper($headers[$i]);
+
   $internal_header = utf8_decode($documented_headers[$i]);
   $document_header = utf8_decode($headers[$i]);
 
