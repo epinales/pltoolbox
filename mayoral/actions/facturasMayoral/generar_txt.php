@@ -146,9 +146,11 @@ error_log(
   ", string: " . $headers[0]);
 
 for ($i=0; $i < $num_headers; $i++) {
-  if (!($headers[$i] == $documented_headers[$i])) {
+  $internal_header = strtoupper($documented_headers[$i]);
+  $document_header = strtoupper($headers[$i]);
+  if (!($internal_header == $document_header)) {
     $system_callback['code'] = 500;
-    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . $headers[0];
+    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $internal_header; y se encontró: " . $document_header;
     error_log(mb_detect_encoding($documented_headers[$i]));
 
     exit_script($system_callback);
