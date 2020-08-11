@@ -117,7 +117,7 @@ if (!$test_extension) {
 
 $conversion = new convert_csv_to_utf8($file['file']['tmp_name']);
 
-error_log("Conversion: " . var_export($conversion));
+// error_log("Conversion: " . var_export($conversion));
 
 $file_handle = fopen($file['file']['tmp_name'], 'r');
 
