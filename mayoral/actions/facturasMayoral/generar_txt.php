@@ -119,7 +119,7 @@ $documented_headers = [
   "SUBDIVI",
   "CANTIDAD",
   "PRECIO UN.",
-  "IMPORTE TOT",
+  "IMPORTE TOT,",
   "MONEDA",
   "ORIGEN",
   "PESO NETO",
