@@ -128,6 +128,7 @@ $num_headers = count($documented_headers);
 
 for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
+    error_log("Comparación: " . $headers[$i] . " - " . $documented_headers[$i]);
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba " . utf8_encode($headers[$i]) . "; y se encontró: $documented_headers[$i].";
     error_log(mb_detect_encoding($documented_headers[$i]));
