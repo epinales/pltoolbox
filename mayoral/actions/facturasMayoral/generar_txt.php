@@ -121,8 +121,9 @@ $valor_factura = array();
 $today = date('Y-m-d', strtotime('today'));
 
 $num_headers = count($documented_headers);
-error_log(htmlentities($documented_headers[0], ENT_QUOTES, "UTF-8"));
-error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . $documented_headers[0]);
+error_log($documented_headers[0]);
+
+error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . mb_strlen($documented_headers[0]));
 
 for ($i=0; $i < $num_headers; $i++) {
   $file_header = utf8_encode($headers[$i]);
