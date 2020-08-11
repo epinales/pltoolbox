@@ -167,7 +167,7 @@ if (!$test_extension) {
   exit_script($system_callback);
 }
 
-$conversion = new convert_csv_to_utf8($file['file']['tmp_name']);
+// $conversion = new convert_csv_to_utf8($file['file']['tmp_name']);
 
 // error_log("Conversion: " . var_export($conversion));
 
