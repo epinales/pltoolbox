@@ -481,6 +481,8 @@ $(document).ready(function(){
         //Se detectaron alertas al momento de procesar el CSV.
         $('#tbody_alertas').html(r.alertas);
         $('#banner-errores-csv').fadeIn();
+      } else {
+        alertify.warning(r.message);
       }
     }).fail(function(x,y,z){
       $('.loading-screen.csv').addClass('invisible');
