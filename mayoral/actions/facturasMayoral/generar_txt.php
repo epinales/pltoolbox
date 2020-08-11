@@ -16,7 +16,8 @@ function remove_n($txt){
 }
 
 $root = $_SERVER['DOCUMENT_ROOT'];
-require $root . "/pltoolbox/Mayoral/resources/specific_classes/csv_to_utf8.php";
+
+require $root . "/pltoolbox/mayoral/resources/specific_classes/csv_to_utf8.php";
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 require $root . '/pltoolbox/Resources/vendor/autoload.php';
 
