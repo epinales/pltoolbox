@@ -54,12 +54,12 @@ function returnJsonHttpResponse($success, $data){
 }
 
 function exit_script($input_array){
- // $json_string = json_encode($input_array);
- returnJsonHttpResponse(true, $input_array);
- // echo $json_string;
- // global $db;
- // $db->close();
- // die();
+  // returnJsonHttpResponse(true, $input_array);
+ $json_string = json_encode($input_array);
+ echo $json_string;
+ global $db;
+ $db->close();
+ die();
 
 }
 
