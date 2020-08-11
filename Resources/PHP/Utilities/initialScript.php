@@ -25,7 +25,7 @@ $horaActual = date('H:i');
 
 include($root . '/pltoolbox/Resources/PHP/DataBases/conexion.php');
 function exit_script($input_array){
- $json_string = json_encode($input_array, JSON_INVALID_UTF8_SUBSTITUTE);
+ $json_string = json_encode($input_array);
  echo $json_string;
  global $db;
  $db->close();
