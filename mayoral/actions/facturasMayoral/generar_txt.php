@@ -123,7 +123,7 @@ $today = date('Y-m-d', strtotime('today'));
 $num_headers = count($documented_headers);
 error_log($documented_headers[0]);
 
-error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . mb_strlen($documented_headers[0]));
+error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . utf8_decode($documented_headers[0]));
 error_log("Real Header encoding UTF8: " . mb_detect_encoding(utf8_encode($headers[0])) . ", Length: " . strlen(utf8_encode($headers[0])) . " string: " . mb_strlen(utf8_encode($headers[0])));
 error_log("Real Header encoding: " . mb_detect_encoding($headers[0]) . ", Length: " . strlen($headers[0]) . " string: " . mb_strlen($headers[0]));
 
