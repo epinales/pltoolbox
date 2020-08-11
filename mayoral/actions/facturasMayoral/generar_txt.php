@@ -1,6 +1,7 @@
 <?php
 
 error_log("Internal Encoding: " . mb_internal_encoding());
+ini_set('auto_detect_line_endings',TRUE);
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -132,6 +133,7 @@ for ($i=0; $i < $num_headers; $i++) {
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . htmlentities($headers[$i], ENT_QUOTES, 'utf-8');
     error_log(mb_detect_encoding($documented_headers[$i]));
+    ini_set('auto_detect_line_endings',FALSE);
     exit_script($system_callback);
   }
 }
