@@ -107,6 +107,8 @@ $test_extension = in_array($extension, $authorized_files);
 $documented_headers = ["﻿AÑO","FACTURA","ARTICULO","PIEZA","RANGO","DESCRIPCION ","DESCRIPCION MX","COMPOSICION","COMP. FORRO","TARIC","MX HS CODE","SUBDIVI","CANTIDAD","PRECIO UN.","IMPORTE TOT,","MONEDA","ORIGEN","PESO NETO","PESO BRUTO","FACERR","SECCION ","MARCA","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","TK1","TK2","TK3","TK4","TK5","TK6","TK7","TK8","TK9","TK10","C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","PUNTO / PLANA","SEXO","UMC","UMT"
 ];
 
+error_log("Header encoding:" . mb_detect_encoding($document_headers[0]));
+
 if (!$test_extension) {
   $system_callback['code'] = 500;
   $system_callback['message'] = "Los archivos con extensión $extension no están permitidos. Favor de subir un archivo CSV.";
@@ -127,7 +129,7 @@ $num_headers = count($documented_headers);
 for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
     $system_callback['code'] = 500;
-    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba ; y se encontró: .";
+    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $headers[$i]; y se encontró: $documented_headers[$i].";
     error_log(mb_detect_encoding($system_callback['message']));
     exit_script($system_callback);
   }
