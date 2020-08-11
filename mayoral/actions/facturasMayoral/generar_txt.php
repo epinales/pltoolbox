@@ -1,7 +1,5 @@
 <?php
 
-error_log("Internal Encoding: " . mb_internal_encoding());
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -111,7 +109,6 @@ $documented_headers = ["﻿AÑO","FACTURA","ARTICULO","PIEZA","RANGO","DESCRIPCI
 if (!$test_extension) {
   $system_callback['code'] = 500;
   $system_callback['message'] = "Los archivos con extensión $extension no están permitidos. Favor de subir un archivo CSV.";
-  error_log(mb_detect_encoding($system_callback['message']));
   exit_script($system_callback);
 }
 
@@ -124,7 +121,8 @@ $valor_factura = array();
 $today = date('Y-m-d', strtotime('today'));
 
 $num_headers = count($documented_headers);
-error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . "string: " . $documented_headers[0]);
+error_log($documented_headers[0]);
+error_log("Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) . ", Length: " . strlen($documented_headers[0]) . " string: " . $documented_headers[0]);
 
 for ($i=0; $i < $num_headers; $i++) {
   $file_header = utf8_encode($headers[$i]);
