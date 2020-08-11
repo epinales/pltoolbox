@@ -127,6 +127,7 @@ error_log("Documented Header encoding: " . mb_detect_encoding($documented_header
 
 for ($i=0; $i < $num_headers; $i++) {
   $file_header = utf8_encode($headers[$i]);
+  error_log("Strcmp: " . strcmp($file_header, $documented_headers[$i]));
   if (!($file_header == $documented_headers[$i])) {
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . utf8_encode($headers[$i]);
