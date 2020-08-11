@@ -130,7 +130,7 @@ error_log("Real Header encoding: " . mb_detect_encoding($headers[0]) . ", Length
 for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
     $system_callback['code'] = 500;
-    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: $headers[$i]";
+    $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . utf8_encode($headers[0]);
     error_log(mb_detect_encoding($documented_headers[$i]));
 
     exit_script($system_callback);
