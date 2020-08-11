@@ -92,10 +92,6 @@ if (!$identificadores_excepciones_query) {
     error_log("Error en prepare queries exceppciones: " . $db->error);
 }
 
-// $system_callback['anexo30'] = $anexo30;
-// $system_callback['trato_preferencial'] = $trato_preferencial;
-// $system_callback['precios_estimados'] = $precios_estimados;
-
 
 $file = $_FILES;
 $text_file = "";
@@ -133,21 +129,24 @@ error_log($documented_headers[0]);
 error_log(
   "Documented Header encoding: " . mb_detect_encoding($documented_headers[0]) .
   ", Length: " . strlen($documented_headers[0]) .
-  ", string: " . utf8_decode($documented_headers[0]));
+  ", string: " . utf8_decode($documented_headers[0])
+);
 
 error_log(
   "Real Header encoding UTF8: " . mb_detect_encoding(utf8_encode($headers[0])) .
   ", Length: " . strlen(utf8_encode($headers[0])) .
-  ", string: " . utf8_encode($headers[0]));
+  ", string: " . utf8_encode($headers[0])
+);
 
 error_log(
   "Real Header encoding: " . mb_detect_encoding($headers[0]) .
   ", Length: " . strlen($headers[0]) .
-  ", string: " . $headers[0]);
+  ", string: " . $headers[0]
+);
 
 for ($i=0; $i < $num_headers; $i++) {
-  $internal_header = strtoupper($documented_headers[$i]);
-  $document_header = strtoupper($headers[$i]);
+  $internal_header = strtolower($documented_headers[$i]);
+  $document_header = strtolower($headers[$i]);
   if (!($internal_header == $document_header)) {
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $internal_header; y se encontró: " . $document_header;
