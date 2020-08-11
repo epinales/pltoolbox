@@ -108,6 +108,7 @@ $documented_headers = ["﻿AÑO","FACTURA","ARTICULO","PIEZA","RANGO","DESCRIPCI
 if (!$test_extension) {
   $system_callback['code'] = 500;
   $system_callback['message'] = utf8_decode("Los archivos con extensión $extension no están permitidos. Favor de subir un archivo CSV.");
+  error_log(mb_detect_encoding($system_callback['message']));
   exit_script($system_callback);
 }
 
@@ -125,6 +126,7 @@ for ($i=0; $i < $num_headers; $i++) {
   if (!($headers[$i] == $documented_headers[$i])) {
     $system_callback['code'] = 500;
     $system_callback['message'] = utf8_decode("Los encabezados no son correctos. Se esperaba $headers[$i]; y se encontró: $documented_headers[$i].");
+    error_log(mb_detect_encoding($system_callback['message']));
     exit_script($system_callback);
   }
 }
