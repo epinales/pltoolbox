@@ -458,7 +458,8 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       cache: false,
-      contentType: "text/html; charset=UTF-8",
+      // contentType: "text/html; charset=UTF-8",
+      contentType: false,
       processData: false,
       beforeSend: function(){
         $('.loading-screen.csv').removeClass('invisible');
