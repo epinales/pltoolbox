@@ -458,7 +458,7 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       cache: false,
-      // contentType: "text/html; charset=UTF-8",
+      dataType: "json",
       contentType: false,
       processData: false,
       beforeSend: function(){
