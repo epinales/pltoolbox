@@ -7,6 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 function remove_n($txt){
   $txt = str_replace("ñ","n",$txt);
   $txt = str_replace("Ñ","N",$txt);
@@ -15,6 +16,7 @@ function remove_n($txt){
 }
 
 $root = $_SERVER['DOCUMENT_ROOT'];
+require $root . "/pltoolbox/Mayoral/resources/specific_classes/csv_to_utf8.php";
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 require $root . '/pltoolbox/Resources/vendor/autoload.php';
 
@@ -111,6 +113,10 @@ if (!$test_extension) {
   $system_callback['message'] = "Los archivos con extensión $extension no están permitidos. Favor de subir un archivo CSV.";
   exit_script($system_callback);
 }
+
+$conversion = new convert_csv_to_utf8($file['file']['tmp_name']);
+
+error_log("Conversion: " . $conversion);
 
 $file_handle = fopen($file['file']['tmp_name'], 'r');
 
