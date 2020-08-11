@@ -458,7 +458,6 @@ $(document).ready(function(){
       method: 'POST',
       data: data,
       cache: false,
-      dataType: "json",
       contentType: false,
       processData: false,
       beforeSend: function(){
