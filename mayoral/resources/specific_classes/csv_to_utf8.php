@@ -29,14 +29,14 @@ class convert_csv_to_utf8
 				file_put_contents($file_address, $finaltext);
 			else
 				file_put_contents($saveto, $finaltext);
-			echo "converted";
+			return "converted";
 
 			return true;
         } else {
 
             ini_set('auto_detect_line_endings', $auto_detect_line_endings);
 
-            echo "file_not_find";
+            return "file_not_find";
 
             return false;
         }
