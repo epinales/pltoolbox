@@ -487,7 +487,8 @@ $(document).ready(function(){
       }
     }).fail(function(x,y,z){
       $('.loading-screen.csv').addClass('invisible');
-      console.error(x + ": " + x);
+      console.error(x);
+      console.error(yd);
     });
 
   });
