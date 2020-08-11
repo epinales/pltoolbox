@@ -204,8 +204,8 @@ for ($i=0; $i < $num_headers; $i++) {
   $internal_header = utf8_decode($documented_headers[$i]);
   $document_header = utf8_decode($headers[$i]);
 
-  $internal_header = $documented_headers[$i];
-  $document_header = $headers[$i];
+  // $internal_header = $documented_headers[$i];
+  // $document_header = $headers[$i];
 
   if (!($internal_header == $document_header)) {
     $system_callback['code'] = 500;
