@@ -220,7 +220,7 @@ foreach ($invoice_items as $item) {
     $item[10],                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
     "",
-    // (double) $c_umt / $item[12],                            //FactorAjuste
+    (double) $c_umt / $item[12],                            //FactorAjuste
     $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
     $marca,                                                  //Marca,
@@ -450,7 +450,7 @@ $xls_file = $root . "/pltoolbox/mayoral/resources/TempFiles/uvas_file_{$uniq}.xl
 $writeXLS->save($xls_file);
 
 
-$system_callback['pbs'] = $datos_pbs;
+// $system_callback['pbs'] = $datos_pbs;
 $system_callback['code'] = 1;
 $system_callback['uniq'] = $uniq;
 $system_callback['advertencias'] = $advertencias;
