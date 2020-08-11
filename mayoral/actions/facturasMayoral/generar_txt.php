@@ -127,8 +127,8 @@ $num_headers = count($documented_headers);
 error_log("Real Header encoding:" . mb_detect_encoding($headers[0]));
 
 for ($i=0; $i < $num_headers; $i++) {
-  if (!(utf8_encode($headers[$i]) == $documented_headers[$i])) {
-    error_log(json_encode($headers));
+  $file_header = utf8_encode($headers[$i]);
+  if (!($file_header == $documented_headers[$i])) {
     $system_callback['code'] = 500;
     $system_callback['message'] = "Los encabezados no son correctos. Se esperaba $documented_headers[$i]; y se encontró: " . utf8_encode($headers[$i]);
     error_log(mb_detect_encoding($documented_headers[$i]));
