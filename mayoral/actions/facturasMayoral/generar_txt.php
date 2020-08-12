@@ -449,8 +449,8 @@ foreach ($txt_array as $factura) {
     fputcsv($csv_file, $item);
 
   }
-  // $txt_file = rtrim($txt_file, "|");
-  $txt_file = substr($txt_file, 0, -1);
+  $txt_file = rtrim($txt_file, "|");
+  // $txt_file = substr($txt_file, 0, -1);
   $txt_file .= "^";
 }
 
