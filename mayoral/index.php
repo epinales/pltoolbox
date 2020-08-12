@@ -392,7 +392,7 @@ $json_print = json_encode(array($facturas, $identificadores));
   require 'modales/editarIdentificador.php';
   require 'modales/nuevaFactura.php';
   require 'modales/errores_generacion_csv.php';
-  require $root . '/pltoolbox/scripts.php?1';
+  require $root . '/pltoolbox/scripts.php';
    ?>
-   <script src="js/mayoral.js" charset="utf-8"></script>
+   <script src="js/mayoral.js?1" charset="utf-8"></script>
 </html>
