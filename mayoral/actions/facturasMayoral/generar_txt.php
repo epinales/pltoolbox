@@ -444,7 +444,7 @@ foreach ($txt_array as $factura) {
 
   foreach ($factura['items'] as $item) {
     foreach ($item as $valor_item) {
-      $txt_file .= $valor_item . "|";
+      $txt_file .= rtrim($valor_item) . "|";
     }
     fputcsv($csv_file, $item);
 
