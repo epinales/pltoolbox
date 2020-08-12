@@ -452,7 +452,6 @@ foreach ($txt_array as $factura) {
   $txt_file = rtrim($txt_file, "|");
   // $txt_file = substr($txt_file, 0, -1);
   $txt_file .= "^";
-  $txt_file .= "CAMBIOFACTURA";
 }
 
 $txt_file = rtrim($txt_file, "^");
