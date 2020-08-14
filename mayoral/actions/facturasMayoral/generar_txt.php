@@ -293,7 +293,7 @@ foreach ($invoice_items as $item) {
     $invoice_num,   //NumeroFactura - reemplaza número de órden
     $fecha_factura,         //Fecha -- Hoy es default
     'ESP',          //Siempre se pone ESP(España) como país facturación
-    'MA',           //Siempre se pone MA(Málaga) como entidad de facturación
+    '',           //Siempre se pone MA(Málaga) como entidad de facturación
     $item[15],      //Moneda --
     'CIF',          //Poner un campo para seleccionar el INCOTERM.
     $importe_total_factura, //Valor Moneda Extranjera
@@ -312,7 +312,7 @@ foreach ($invoice_items as $item) {
     2,0,                                                    //UnidadPesoUnitario - PesoUnitario
     $item[10],                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
-    "",
+    // "",
     (double) $c_umt / $item[12],                            //FactorAjuste
     $pais_origen,                                           //PaisOrigen,
     0,                                                      //ValorAgregado
