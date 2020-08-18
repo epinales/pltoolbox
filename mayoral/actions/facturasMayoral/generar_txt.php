@@ -463,7 +463,8 @@ foreach ($identificadores as $identificadores_item) {
   foreach($identificadores_item['identificadores'] as $identificador_parte){
     fputcsv($identificadores_csv, $identificador_parte);
     for ($i=0; $i < 7; $i++) {
-      $txt_file .= $identificador_parte[$i] . "|";
+      $identificadorparte = isset($identificador_parte[$i]) ? $identificador_parte[$i] : "";
+      $txt_file .= $$identificadorparte . "|";
     }
   }
 }
