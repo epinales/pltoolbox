@@ -11,10 +11,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 function remove_n($txt){
   error_log(mb_detect_encoding($txt));
 
-  $txt = iconv(mb_detect_encoding($txt), 'UTF-8', $txt);
-
-  $txt = str_replace("ñ","n",$txt);
-  $txt = str_replace("Ñ","N",$txt);
+  $txt = str_replace(iconv('UTF-8', 'ASCII', "ñ"),"n",$txt);
+  $txt = str_replace(iconv('UTF-8', 'ASCII', "Ñ"),"N",$txt);
   return $txt;
 }
 
