@@ -12,6 +12,7 @@ function remove_n($txt){
   error_log(mb_detect_encoding($txt));
   $txt = str_replace("ñ","n",$txt);
   $txt = str_replace("Ñ","N",$txt);
+  die();
   return $txt;
 }
 
