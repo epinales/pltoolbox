@@ -10,6 +10,9 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 function remove_n($txt){
   error_log(mb_detect_encoding($txt));
+
+  $txt = iconv(mb_detect_encoding($txt), 'UTF-8', $txt);
+
   $txt = str_replace("ñ","n",$txt);
   $txt = str_replace("Ñ","N",$txt);
   return $txt;
@@ -464,7 +467,7 @@ foreach ($identificadores as $identificadores_item) {
     fputcsv($identificadores_csv, $identificador_parte);
     for ($i=0; $i < 7; $i++) {
       $identificadorparte = isset($identificador_parte[$i]) ? $identificador_parte[$i] : "";
-      $txt_file .= $$identificadorparte . "|";
+      $txt_file .= $identificadorparte . "|";
     }
   }
 }
