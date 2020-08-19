@@ -265,15 +265,19 @@ foreach ($invoice_items as $item) {
 
 
   $c_umt = 0;
-  //Calcular Cantidad UMT!! 54 es UMC
+  //Calcular Cantidad UMT!!
+    //54 es UMC
+    //55 es UMT
+        // Codigo 9 es Par
+        // Codigo 6 es Pieza
   if ($item[54] == $item[55]) { //Si UMC = UMT.
     $c_umt = $item[12];
   } elseif ($item[55] == 1) { //Si UMT = Kilo, usa el peso unitario que viene en la factura.
     $c_umt = $item[17];
   } elseif ($item[55] == 9 && $item[54] == 6) { //Si UMC es Pieza y UMT es PAR. Entonces CANTIDAD COMERCIAL * 2.
-    $c_umt = $item[12] * 2;
-  } elseif ($item[55] == 6 && $item[54] == 9) { //Si UMC es Par y UMT es Pieza. Entonces Cantidad Comercial / 2.
     $c_umt = $item[12] / 2;
+  } elseif ($item[55] == 6 && $item[54] == 9) { //Si UMC es Par y UMT es Pieza. Entonces Cantidad Comercial / 2.
+    $c_umt = $item[12] * 2;
   } else {
     // Record error on this PN.
   }
