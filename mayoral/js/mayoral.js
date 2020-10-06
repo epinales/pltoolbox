@@ -313,6 +313,7 @@ $(document).ready(function(){
     editar_identificador.done(function(r){
       r = JSON.parse(r);
       modal.trigger('fetch');
+      $('#tabla-identificadores').trigger('fetch');
     });
 
   });
