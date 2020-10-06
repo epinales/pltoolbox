@@ -65,7 +65,7 @@ $(document).ready(function(){
         for (var field in i.data) {
           if (i.data.hasOwnProperty(field)) {
             $('#'+field).html(i.data[field]);
-            $('.'+field).val(i.data[field]);
+            $('#'+field).val(i.data[field]);
           }
         }
 
