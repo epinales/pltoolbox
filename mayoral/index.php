@@ -394,5 +394,5 @@ $json_print = json_encode(array($facturas, $identificadores));
   require 'modales/errores_generacion_csv.php';
   require $root . '/pltoolbox/scripts.php';
    ?>
-   <script src="js/mayoral.js?2" charset="utf-8"></script>
+   <script src="js/mayoral.js?3" charset="utf-8"></script>
 </html>
