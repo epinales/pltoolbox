@@ -156,6 +156,28 @@ foreach ((array)$eliminar_fracciones['excepciones'] as $fraccion) {
   }
 }
 
+
+//Cambiar complemento 3 para el folio de la UVA.
+
+  //Determinar que en efecto estemos hablando de un identificador PB.
+
+$query = "SELECT identificador FROM mayoral_identificadores WHERE pk_identificador = ?";
+$editar_c3 = "UPDATE mayoral_identificadores SET complemento3 = ? WHERE pk_identificador = ?";
+
+$consultar_identificador = $db->prepare($query);
+$consultar_identificador->bind_param('s', $pk_identificador);
+$consultar_identificador->execute();
+
+$cual_identificador = $consultar_identificador->get_result()->fetch_assoc();
+
+if ($cual_identificador['identificador'] == "PB") {
+  $editar_c3 = $db->prepare($editar_c3);
+  $editar_c3->bind_param('ss', $comple3, $pk_identificador);
+  $editar_c3->execute();
+}
+
+
+
 $system_callback['code'] = 1;
 $system_callback['message'] = "Script called successfully!";
 exit_script($system_callback);

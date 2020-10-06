@@ -264,6 +264,7 @@ $(document).ready(function(){
   $('#editarIdentificador_btn').click(function(){
     var modal = $(this).parents('.modal');
     var identif = modal.data('id');
+    var comple3 = modal.find('.comple3').val();
 
 
     var nuevas_fracciones = {
@@ -295,6 +296,7 @@ $(document).ready(function(){
 
     data = {
       pk_identificador: identif,
+      comple3: comple3,
       nuevas_fracciones,
       eliminar_fracciones
     }

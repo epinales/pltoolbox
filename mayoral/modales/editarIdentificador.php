@@ -14,7 +14,8 @@
             <p class="mb-1"><b>Identificador:</b> <span id="identificador" class="font-weight-light">PS</span></p>
             <p class="mb-1"><b>Complemento 1:</b> <span id="complemento1" class="font-weight-light">PS</span></p>
             <p class="mb-1"><b>Complemento 2:</b> <span id="complemento2" class="font-weight-light">PS</span></p>
-            <p class="mb-1"><b>Complemento 3:</b> <span id="complemento3" class="font-weight-light">PS</span></p>
+            <p class="mb-1"><b>Complemento 3:</b> <input id="complemento3" class="ml-3 comple3"></p>
+            <!-- <p class="mb-1"><b>Complemento 3:</b> <span id="complemento3" class="font-weight-light">PS</span></p> -->
             <p class="mb-1"><b>Complemento 4:</b> <span id="complemento4" class="font-weight-light">PS</span></p>
           </div>
           <h5 class="mb-0">Capitulos, Partidas o Fracciones</h5>
