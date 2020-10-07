@@ -229,11 +229,13 @@ while ($row = fgetcsv($file_handle,1000)) {
 fclose($file_handle);
 
 $i = 1;
-
+$permisos = "";
 foreach ($invoice_items as $item) {
   $i++;
   $pais_origen = "";
   $identificadores_item = array();
+  $aplicar_permiso = false;
+
 
   $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
   $invoice_num = $item[1];
@@ -377,9 +379,16 @@ foreach ($invoice_items as $item) {
 
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
-
-
-    $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
+    $comple3 = $idents['identificador'] == "PB" ? "" : $idents['complemento3'];
+    $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $comple3, $idents['complemento4']);
+    if ($idents['identificador'] == "PB") {
+      $permisos .=
+        $numero_parte . "_" . $i . "|" .
+        "NM|" .
+        $idents['complemento2'] . "|" .
+        $idents['complemento3'] . "|||"
+      ;
+    }
   }
 
   $identificadores_excepciones_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10]);
@@ -474,7 +483,7 @@ foreach ($identificadores as $identificadores_item) {
   }
 }
 
-$txt_file .= "@||||||";
+$txt_file .= "@$permisos";
 
 $txt_file = str_replace("ñ","n",$txt_file);
 $txt_file = str_replace("Ñ","N",$txt_file);
