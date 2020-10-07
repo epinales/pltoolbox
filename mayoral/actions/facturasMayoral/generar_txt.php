@@ -383,7 +383,7 @@ foreach ($invoice_items as $item) {
     $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $comple3, $idents['complemento4']);
     if ($idents['identificador'] == "PB") {
       $permisos .=
-        $numero_parte . "_" . $i . "|" .
+        $numero_parte . "|" .
         "NM|" .
         $idents['complemento2'] . "|" .
         $idents['complemento3'] . "|||"
