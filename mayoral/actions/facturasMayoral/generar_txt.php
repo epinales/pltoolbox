@@ -12,7 +12,7 @@ function remove_n($txt){
   error_log(mb_detect_encoding("Ñ"));
 
   // $txt = str_replace(iconv('UTF-8', 'ASCII', "ñ"),"n",$txt);
-  $txt = str_replace(iconv('UTF-8', 'ASCII', "Ñ"),"N",$txt);
+  // $txt = str_replace(iconv('UTF-8', 'ASCII', "Ñ"),"N",$txt);
   return $txt;
 }
 
