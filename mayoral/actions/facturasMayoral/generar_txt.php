@@ -1238,7 +1238,7 @@ foreach ($invoice_items as $item) {
         $numero_parte . "|" .
         "NM|" .
         $idents['complemento2'] . "|" .
-        $idents['complemento3'] . "|||"
+        $folio . "|||"
       ;
     }
   }
