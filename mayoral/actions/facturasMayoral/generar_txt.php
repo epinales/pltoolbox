@@ -1231,7 +1231,7 @@ foreach ($invoice_items as $item) {
       $folio = $folios_uvas[$clave];
 
       if ($folio = "") {
-        error_log("La linea $i debe tener folio, y no se encontró\n", 0, "/var/log/apache2/special.logk");
+        error_log("La linea $i debe tener folio, y no se encontró\n", 0, "/var/log/apache2/special.log");
       }
 
       $permisos .=
