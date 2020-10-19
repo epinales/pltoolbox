@@ -865,6 +865,8 @@ foreach ($folios_uvas_originales as $uva){
     }
 }
 
+die();
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 
 require $root . "/pltoolbox/mayoral/resources/specific_classes/csv_to_utf8.php";
