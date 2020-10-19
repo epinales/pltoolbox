@@ -860,7 +860,6 @@ foreach ($folios_uvas_originales as $uva){
     $modelos = explode(', ', $uva[2]);
 
     foreach($modelos as $modelo){
-        error_log($fraccion . "_" . $modelo . ": " . $folio);
         $folios_computados[$fraccion . "_" . $modelo] = $folio;
     }
 }
@@ -1217,7 +1216,7 @@ foreach ($invoice_items as $item) {
       $folio = $folios_computados[$clave];
 
       if ($folio == "") {
-        error_log("PERMISOERR: La linea $i debe tener folio, y no se encontro\n");
+        error_log("PERMISOERR: La linea $i ($item[10] - $item[2]) debe tener folio, y no se encontro\n");
       }
 
       $permisos .=
