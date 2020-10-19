@@ -854,6 +854,11 @@ $folios_uvas_originales = [
 
 $folios_computados = [];
 
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios.csv";
+$folios_file = fopen($folios_file, "w");
+
+fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
+
 foreach ($folios_uvas_originales as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
@@ -1216,6 +1221,12 @@ foreach ($invoice_items as $item) {
       $folio = $folios_computados[$clave];
 
       if ($folio == "") {
+        $datos_error = [
+          $i, //linea,
+          $item[10], //fraccion
+          $item[2], //modelo
+        ];
+        fputcsv($folios_file, $datos_error);
         error_log("PERMISOERR: La linea $i ($item[10] - $item[2]) debe tener folio, y no se encontro\n");
       }
 
