@@ -864,7 +864,9 @@ foreach ($folios_uvas_originales as $uva){
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
 
+
     foreach($modelos as $modelo){
+      fputcsv($folios_file, [$folio, $fraccion, $modelo]);
         $folios_computados[$fraccion . "_" . $modelo] = $folio;
     }
 }
