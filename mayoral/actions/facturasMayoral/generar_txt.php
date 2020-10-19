@@ -1,4 +1,5 @@
 <?php
+$root = $_SERVER['DOCUMENT_ROOT'];
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -870,8 +871,6 @@ foreach ($folios_uvas_originales as $uva){
         $folios_computados[$fraccion . "_" . $modelo] = $folio;
     }
 }
-
-$root = $_SERVER['DOCUMENT_ROOT'];
 
 require $root . "/pltoolbox/mayoral/resources/specific_classes/csv_to_utf8.php";
 require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
