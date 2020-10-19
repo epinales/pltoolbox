@@ -1410,6 +1410,7 @@ $writeXLS->save($xls_file);
 $system_callback['code'] = 1;
 $system_callback['uniq'] = $uniq;
 // $system_callback['advertencias'] = $advertencias;
+fclose($folios_file, "w");
 
 exit_script($system_callback);
 
