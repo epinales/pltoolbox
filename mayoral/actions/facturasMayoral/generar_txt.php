@@ -1413,7 +1413,4 @@ $system_callback['uniq'] = $uniq;
 
 exit_script($system_callback);
 
-
-
-
- ?>
+?>
