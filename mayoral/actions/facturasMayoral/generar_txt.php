@@ -860,6 +860,7 @@ foreach ($folios_uvas_originales as $uva){
     $modelos = explode(',', $uva[2]);
 
     foreach($modelos as $modelo){
+        error_log($fraccion . "_" . $modelo . ": " . $folio);
         $folios_computados[$fraccion . "_" . $modelo] = $folio;
     }
 }
