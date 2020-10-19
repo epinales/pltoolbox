@@ -858,7 +858,7 @@ $folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios.
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
-
+die();
 foreach ($folios_uvas_originales as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
