@@ -1946,7 +1946,7 @@ $contenedor_26_54455 = [
   ['10320184-23','64039909','44155'],
 ];
 
-$contenedor_26_5456 = [
+$contenedor_26_54456 = [
   ['10320185','61113008','2459'],
   ['10320185-1','62021391','7408'],
   ['10320185-2','62021392','4409'],
@@ -2196,12 +2196,12 @@ $contenedor_26_5456 = [
 
 $folios_computados = [];
 
-$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_contenedor_26_54455.csv";
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_contenedor_26_54456.csv";
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($contenedor_26_54455 as $uva){
+foreach ($contenedor_26_54456 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
