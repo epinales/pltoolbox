@@ -2196,12 +2196,12 @@ $contenedor_26_54456 = [
 
 $folios_computados = [];
 
-$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_contenedor_26_54456.csv";
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_contenedor_26_54455.csv";
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($contenedor_26_54456 as $uva){
+foreach ($contenedor_26_54455 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
