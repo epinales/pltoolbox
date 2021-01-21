@@ -2479,7 +2479,7 @@ $documented_headers = [
   "COMP. FORRO",
   "TARIC",
   "MX HS CODE",
-  "SUBDIVI",
+  "NICO",
   "CANTIDAD",
   "PRECIO UN.",
   "IMPORTE TOT,",
@@ -2679,7 +2679,7 @@ foreach ($invoice_items as $item) {
   } else {
     $precio_unitario_tarifa = $item[13];
   }
-  if (  array_key_exists($item[10], $precios_estimados)) {
+  if (  array_key_exists($item[10] . $tiem[11], $precios_estimados)) {
     $precio_estimado_item = $precios_estimados[$item[10]];
     if ($precio_unitario_tarifa > $precio_estimado_item) {
       if ($capitulo == 64) {
