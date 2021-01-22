@@ -575,7 +575,7 @@ foreach ($invoice_items as $item) {
   } else {
     $precio_unitario_tarifa = $item[13];
   }
-  if (  array_key_exists($item[10] . $tiem[11], $precios_estimados)) {
+  if (  array_key_exists($item[10] . $item[11], $precios_estimados)) {
     $precio_estimado_item = $precios_estimados[$item[10]];
     if ($precio_unitario_tarifa > $precio_estimado_item) {
       if ($capitulo == 64) {
@@ -612,7 +612,9 @@ foreach ($invoice_items as $item) {
     }
   }
 
-  $identificadores_aplicables_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10], $item[10].$item[11]);
+  $nico = $item[10] . $item[11];
+
+  $identificadores_aplicables_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10], $nico);
   $identificadores_aplicables_query->execute();
   $identificadores_aplicables = $identificadores_aplicables_query->get_result();
 
@@ -644,7 +646,7 @@ foreach ($invoice_items as $item) {
     }
   }
 
-  $identificadores_excepciones_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10].$item[11]);
+  $identificadores_excepciones_query->bind_param('sss', $capitulo, $partida_fraccion, $nico);
   $identificadores_excepciones_query->execute();
   $identificadores_excepciones = $identificadores_excepciones_query->get_result();
 
