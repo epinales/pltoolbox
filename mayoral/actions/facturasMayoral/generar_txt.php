@@ -614,7 +614,7 @@ foreach ($invoice_items as $item) {
 
   $nico = $item[10] . $item[11];
 
-  $identificadores_aplicables_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10], $nico);
+  $identificadores_aplicables_query->bind_param('ssss', $capitulo, $partida_fraccion, $item[10], $nico);
   $identificadores_aplicables_query->execute();
   $identificadores_aplicables = $identificadores_aplicables_query->get_result();
 
