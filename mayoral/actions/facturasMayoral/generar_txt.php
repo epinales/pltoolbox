@@ -646,7 +646,7 @@ foreach ($invoice_items as $item) {
     }
   }
 
-  $identificadores_excepciones_query->bind_param('sss', $capitulo, $partida_fraccion, $item[10], $nico);
+  $identificadores_excepciones_query->bind_param('ssss', $capitulo, $partida_fraccion, $item[10], $nico);
   $identificadores_excepciones_query->execute();
   $identificadores_excepciones = $identificadores_excepciones_query->get_result();
 
