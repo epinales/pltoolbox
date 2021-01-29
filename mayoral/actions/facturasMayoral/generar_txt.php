@@ -895,6 +895,7 @@ foreach ($invoice_items as $item) {
   $pais_origen = "";
   $identificadores_item = array();
   $aplicar_permiso = false;
+  $numero_nico = str_pad($item[11], 2, 0, STR_PAD_LEFT);
 
 
   $invoice_num = substr($item[1], 0, 2) . "." . substr($item[1], -3);
@@ -977,7 +978,7 @@ foreach ($invoice_items as $item) {
     $item[54],                                              //UMC
     $item[13],                                              //PrecioUnitario
     2,0,                                                    //UnidadPesoUnitario - PesoUnitario
-    $item[10].$item[11],                                              //Fraccion
+    $item[10].$numero_nico,                                              //Fraccion
     $c_umt,                                                 //CantidadUMT
     // "",
     (double) $c_umt / $item[12],                            //FactorAjuste
@@ -996,7 +997,7 @@ foreach ($invoice_items as $item) {
   } else {
     $precio_unitario_tarifa = $item[13];
   }
-  if (  array_key_exists($item[10] . $item[11], $precios_estimados)) {
+  if (  array_key_exists($item[10] . $numero_nico, $precios_estimados)) {
     $precio_estimado_item = $precios_estimados[$item[10]];
     if ($precio_unitario_tarifa > $precio_estimado_item) {
       if ($capitulo == 64) {
@@ -1021,7 +1022,7 @@ foreach ($invoice_items as $item) {
   }
 
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
-  if (in_array($item[10].$item[11], $anexo30)) {
+  if (in_array($item[10].$numero_nico, $anexo30)) {
     if ($marca == "NUKUTAVAKE") {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
     } elseif ($marca == "MAYORAL Y DISENO" ||$marca == "ABEL & LULA Y DISENO" ||$item[10] == 39262099) {
@@ -1033,7 +1034,7 @@ foreach ($invoice_items as $item) {
     }
   }
 
-  $nico = $item[10] . $item[11];
+  $nico = $item[10] . $numero_nico;
 
   $identificadores_aplicables_query->bind_param('ssss', $capitulo, $partida_fraccion, $item[10], $nico);
   $identificadores_aplicables_query->execute();
