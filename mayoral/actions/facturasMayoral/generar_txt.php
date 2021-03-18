@@ -2851,12 +2851,12 @@ $cnt_12 = [
   ['10321318-1','96151101','10069, 10070'],
 ];
 
-$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_12.csv";
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_11.csv";
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($cnt_12 as $uva){
+foreach ($cnt_11 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
@@ -2918,7 +2918,7 @@ $advertencias = array();
 
 $anexo30_query = $db->query('SELECT fraccion FROM mayoral_identificadores_anexo30');
 while ($item = $anexo30_query->fetch_assoc()) {
-  $anexo30[] = $item['fraccion'];
+  $anexo30[] = substr($item['fraccion'], 0, 8);
 }
 
 $trato_preferencial_query = $db->query('SELECT 3_siglas 3siglas FROM mayoral_trato_preferencial');
@@ -3192,7 +3192,7 @@ foreach ($invoice_items as $item) {
   }
 
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
-  if (in_array($item[10].$numero_nico, $anexo30)) {
+  if (in_array($item[10], $anexo30)) {
     if (strpos($marca, 'NUKUTAVAKE')) {
       $identificadores[$numero_parte . "_" . $i]['identificadores']['MC'] = array($numero_parte, 'MC', '2', '1', '1');
     } elseif ($marca == "MAYORAL Y DISENO" ||$marca == "ABEL & LULA Y DISENO" ||$item[10] == 39262099) {
