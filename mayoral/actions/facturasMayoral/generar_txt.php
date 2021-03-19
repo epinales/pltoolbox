@@ -3213,7 +3213,7 @@ foreach ($invoice_items as $item) {
   }
 
   if (in_array($item[10], $anexo30)) {
-    if (strpos($marca, 'NUKUTAVAKE')) {
+    if (strpos("______" . $marca . "_____", 'NUKUTAVAKE')) {
       if ($numero_parte ==  "1852389009161051002".$hm."x") {
         error_log("Special Debug: Se debe aplicar el identificador MC");
       }
