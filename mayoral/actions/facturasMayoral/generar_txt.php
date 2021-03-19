@@ -3200,6 +3200,18 @@ foreach ($invoice_items as $item) {
   }
 
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
+
+  if ($numero_parte ==  "1852389009161051002".$hm."x") {
+    error_log("Special Debug: Comparación de Fracción:" . in_array($item[10], $anexo30));
+  }
+  if ($numero_parte ==  "1852389009161051002".$hm."x") {
+    error_log("Special Debug: Comparación de Marca:" . in_array($marca, 'NUKUTAVAKE'));
+  }
+
+  if ($numero_parte ==  "1852389009161051002".$hm."x") {
+    error_log("Special Debug: Marca: $marca");
+  }
+
   if (in_array($item[10], $anexo30)) {
     if (strpos($marca, 'NUKUTAVAKE')) {
       if ($numero_parte ==  "1852389009161051002".$hm."x") {
