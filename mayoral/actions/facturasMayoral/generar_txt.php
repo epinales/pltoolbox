@@ -3191,6 +3191,14 @@ foreach ($invoice_items as $item) {
     $identificadores[$numero_parte . "_" . $i]['identificadores']['TL'] = array($numero_parte, 'TL', 'EMU');
   }
 
+  if ($numero_parte ==  "1852389009161051002".$hm."x") {
+    error_log("Special Debug: Fraccion: $item[10]");
+  }
+
+  if ($numero_parte ==  "1852389009161051002".$hm."x") {
+    error_log("Special Debug: Marca: $marca");
+  }
+
   //Si la fracción pertenece al Anexo 30, agrega el identificador MC correspondiene, o arroja una alerta, si no encuentra que MC poner.
   if (in_array($item[10], $anexo30)) {
     if (strpos($marca, 'NUKUTAVAKE')) {
