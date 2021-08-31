@@ -3601,12 +3601,12 @@ $cnt_18 = [
   ['103211124-8','39269099','19001'],
 ];
 
-$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_17.csv";
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_18.csv";
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($cnt_17 as $uva){
+foreach ($cnt_18 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
