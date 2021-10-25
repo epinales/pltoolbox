@@ -5805,12 +5805,19 @@ $cnt_30 = [
   ['103211374-38','42029204','19799'],
 ];
 
-$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_30_68223.csv";
+$cnt_30_b = [
+  ['103211415','63079099','199'],
+  ['103211415-1','63079099','199'],
+  ['103211416','42022203','199'],
+  ['103211416-1','42029204','199'],
+];
+
+$folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folios_cnt_30_b.csv";
 $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($cnt_30 as $uva){
+foreach ($cnt_30_b as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(', ', $uva[2]);
