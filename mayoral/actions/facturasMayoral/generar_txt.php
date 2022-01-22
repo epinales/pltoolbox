@@ -489,6 +489,8 @@ foreach ($invoice_items as $item) {
     $c_umt = $item[12] / 2;
   } elseif ($item[55] == 6 && $item[54] == 9) { //Si UMC es Par y UMT es Pieza. Entonces Cantidad Comercial / 2.
     $c_umt = $item[12] * 2;
+  } elseif ($item[55] == 6 && $item[54] == 12) { //Si UMC es Juego y UMT es Pieza. Entonces Cantidad Comercial * 2.
+    $c_umt = $item[12] * 2;
   } else {
     // Record error on this PN.
   }
