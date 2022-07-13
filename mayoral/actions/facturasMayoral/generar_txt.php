@@ -277,7 +277,7 @@ $muestrario = [
   ['10322783-13','39269099','63986'],
   ['10322783-14','48203001','67550'],
   ['10322783-20','39262099','3437, 6432'],
-]:
+];
 
 $folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/muestrario.csv";
 $folios_file = fopen($folios_file, "w");
