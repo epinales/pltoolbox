@@ -8,10 +8,10 @@
 
 /*PRODUCTION ENVIRONMENT*/
 $datab = 'pltoolbox';
-$host = '10.1.4.10';
+$host = '3.20.125.227';
 $port = 3306;
-$usr = 'prolog';
-$pwd = 'f4Tnps.03';
+$usr = 'web-agent';
+$pwd = 'W3b@g3n7';
 
 $db = new mysqli($host, $usr, $pwd, $datab, $port) or die ('Could not connect to the database server ' . $login->error );
 
