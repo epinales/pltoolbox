@@ -3008,7 +3008,7 @@ $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($cnt_15 as $uva){
+foreach ($cnt_16 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(',',str_replace(' ', '', $uva[2]));
