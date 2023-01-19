@@ -138,6 +138,8 @@ $(document).ready(function(){
     var li = $(this).parents('li');
     li.remove();
   });
+
+
   $('#guardarIdentificador_btn').click(function(){
     var inputs = $('#agregarIdentificadores-forma').find('.custom-input');
     var fracciones_aplicables = $('#fracciones-aplicables').find('li');
@@ -166,11 +168,14 @@ $(document).ready(function(){
       identificador, fracciones
     }
 
+    console.log(data);
+
     var add_identificador = $.ajax({
       method: 'POST',
       data: data,
       url: 'actions/identificadores/add.php'
     });
+
 
     add_identificador.done(function(r){
       r = JSON.parse(r);
