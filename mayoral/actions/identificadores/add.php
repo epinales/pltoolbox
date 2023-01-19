@@ -10,7 +10,7 @@ require $root . '/pltoolbox/Resources/PHP/Utilities/initialScript.php';
 
 $system_callback = [];
 extract($_POST); //Should contain identificador and fracciones[aplicables], fracciones[excepciones]
-
+$now = date_create('now')->format('Y-m-d H:i:s');
 
 
 $db->query('LOCK TABLES mayoral_identificadores, mayoral_identificadores_fraccion, mayoral_identificadores_fraccion_excepciones WRITE;');
@@ -20,7 +20,7 @@ try {
 
   $db->begin_transaction();
 
-  $insert_identificadores = "INSERT INTO mayoral_identificadores (identificador, complemento1, complemento2, complemento3, complemento4) VALUES (?,?,?,?,?) ";
+  $insert_identificadores = "INSERT INTO mayoral_identificadores (identificador, complemento1, complemento2, complemento3, complemento4, date_added, added_by) VALUES (?,?,?,?,?,?,?) ";
 
   $insert_identificadores = $db->prepare($insert_identificadores);
   if (!($insert_identificadores)) {
@@ -30,7 +30,7 @@ try {
   }
 
 
-  $insert_identificadores->bind_param('sssss', $identificador['identificador'], $identificador['complemento1'], $identificador['complemento2'], $identificador['complemento3'], $identificador['complemento4']);
+  $insert_identificadores->bind_param('sssssss', $identificador['identificador'], $identificador['complemento1'], $identificador['complemento2'], $identificador['complemento3'], $identificador['complemento4'], $now, 3);
   if (!($insert_identificadores)) {
     $system_callback['code'] = "500";
     $system_callback['message'] = "Error during trip variables binding [$insert_identificadores->errno]: $insert_identificadores->error";
