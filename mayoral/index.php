@@ -195,7 +195,7 @@ $json_print = json_encode(array($facturas, $identificadores));
             <li class="nav-item">
               <a class="nav-link active" id="inicio-tab" data-toggle="tab" href="#inicio-pane" role="tab" aria-controls="inicio" aria-selected="false">Inicio</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" id="identificadores-tab" data-toggle="tab" href="#identificadores-pane" role="tab" aria-controls="identificadores" aria-selected="false">Identificadores</a>
             </li>
             <li class="nav-item">
@@ -203,7 +203,7 @@ $json_print = json_encode(array($facturas, $identificadores));
             </li>
             <li class="nav-item">
               <a class="nav-link" id="preciosEstimados-tab" data-toggle="tab" href="#preciosEstimados-pane" role="tab" aria-controls="preciosEstimados" aria-selected="false">Precios Estimados</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" id="facturasMayoralcsv-tab" data-toggle="tab" href="#facturasMayoralcsv-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
             </li>
