@@ -16,7 +16,7 @@
 
 
 <div class="bread p-2 font18">
-  <b>Bienvenido, <?php echo $nombreUsuario ?></b>
+  <b>Bienvenid@, <?php echo $nombreUsuario ?></b>
 </div>
 <div class="cartas">
   <div class="row m-0">
