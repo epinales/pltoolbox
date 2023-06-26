@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Resources/vendor/composer" />
+      <path value="$PROJECT_DIR$/Resources/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/Resources/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/Resources/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/Resources/vendor/markbaker/complex" />
+    </include_path>
+  </component>
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>
