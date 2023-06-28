@@ -5135,7 +5135,7 @@ $cnt_18_23 = [
   ['10323324','95030012','19271'],
 ];
 
-$cnt_24_23 = [
+$aer_2_23 = [
   ['10323581','61061002','5140, 5276'],
   ['10323581-1','62064092','5141, 5272, 5273, 5274, 5275, 5277, 5278'],
   ['10323581-2','42022203','5433, 5434'],
@@ -5190,7 +5190,7 @@ $folios_file = fopen($folios_file, "w");
 
 fputcsv($folios_file, ['Linea', 'Fraccion', 'Modelo']);
 
-foreach ($cnt_24_23 as $uva){
+foreach ($aer_2_23 as $uva){
     $folio = $uva[0];
     $fraccion = $uva[1];
     $modelos = explode(',',str_replace(' ', '', $uva[2]));
