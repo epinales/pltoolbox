@@ -320,7 +320,7 @@ $json_print = json_encode(array($facturas, $identificadores));
           </div> -->
           <div class="tab-pane fade mt-5 px-5" id="facturasMayoralcsv-pane" role="tabpanel" aria-labelledby="facturasMayoralcsv-tab">
             <div class="">
-              <h4>Factuas CSV</h4>
+              <h4>Facturas CSV</h4>
             </div>
             <hr>
             <div class="">
