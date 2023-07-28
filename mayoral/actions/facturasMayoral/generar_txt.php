@@ -1558,6 +1558,9 @@ foreach ($invoice_items as $item) {
 
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     $folio = "";
+
+    if ($idents['identificador'] == "PB") continue;
+    
     $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
     // $comple3 = $idents['identificador'] == "PB" ? "" : $idents['complemento3'];
     $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
