@@ -1559,13 +1559,11 @@ foreach ($invoice_items as $item) {
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     $folio = "";
 
-    // if ($idents['identificador'] == "PB") continue;
-
-    if ($idents['identificador'] != "PB") {
-        // $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
+    // if ($idents['identificador'] != "PB") {
+        $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
         // $comple3 = $idents['identificador'] == "PB" ? "" : $idents['complemento3'];
-        $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $idents['complemento1'], $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
-    }
+        $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $comple1, $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
+    // }
 
     
     if ($idents['identificador'] == "PB") {
@@ -1584,12 +1582,46 @@ foreach ($invoice_items as $item) {
 
       $permisos .=
         $numero_parte . "|" .
-        "N3|" .
+        "NM|" .
         $idents['complemento2'] . "|" .
         $folio . "|||"
       ;
     }
   }
+
+
+  // while ($idents = $identificadores_aplicables->fetch_assoc()) {
+  //   $folio = "";
+
+  //   if ($idents['identificador'] != "PB") {
+  //       // $comple1 = $idents['identificador'] == "PB" ? $uvnom : $idents['complemento1'];
+  //       // $comple3 = $idents['identificador'] == "PB" ? "" : $idents['complemento3'];
+  //       $identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']] = array($numero_parte, $idents['identificador'], $idents['complemento1'], $idents['complemento2'], $idents['complemento3'], $idents['complemento4']);
+  //   }
+
+    
+  //   if ($idents['identificador'] == "PB") {
+  //     $clave = $item[10] . "_" . $item[2];
+  //     $folio = $folios_computados[$clave];
+
+  //     if ($folio == "") {
+  //       $datos_error = [
+  //         $i, //linea,
+  //         $item[10], //fraccion
+  //         $item[2], //modelo
+  //       ];
+  //       fputcsv($folios_file, $datos_error);
+  //       error_log("PERMISOERR: La linea $i ($item[10] - $item[2]) debe tener folio, y no se encontro\n");
+  //     }
+
+  //     $permisos .=
+  //       $numero_parte . "|" .
+  //       "N3|" .
+  //       $idents['complemento2'] . "|" .
+  //       $folio . "|||"
+  //     ;
+  //   }
+  // }
 
   $identificadores_excepciones_query->bind_param('ssss', $capitulo, $partida_fraccion, $item[10], $nico);
   $identificadores_excepciones_query->execute();
