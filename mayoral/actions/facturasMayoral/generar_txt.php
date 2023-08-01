@@ -1800,7 +1800,7 @@ foreach ($invoice_items as $item) {
   }
 
   if($has_pb){
-    unset($identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['NM']]);
+    unset($identificadores[$numero_parte . "_" . $i]['identificadores']['NM']);
   }
 
 
