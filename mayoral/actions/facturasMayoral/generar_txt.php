@@ -2025,9 +2025,15 @@ foreach ($invoice_items as $item) {
   $identificadores_excepciones_query->execute();
   $identificadores_excepciones = $identificadores_excepciones_query->get_result();
 
+  if($item[10] === '98010001'){
+    unset($identificadores[$numero_parte . "_" . $i]['identificadores']['TL']);
+  }
+
   while ($idents = $identificadores_excepciones->fetch_assoc()) {
     unset($identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['pk_identificador']]);
   }
+
+
   $no_pb = true;
   foreach ($identificadores[$numero_parte . "_" . $i]['identificadores'] as $identificador) {
     if ($identificador[1] == "PB") {
