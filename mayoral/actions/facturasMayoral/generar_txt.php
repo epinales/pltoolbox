@@ -1763,6 +1763,8 @@ foreach ($invoice_items as $item) {
   $identificadores_aplicables_query->execute();
   $identificadores_aplicables = $identificadores_aplicables_query->get_result();
 
+  $has_pb = false;
+
   while ($idents = $identificadores_aplicables->fetch_assoc()) {
     $folio = "";
 
@@ -1774,6 +1776,7 @@ foreach ($invoice_items as $item) {
 
     
     if ($idents['identificador'] == "PB") {
+      $has_pb = true;
       $clave = $item[10] . "_" . $item[2];
       $folio = $folios_computados[$clave];
 
@@ -1794,6 +1797,10 @@ foreach ($invoice_items as $item) {
         $folio . "|||"
       ;
     }
+  }
+
+  if($has_pb){
+    unset($identificadores[$numero_parte . "_" . $i]['identificadores'][$idents['NM']]);
   }
 
 
