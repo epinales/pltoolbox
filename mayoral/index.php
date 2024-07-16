@@ -204,9 +204,9 @@ $json_print = json_encode(array($facturas, $identificadores));
             <li class="nav-item">
               <a class="nav-link" id="preciosEstimados-tab" data-toggle="tab" href="#preciosEstimados-pane" role="tab" aria-controls="preciosEstimados" aria-selected="false">Precios Estimados</a>
             </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" id="facturasMayoralcsv-tab" data-toggle="tab" href="#facturasMayoralcsv-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
               <a class="nav-link" id="temp-tab" data-toggle="tab" href="#temp-pane" role="tab" aria-controls="facturasMayoral" aria-selected="false">Facturas Mayoral</a>
             </li> -->
@@ -216,9 +216,9 @@ $json_print = json_encode(array($facturas, $identificadores));
       <div class="flex-grow-1 container-fluid" style="overflow-y: scroll">
         <div class="tab-content" id="sideMenu-tabContent">
           <div class="tab-pane fade show active mt-5 px-5" id="inicio-pane" role="tabpanel" aria-labelledby="inicio-tab">
-            <h4>Bienvenido al portal de procesamiento de facturas de Mayoral!</h4>
+            <h4>Favor de utilizar el sistema nuevo en Spectrum Tools!  <a href="https://apps.gowithspectrum.com/mayoral/generar-txt" class="btn btn-sm btn-outline-primary">Ir</a></h4>
             <hr>
-            <p>En este portal podrás subir la factura de Mayoral, para que se validen:
+            <!-- <p>En este portal podrás subir la factura de Mayoral, para que se validen:
               <ul class="">
                 <li>Errores de Unidad de Medida (Tarifa)</li>
                 <li>Precios Estimados</li>
@@ -233,7 +233,7 @@ $json_print = json_encode(array($facturas, $identificadores));
                 <li>En 'Precios Estimados' carga los precios estimados actualizados, esta información es importante para poder calcular si existen productos por debajo del precio estimado.</li>
                 <li>Ya que todas las configuraciones estan actualizadas, en 'Facturas Mayoral' podrás cargar la(s) factura(s) de Mayoral, en formato CSV para poder procesar los indicadores necesarios, revisar los precios estimados, y crear la plantilla para cargar la información al Sistema de Tráfico</li>
               </ol>
-            </p>
+            </p> -->
           </div>
           <div class="tab-pane fade mt-5 px-5 text-center" id="identificadores-pane" role="tabpanel" aria-labelledby="identificadores-tab">
             <div class="" id="lista-identificadores">
@@ -246,8 +246,6 @@ $json_print = json_encode(array($facturas, $identificadores));
                     <th>Complemento 2</th>
                     <th>Complemento 3</th>
                     <th>Complemento 4</th>
-                    <!-- <th>Fracciones / Cap Aplicables</th>
-                    <th>Excepciones</th> -->
                   </tr>
                 </thead>
                 <tbody id="tabla-identificadores">
