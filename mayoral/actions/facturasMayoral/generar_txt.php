@@ -211,6 +211,9 @@ $cnt_1 = [
   ['10324643','95030012','19271, 19274, 19822'],
 ];
 
+$cnt_2 = [
+
+];
 
 $folios_file = $root . "/pltoolbox/mayoral/resources/TempFiles/items_sin_folio.csv";
 $folios_file = fopen($folios_file, "w");
@@ -560,6 +563,7 @@ foreach ($invoice_items as $item) {
   //Aplicar identificador TL - EMU si eta en la lista de trato preferencial.
   if (in_array($pais_origen, $trato_preferencial)) {
     $identificadores[$numero_parte . "_" . $i]['identificadores']['TL'] = array($numero_parte, 'TL', 'EMU');
+    $identificadores[$numero_parte . "_" . $i]['identificadores']['EO'] = array($numero_parte, 'EO', '1');
   }
 
   if ($numero_parte ==  "1852389009161051002".$hm."x") {
